@@ -1,7 +1,119 @@
 import 'package:flutter/material.dart';
+import 'package:learning_flutter/abstractEg.dart';
+import 'package:learning_flutter/encapsulation.dart';
+import 'package:learning_flutter/inheritanceEg.dart';
+import 'package:learning_flutter/interfaceEg.dart';
+import 'package:learning_flutter/overridingEg.dart';
+import 'package:learning_flutter/simpleConstructorEg.dart';
+
+import 'async_await.dart';
+import 'simpleClassEg.dart';
 
 void main() {
-  runApp(const MyApp());
+  // runApp(const MyApp());
+  // callSimpleStudentClass();
+  // callCarClass();
+  // callDogClass();
+  // callEagleClass();
+  // callRectangleClass();
+  // callListClass();
+  // callStudentPercentage();
+  // print(10.getNumberInWords());
+  testApiCall();
+}
+
+void testApiCall() {
+  var asyncAwaitClass = AsyncAwaitClass();
+  asyncAwaitClass.execute();
+}
+
+void callSimpleStudentClass() {
+  var student1 = Student();
+  student1.rollNumber = 1;
+  student1.name = "Rahil";
+  student1.studentDetail();
+
+  var student2 = Student();
+  student2.rollNumber = 2;
+  student2.name = "Sameer";
+  student2.studentDetail();
+
+  var student3 = Student();
+  student3.rollNumber = 3;
+  student3.name = "Jasmin";
+  student3.studentDetail();
+}
+
+void callCarClass() {
+  /*var car = Car();
+  car.name = "Audi";
+  car.topSpeed = 100;
+  car.carDetail();*/
+
+  /*var car1 = Car(name: "Audi", topSpeed: 100);
+  car1.carDetail();
+  var car2 = Car(name: "BMW", topSpeed: 200);
+  car2.carDetail();
+  var car3 = Car(name: "Mercedes", topSpeed: 300);
+  car3.carDetail();*/
+
+  /*var car = Car.myNamedConstructor1();
+  var car1 = Car.myNamedConstructor2(name: "Audi", topSpeed: 100);
+  car1.carDetail();
+  var car2 = Car.myNamedConstructor2(name: "BMW", topSpeed: 200);
+  car2.carDetail();*/
+}
+
+void callDogClass() {
+  var dog = Dog();
+  dog.name = "Husky";
+  dog.age = 3;
+  dog.bark();
+
+  var cat = Cat();
+  cat.name = "Snowy";
+  cat.breed = "Persian";
+  cat.meow();
+}
+
+void callEagleClass() {
+  var eagle = Eagle();
+  eagle.fly();
+}
+
+void callRectangleClass() {
+  var rectangle = Rectangle();
+  rectangle.draw();
+
+  var circle = Circle();
+  circle.draw();
+}
+
+void callListClass() {
+  var list = List();
+  list.clickOne();
+  list.clickTwo();
+}
+
+void callStudentPercentage() {
+  var studentPercentage = StudentPercentage();
+  studentPercentage.calculatePercentage = 250;
+  print(studentPercentage.percentage);
+}
+
+/*todo simple extension function */
+extension on int {
+  getNumberInWords() {
+    if (this == 1) {
+      return "One";
+    } else if (this == 2) {
+      return "Two";
+    } else if (this == 3) {
+      return "Three";
+    } else {
+      return "Error occured";
+    }
+  }
 }
 
 class MyApp extends StatelessWidget {

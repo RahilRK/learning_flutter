@@ -150,6 +150,13 @@ class DemoScreen extends StatefulWidget {
 }
 
 class _DemoScreenState extends State<DemoScreen> {
+
+  int _checkedRadioValue = 1;
+
+  bool _checkedBox1Value = false;
+  bool _checkedBox2Value = false;
+  bool _checkedBox3Value = false;
+
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
@@ -168,10 +175,61 @@ class _DemoScreenState extends State<DemoScreen> {
         // the App.build method, and use it to set our appbar title.
         elevation: 8,
         shadowColor: Colors.black,
-        leading: Icon(Icons.home),
+        // leading: Icon(Icons.home),
         title: Text("Home"),
         actions: [Icon(Icons.search), Icon(Icons.more_vert)],
         // actionsIconTheme: IconThemeData(color: Colors.white),
+      ),
+      drawer: Drawer(
+        child: ListView(
+          children: [
+            DrawerHeader(
+              decoration: BoxDecoration(
+                color: Theme.of(context).colorScheme.inversePrimary,
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(16),
+                    child: Image.asset(
+                      "images/brainvire_logo.png",
+                      height: 54,
+                      width: 54,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      "Brainvire",
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                  )
+                ],
+              ),
+            ),
+            Column(
+              children: [
+                ListTile(
+                  leading: Icon(Icons.home),
+                  title: Text("Home"),
+                ),
+                ListTile(
+                  leading: Icon(Icons.photo),
+                  title: Text("Gallery"),
+                ),
+                ListTile(
+                  leading: Icon(Icons.settings),
+                  title: Text("Settings"),
+                ),
+                ListTile(
+                  leading: Icon(Icons.logout),
+                  title: Text("Logout"),
+                )
+              ],
+            )
+          ],
+        ),
       ),
       body: Center(
         child: Column(
@@ -283,35 +341,276 @@ class _DemoScreenState extends State<DemoScreen> {
             // child: Text("Text Button"))
 
             /*todo TextField eg*/
-            Padding(
-              padding: const EdgeInsets.all(8.0),
+            /*Padding(
+              padding: const EdgeInsets.all(16.0),
               child: TextField(
-                // keyboardType: TextInputType.number,
+                keyboardType: TextInputType.number,
+                maxLines: 1,
+                maxLength: 10,
+
+                obscureText: true,//for password field
+                obscuringCharacter: "*",
+
                 // autofocus: true,
                 // enabled: false,
                 // readOnly: true,
+
                 decoration: InputDecoration(
-                    // labelText: "First name",
-                    hintText: "First name",
+                    labelText: "Phone number",
+                    // hintText: "Phone number",
                     // hintStyle: TextStyle(color: Colors.red),
-                    helperText: "Enter first name",
+                    helperText: "Enter phone number",
+                    // icon: Icon(Icons.phone),
+                    prefixIcon: Icon(Icons.phone),
+                    // suffixIcon: Icon(Icons.more_horiz),
+                    prefixText: "+91",
+                    // suffixText: ".com",
                     filled: true,
                     fillColor: Colors.black12,
                     border: OutlineInputBorder(
                         // borderSide: BorderSide.none,
                         // borderRadius: BorderRadius.circular(32)
                         ),
-                    enabledBorder: OutlineInputBorder(
+                     enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.blue)),
                     focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.red))),
+                        borderSide: BorderSide(color: Colors.red)) ),
               ),
+            )*/
+
+            /*todo image eg*/
+            /*Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Image.asset(
+                "images/brainvire_logo.png",
+                fit: BoxFit.fill,
+                // height: 100,
+                // width: 100,
+                semanticLabel: "This is demo image",
+                color: Colors.black12,
+                colorBlendMode: BlendMode.darken,
+              ),
+            ),
+
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Image.network(
+                "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
+                height: 100,
+                width: 100,
+                semanticLabel: "This is demo image",
+              ),
+            )*/
+
+            /*todo stack & positioned eg*/
+            /*Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Stack(
+                alignment: Alignment.center,
+                children: [
+                  Container(
+                    height: 250,
+                    width: 250,
+                    child: Text("Third"),
+                    color: Colors.orange,
+                    padding: EdgeInsets.all(30),
+                    alignment: Alignment.center,
+                  ),
+                  Container(
+                    height: 200,
+                    width: 200,
+                    child: Text("Second"),
+                    color: Colors.green,
+                    padding: EdgeInsets.all(30),
+                    alignment: Alignment.center,
+                  ),
+                  Positioned(
+                    top: 0,
+                    right: 0,
+                    child: Container(
+                      height: 150,
+                      width: 150,
+                      child: Text("First"),
+                      color: Colors.blue,
+                      padding: EdgeInsets.all(30),
+                      alignment: Alignment.center,
+                    ),
+                  ),
+                ],
+              ),
+            )*/
+
+            /*todo IndexedStack eg*/
+            /*Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: IndexedStack(
+                index: 2,
+                alignment: Alignment.center,
+                children: [
+                  Container(
+                    height: 250,
+                    width: 250,
+                    child: Text("Third"),
+                    color: Colors.orange,
+                    padding: EdgeInsets.all(30),
+                    alignment: Alignment.center,
+                  ),
+                  Container(
+                    height: 200,
+                    width: 200,
+                    child: Text("Second"),
+                    color: Colors.green,
+                    padding: EdgeInsets.all(30),
+                    alignment: Alignment.center,
+                  ),
+                  Positioned(
+                    top: 0,
+                    right: 0,
+                    child: Container(
+                      height: 150,
+                      width: 150,
+                      child: Text("First"),
+                      color: Colors.blue,
+                      padding: EdgeInsets.all(30),
+                      alignment: Alignment.center,
+                    ),
+                  ),
+                ],
+              ),
+            )*/
+
+            /*todo Clipper eg*/
+            /*Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: ClipOval(
+                // borderRadius: BorderRadius.circular(16),
+                child: Align(
+                  heightFactor: 0.5,
+                  widthFactor: 0.9,
+                  child: Image.network(
+                    "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
+                  ),
+                ),
+              ),
+            )*/
+
+            /*todo Radio button eg*/
+            /*Row(
+              children: [
+                Radio(
+                    value: 1,
+                    groupValue: _checkedRadioValue,
+                    onChanged: (value) {
+                      setState(() {
+                        _checkedRadioValue = value!;
+                      });
+                    }),
+                SizedBox(
+                  width: 10,
+                ),
+                Text("Red")
+              ],
+            ),
+            Row(
+              children: [
+                Radio(
+                    value: 2,
+                    groupValue: _checkedRadioValue,
+                    onChanged: (value) {
+                      setState(() {
+                        _checkedRadioValue = value!;
+                      });
+                    }),
+                SizedBox(
+                  width: 10,
+                ),
+                Text("Blue")
+              ],
+            ),
+            Row(
+              children: [
+                Radio(
+                    value: 3,
+                    groupValue: _checkedRadioValue,
+                    onChanged: (value) {
+                      setState(() {
+                        _checkedRadioValue = value!;
+                      });
+                    }),
+                SizedBox(
+                  width: 10,
+                ),
+                Text("Green")
+              ],
+            ),*/
+
+            /*todo Checkbox eg*/
+            /*Row(
+              children: [
+                Checkbox(
+                    value: _checkedBox1Value,
+                    onChanged: (value) {
+                      setState(() {
+                        _checkedBox1Value = value!;
+                      });
+                    }),
+                SizedBox(
+                  width: 10,
+                ),
+                Text("Audi")
+              ],
+            ),
+            Row(
+              children: [
+                Checkbox(
+                    value: _checkedBox2Value,
+                    onChanged: (value) {
+                      setState(() {
+                        _checkedBox2Value = value!;
+                      });
+                    }),
+                SizedBox(
+                  width: 10,
+                ),
+                Text("Mercedes")
+              ],
+            ),
+            Row(
+              children: [
+                Checkbox(
+                    value: _checkedBox3Value,
+                    onChanged: (value) {
+                      setState(() {
+                        _checkedBox3Value = value!;
+                      });
+                    }),
+                SizedBox(
+                  width: 10,
+                ),
+                Text("BMW")
+              ],
+            ),*/
+
+            /*todo card eg*/
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Container(
+                  height: 300,
+                  width: 300,
+                  child: Card(
+                    margin: EdgeInsets.all(8),
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                    color: Colors.red,
+                    elevation: 16,
+                  )),
             )
+
+
           ],
 
-          // crossAxisAlignment: CrossAxisAlignment.stretch,
+          // crossAxisAlignment: CrossAxisAlignment.center,
           // verticalDirection: VerticalDirection.up,
-          // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          // mainAxisAlignment: MainAxisAlignment.center,
         ),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 void main() {
   runApp(const MyApp());
@@ -32,6 +33,8 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       home: const DemoScreen(title: 'Flutter Demo Home Page'),
+      // home: NavigationBarEg(),
+      // home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
 }
@@ -69,6 +72,41 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    print("lifeCycle: initState");
+  }
+
+  @override
+  void didChangeDependencies() {
+    // TODO: implement didChangeDependencies
+    super.didChangeDependencies();
+    print("lifeCycle: didChangeDependencies");
+  }
+
+  @override
+  void didUpdateWidget(covariant MyHomePage oldWidget) {
+    // TODO: implement didUpdateWidget
+    super.didUpdateWidget(oldWidget);
+    print("lifeCycle: didUpdateWidget");
+  }
+
+  @override
+  void deactivate() {
+    // TODO: implement deactivate
+    super.deactivate();
+    print("lifeCycle: deactivate");
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    print("lifeCycle: dispose");
+  }
+
+  @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
     // by the _incrementCounter method above.
@@ -76,6 +114,7 @@ class _MyHomePageState extends State<MyHomePage> {
     // The Flutter framework has been optimized to make rerunning build methods
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
+    print("lifeCycle: build");
     return Scaffold(
       appBar: AppBar(
         // TRY THIS: Try changing the color here to a specific color (to
@@ -112,13 +151,6 @@ class _MyHomePageState extends State<MyHomePage> {
               '$_counter',
               style: Theme.of(context).textTheme.headlineMedium,
             ),
-            const Text(
-              "Demo text",
-              style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                  backgroundColor: Colors.red),
-            )
           ],
         ),
       ),
@@ -150,7 +182,6 @@ class DemoScreen extends StatefulWidget {
 }
 
 class _DemoScreenState extends State<DemoScreen> {
-
   int _checkedRadioValue = 1;
 
   bool _checkedBox1Value = false;
@@ -176,8 +207,11 @@ class _DemoScreenState extends State<DemoScreen> {
         elevation: 8,
         shadowColor: Colors.black,
         // leading: Icon(Icons.home),
-        title: Text("Home"),
-        actions: [Icon(Icons.search), Icon(Icons.more_vert)],
+        title: const Text("Home"),
+        actions: const [
+          Icon(Icons.search),
+          Icon(Icons.more_vert),
+        ],
         // actionsIconTheme: IconThemeData(color: Colors.white),
       ),
       drawer: Drawer(
@@ -198,8 +232,8 @@ class _DemoScreenState extends State<DemoScreen> {
                       width: 54,
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
+                  const Padding(
+                    padding: EdgeInsets.all(8.0),
                     child: Text(
                       "Brainvire",
                       style: TextStyle(fontWeight: FontWeight.bold),
@@ -208,7 +242,7 @@ class _DemoScreenState extends State<DemoScreen> {
                 ],
               ),
             ),
-            Column(
+            const Column(
               children: [
                 ListTile(
                   leading: Icon(Icons.home),
@@ -592,7 +626,7 @@ class _DemoScreenState extends State<DemoScreen> {
             ),*/
 
             /*todo card eg*/
-            Padding(
+            /*Padding(
               padding: const EdgeInsets.all(8.0),
               child: Container(
                   height: 300,
@@ -603,16 +637,443 @@ class _DemoScreenState extends State<DemoScreen> {
                     color: Colors.red,
                     elevation: 16,
                   )),
+            )*/
+
+            /*todo Custom widget eg*/
+            /*CustomButton(
+              text: "Login",
+              foregroundColor: Colors.white,
+              backgroundColor: Colors.red,
+              onButtonClick: () {
+                print("onButtonClick");
+              },
+            )*/
+
+            /*todo SegmentedButton widget with Single selection eg*/
+            /*Padding(
+              padding: EdgeInsets.all(8.0),
+              child: SingleChoice(),
+            ),*/
+
+            /*todo SegmentedButton widget with Multiple selection eg*/
+            /*Padding(
+              padding: EdgeInsets.all(8.0),
+              child: MultipleChoice(),
+            )*/
+
+            /*todo Alert dialogue eg*/
+            /*Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: AlertDialogueEg(),
+            ),*/
+
+            /*todo ListTile eg*/
+            /*Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Card(
+                child: ListTile(
+                  leading: Icon(Icons.abc_outlined),
+                  title: Text("This is title"),
+                  subtitle: Text("This is subtitle"),
+                  trailing: Icon(Icons.check),
+                  onTap: () {
+                    print("onTap");
+                  },
+                ),
+              ),
+            ),*/
+
+            /*todo BottomSheet eg*/
+            /*Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: BottomSheetEg(),
+            )*/
+
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: DatePickerEg(),
+            ),
+
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: TimePickerEg(),
             )
-
-
           ],
-
           // crossAxisAlignment: CrossAxisAlignment.center,
           // verticalDirection: VerticalDirection.up,
           // mainAxisAlignment: MainAxisAlignment.center,
         ),
+      ),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () {
+          // Add your onPressed code here!
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            content: const Text('This is snake bar!'),
+            action: SnackBarAction(
+              label: "Dismiss",
+              onPressed: () {},
+            ),
+          ));
+        },
+        label: const Text('Add'),
+        icon: const Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
+    );
+  }
+}
+
+class CustomButton extends StatelessWidget {
+  const CustomButton({
+    super.key,
+    required this.text,
+    required this.foregroundColor,
+    required this.backgroundColor,
+    required this.onButtonClick,
+  });
+
+  final String text;
+  final Color foregroundColor;
+  final Color backgroundColor;
+  final Function()? onButtonClick;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: ElevatedButton(
+          onPressed: onButtonClick,
+          style: TextButton.styleFrom(
+            foregroundColor: foregroundColor,
+            backgroundColor: backgroundColor,
+          ),
+          child: Text(text)),
+    );
+  }
+}
+
+enum Calendar { day, week, month, year }
+
+class SingleChoice extends StatefulWidget {
+  const SingleChoice({super.key});
+
+  @override
+  State<SingleChoice> createState() => _SingleChoiceState();
+}
+
+class _SingleChoiceState extends State<SingleChoice> {
+  Calendar calendarView = Calendar.day;
+
+  @override
+  Widget build(BuildContext context) {
+    return SegmentedButton<Calendar>(
+      segments: const <ButtonSegment<Calendar>>[
+        ButtonSegment<Calendar>(
+            value: Calendar.day,
+            label: Text('Day'),
+            icon: Icon(Icons.calendar_view_day)),
+        ButtonSegment<Calendar>(
+            value: Calendar.week,
+            label: Text('Week'),
+            icon: Icon(Icons.calendar_view_week)),
+        ButtonSegment<Calendar>(
+            value: Calendar.month,
+            label: Text('Month'),
+            icon: Icon(Icons.calendar_view_month)),
+        ButtonSegment<Calendar>(
+            value: Calendar.year,
+            label: Text('Year'),
+            icon: Icon(Icons.calendar_today)),
+      ],
+      selected: {calendarView},
+      onSelectionChanged: (Set<Calendar> newSelection) {
+        setState(() {
+          calendarView = newSelection.first;
+        });
+      },
+    );
+  }
+}
+
+enum Sizes { extraSmall, small, medium, large, extraLarge }
+
+class MultipleChoice extends StatefulWidget {
+  const MultipleChoice({super.key});
+
+  @override
+  State<MultipleChoice> createState() => _MultipleChoiceState();
+}
+
+class _MultipleChoiceState extends State<MultipleChoice> {
+  Set<Sizes> selection = <Sizes>{Sizes.large, Sizes.extraLarge};
+
+  @override
+  Widget build(BuildContext context) {
+    return SegmentedButton<Sizes>(
+      segments: const <ButtonSegment<Sizes>>[
+        ButtonSegment<Sizes>(value: Sizes.extraSmall, label: Text('XS')),
+        ButtonSegment<Sizes>(value: Sizes.small, label: Text('S')),
+        ButtonSegment<Sizes>(value: Sizes.medium, label: Text('M')),
+        ButtonSegment<Sizes>(
+          value: Sizes.large,
+          label: Text('L'),
+        ),
+        ButtonSegment<Sizes>(value: Sizes.extraLarge, label: Text('XL')),
+      ],
+      selected: selection,
+      onSelectionChanged: (newSelection) {
+        setState(() {
+          selection = newSelection;
+        });
+      },
+      multiSelectionEnabled: true,
+    );
+  }
+}
+
+class AlertDialogueEg extends StatelessWidget {
+  const AlertDialogueEg({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+        onPressed: () => showDialog(
+            context: context,
+            builder: (BuildContext context) => AlertDialog(
+                  title: const Text("This is title"),
+                  content: const Text("This is content"),
+                  actions: [
+                    TextButton(
+                      onPressed: () => Navigator.pop(context, 'Cancel'),
+                      child: const Text('Cancel'),
+                    ),
+                    TextButton(
+                      onPressed: () => Navigator.pop(context, 'OK'),
+                      child: const Text('OK'),
+                    ),
+                  ],
+                )),
+        child: const Text("Show Dialogue"));
+  }
+}
+
+class BottomSheetEg extends StatelessWidget {
+  const BottomSheetEg({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+        onPressed: () => showModalBottomSheet(
+            context: context,
+            builder: (BuildContext context) {
+              return Wrap(
+                children: [
+                  ListTile(
+                    leading: Icon(Icons.abc_outlined),
+                    title: Text("This is title 1"),
+                    subtitle: Text("This is subtitle 1"),
+                    trailing: Icon(Icons.close),
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.abc_outlined),
+                    title: Text("This is title 2"),
+                    subtitle: Text("This is subtitle 2"),
+                    trailing: Icon(Icons.close),
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.abc_outlined),
+                    title: Text("This is title 3"),
+                    subtitle: Text("This is subtitle 3"),
+                    trailing: Icon(Icons.close),
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                ],
+              );
+            }),
+        child: const Text("Show Bottom sheet"));
+  }
+}
+
+class NavigationBarEg extends StatefulWidget {
+  const NavigationBarEg({super.key});
+
+  @override
+  State<NavigationBarEg> createState() => _NavigationBarEgState();
+}
+
+class _NavigationBarEgState extends State<NavigationBarEg> {
+  int currentPageIndex = 0;
+  NavigationDestinationLabelBehavior labelBehavior =
+      NavigationDestinationLabelBehavior.onlyShowSelected;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      bottomNavigationBar: NavigationBar(
+        labelBehavior: labelBehavior,
+        onDestinationSelected: (index) {
+          setState(() {
+            currentPageIndex = index;
+          });
+        },
+        indicatorColor: Colors.amber,
+        selectedIndex: currentPageIndex,
+        destinations: const [
+          NavigationDestination(icon: Icon(Icons.home), label: 'Home'),
+          NavigationDestination(
+              icon: Badge(child: Icon(Icons.notifications_sharp)),
+              label: 'Notifications'),
+          NavigationDestination(
+            icon: Badge(
+              label: Text('2'),
+              child: Icon(Icons.messenger_sharp),
+            ),
+            label: 'Messages',
+          ),
+        ],
+      ),
+      body: [
+        /// Home page
+        Card(
+          shadowColor: Colors.transparent,
+          margin: const EdgeInsets.all(8.0),
+          child: SizedBox.expand(
+            child: Center(
+              child: Text(
+                'Home page',
+              ),
+            ),
+          ),
+        ),
+
+        /// Notification page
+        Card(
+          shadowColor: Colors.transparent,
+          margin: const EdgeInsets.all(8.0),
+          child: SizedBox.expand(
+            child: Center(
+              child: Text(
+                'Notification page',
+              ),
+            ),
+          ),
+        ),
+
+        /// Message page
+        Card(
+          shadowColor: Colors.transparent,
+          margin: const EdgeInsets.all(8.0),
+          child: SizedBox.expand(
+            child: Center(
+              child: Text(
+                'Message page',
+              ),
+            ),
+          ),
+        ),
+      ][currentPageIndex],
+    );
+  }
+}
+
+class DatePickerEg extends StatefulWidget {
+  const DatePickerEg({super.key});
+
+  @override
+  State<DatePickerEg> createState() => _DatePickerEgState();
+}
+
+class _DatePickerEgState extends State<DatePickerEg> {
+  TextEditingController dateController = TextEditingController();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    dateController.text = "";
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return TextField(
+      controller: dateController, //editing controller of this TextField
+      decoration: const InputDecoration(
+          icon: Icon(Icons.calendar_today), //icon of text field
+          labelText: "Enter Date" //label text of field
+          ),
+      readOnly: true, // when true user cannot edit text
+      onTap: () async {
+        DateTime? pickedDate = await showDatePicker(
+            context: context,
+            initialDate: DateTime.now(),
+            //get today's date
+            firstDate: DateTime(2000),
+            //DateTime.now() - not to allow to choose before today.
+            lastDate: DateTime(2101));
+        if (pickedDate != null) {
+          print(
+              pickedDate); //get the picked date in the format => 2022-07-04 00:00:00.000
+          String formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate);
+          print(
+              formattedDate); //formatted date output using intl package =>  2022-07-04
+          setState(() {
+            dateController.text = formattedDate;
+          });
+        }
+      },
+    );
+  }
+}
+
+class TimePickerEg extends StatefulWidget {
+  const TimePickerEg({super.key});
+
+  @override
+  State<TimePickerEg> createState() => _TimePickerEgState();
+}
+
+class _TimePickerEgState extends State<TimePickerEg> {
+  TimeOfDay selectedTime = TimeOfDay.now();
+  TextEditingController dateController = TextEditingController();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    dateController.text = "";
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+
+    final localizations = MaterialLocalizations.of(context);
+
+    return TextField(
+      controller: dateController, //editing controller of this TextField
+      decoration: const InputDecoration(
+          icon: Icon(Icons.calendar_today), //icon of text field
+          labelText: "Enter Time" //label text of field
+          ),
+      readOnly: true, // when true user cannot edit text
+      onTap: () async {
+        TimeOfDay? pickedTime = await showTimePicker(context: context, initialTime: selectedTime);
+        if(pickedTime != null && pickedTime != selectedTime) {
+          selectedTime = pickedTime;
+          print(selectedTime);
+          final formattedTimeOfDay = localizations.formatTimeOfDay(selectedTime);
+          print(formattedTimeOfDay);
+          setState(() {
+            dateController.text = formattedTimeOfDay;
+          });
+        }
+      },
     );
   }
 }

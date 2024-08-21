@@ -33,6 +33,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       home: const DemoScreen(title: 'Flutter Demo Home Page'),
+      // home: const PopupOptionMenuEg(),
       // home: NavigationBarEg(),
       // home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
@@ -689,15 +690,35 @@ class _DemoScreenState extends State<DemoScreen> {
               child: BottomSheetEg(),
             )*/
 
-            Padding(
+            /*todo Date Picker eg*/
+            /*Padding(
               padding: const EdgeInsets.all(8.0),
               child: DatePickerEg(),
-            ),
+            ),*/
+
+            /*todo Time Picker eg*/
+            /*Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: TimePickerEg(),
+            ),*/
+
+            /*todo Chip eg*/
+            /*Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: ChipEg(),
+            ),*/
+
+            /*todo ListView eg*/
+            /*ListEg()*/
+
+            /*todo Horizontal ListView eg*/
+            /*HorizontalListEg()*/
 
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: TimePickerEg(),
+              child: DropdownMenuEg(),
             )
+
           ],
           // crossAxisAlignment: CrossAxisAlignment.center,
           // verticalDirection: VerticalDirection.up,
@@ -1052,7 +1073,6 @@ class _TimePickerEgState extends State<TimePickerEg> {
 
   @override
   Widget build(BuildContext context) {
-
     final localizations = MaterialLocalizations.of(context);
 
     return TextField(
@@ -1063,17 +1083,247 @@ class _TimePickerEgState extends State<TimePickerEg> {
           ),
       readOnly: true, // when true user cannot edit text
       onTap: () async {
-        TimeOfDay? pickedTime = await showTimePicker(context: context, initialTime: selectedTime);
-        if(pickedTime != null && pickedTime != selectedTime) {
+        TimeOfDay? pickedTime =
+            await showTimePicker(context: context, initialTime: selectedTime);
+        if (pickedTime != null && pickedTime != selectedTime) {
           selectedTime = pickedTime;
           print(selectedTime);
-          final formattedTimeOfDay = localizations.formatTimeOfDay(selectedTime);
+          final formattedTimeOfDay =
+              localizations.formatTimeOfDay(selectedTime);
           print(formattedTimeOfDay);
           setState(() {
             dateController.text = formattedTimeOfDay;
           });
         }
       },
+    );
+  }
+}
+
+class ChipEg extends StatefulWidget {
+  const ChipEg({super.key});
+
+  @override
+  State<ChipEg> createState() => _ChipEgState();
+}
+
+class _ChipEgState extends State<ChipEg> {
+  final List<String> _filters = [];
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Wrap(runSpacing: 8, spacing: 8, children: [
+          InputChip(
+            label: Text("filter label"),
+            labelStyle:
+                TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
+            backgroundColor: Colors.blue,
+            avatar: CircleAvatar(
+              child: Text('AZ'),
+              backgroundColor: Colors.white.withOpacity(0.8),
+            ),
+            onPressed: () => print("input chip pressed"),
+            onDeleted: () => print("input chip deleted"),
+          )
+        ]),
+        Wrap(
+          spacing: 8.0,
+          children: <String>['Chip 1', 'Chip 2', 'Chip 3'].map((String name) {
+            return FilterChip(
+              label: Text(name),
+              selected: _filters.contains(name),
+              onSelected: (bool selected) {
+                setState(() {
+                  if (selected) {
+                    _filters.add(name);
+                  } else {
+                    _filters.removeWhere((String item) => item == name);
+                  }
+                });
+              },
+            );
+          }).toList(),
+        ),
+      ],
+    );
+  }
+}
+
+class ListEg extends StatefulWidget {
+  const ListEg({super.key});
+
+  @override
+  State<ListEg> createState() => _ListEgState();
+}
+
+class _ListEgState extends State<ListEg> {
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        ListView(
+          shrinkWrap: true,
+          children: [
+            ListTile(
+              leading: Icon(Icons.label),
+              title: Text(
+                "Title 1",
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              subtitle: Text("Subtitle 1"),
+              trailing: Text("Trailing"),
+              onTap: () {
+                print("onTap");
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.label),
+              title: Text(
+                "Title 2",
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              subtitle: Text("Subtitle 2"),
+              trailing: Icon(Icons.remove_circle),
+              onTap: () {
+                print("onTap");
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.label),
+              title: Text(
+                "Title 3",
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              subtitle: Text("Subtitle 3"),
+              onTap: () {
+                print("onTap");
+              },
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+}
+
+class HorizontalListEg extends StatefulWidget {
+  const HorizontalListEg({super.key});
+
+  @override
+  State<HorizontalListEg> createState() => _HorizontalListEgState();
+}
+
+class _HorizontalListEgState extends State<HorizontalListEg> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 154,
+      child: ListView(
+        scrollDirection: Axis.horizontal,
+        children: [
+          Container(
+            width: 160,
+            color: Colors.red,
+          ),
+          Container(
+            width: 160,
+            color: Colors.blue,
+          ),
+          Container(
+            width: 160,
+            color: Colors.green,
+          ),
+          Container(
+            width: 160,
+            color: Colors.yellow,
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class PopupOptionMenuEg extends StatefulWidget {
+  const PopupOptionMenuEg({super.key});
+
+  @override
+  State<PopupOptionMenuEg> createState() => _PopupOptionMenuEgState();
+}
+
+class _PopupOptionMenuEgState extends State<PopupOptionMenuEg> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Title"),
+        actions: [
+          PopupMenuButton(
+            icon: Icon(Icons.more_vert),
+            itemBuilder: (BuildContext context) => <PopupMenuEntry>[
+              const PopupMenuItem(
+                child: ListTile(
+                  leading: Icon(Icons.add),
+                  title: Text('Item 1'),
+                ),
+              ),
+              const PopupMenuItem(
+                child: ListTile(
+                  leading: Icon(Icons.anchor),
+                  title: Text('Item 2'),
+                ),
+              ),
+              const PopupMenuItem(
+                child: ListTile(
+                  leading: Icon(Icons.article),
+                  title: Text('Item 3'),
+                ),
+              ),
+              const PopupMenuDivider(),
+              const PopupMenuItem(child: Text('Item A')),
+              const PopupMenuItem(child: Text('Item B')),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class DropdownMenuEg extends StatefulWidget {
+  const DropdownMenuEg({super.key});
+
+  @override
+  State<DropdownMenuEg> createState() => _DropdownMenuEgState();
+}
+
+class _DropdownMenuEgState extends State<DropdownMenuEg> {
+  @override
+  Widget build(BuildContext context) {
+    String dropdownValue = "Menu B";
+    return Row(
+      children: [
+
+        Text("Select menu:"),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: DropdownButton(
+              value: dropdownValue,
+              items: <DropdownMenuItem>[
+                DropdownMenuItem(value: "Menu A", child: Text("Menu A")),
+                DropdownMenuItem(value: "Menu B", child: Text("Menu B")),
+                DropdownMenuItem(value: "Menu C", child: Text("Menu C")),
+              ],
+              onChanged: (value) {
+
+                setState(() {
+                  dropdownValue = value;
+                });
+
+              }),
+        ),
+      ],
     );
   }
 }

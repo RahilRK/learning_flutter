@@ -1,12 +1,16 @@
+import 'dart:ffi';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 void main() {
-  runApp(const MyApp());
+  // runApp(const MaterialMyApp());
+  runApp(const CupertinoMyApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class MaterialMyApp extends StatelessWidget {
+  const MaterialMyApp({super.key});
 
   // This widget is the root of your application.
   @override
@@ -36,6 +40,20 @@ class MyApp extends StatelessWidget {
       // home: const PopupOptionMenuEg(),
       // home: NavigationBarEg(),
       // home: const MyHomePage(title: 'Flutter Demo Home Page'),
+    );
+  }
+}
+
+class CupertinoMyApp extends StatelessWidget {
+  const CupertinoMyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return CupertinoApp(
+      theme: CupertinoThemeData(brightness: Brightness.light),
+      home: CupertinoDemoApp(),
+      // home: CupertinoListTileEg(),
+      // home: CupertinoActionSheetEg(),
     );
   }
 }
@@ -718,7 +736,6 @@ class _DemoScreenState extends State<DemoScreen> {
               padding: const EdgeInsets.all(8.0),
               child: DropdownMenuEg(),
             )
-
           ],
           // crossAxisAlignment: CrossAxisAlignment.center,
           // verticalDirection: VerticalDirection.up,
@@ -1304,7 +1321,6 @@ class _DropdownMenuEgState extends State<DropdownMenuEg> {
     String dropdownValue = "Menu B";
     return Row(
       children: [
-
         Text("Select menu:"),
         Padding(
           padding: const EdgeInsets.all(8.0),
@@ -1316,14 +1332,250 @@ class _DropdownMenuEgState extends State<DropdownMenuEg> {
                 DropdownMenuItem(value: "Menu C", child: Text("Menu C")),
               ],
               onChanged: (value) {
-
                 setState(() {
                   dropdownValue = value;
                 });
-
               }),
         ),
       ],
     );
   }
 }
+
+/*todo Cupertino UI*/
+class CupertinoDemoApp extends StatefulWidget {
+  const CupertinoDemoApp({super.key});
+
+  @override
+  State<CupertinoDemoApp> createState() => _CupertinoDemoAppState();
+}
+
+class _CupertinoDemoAppState extends State<CupertinoDemoApp> {
+  bool checkBoxValue = false;
+  double dragValue = 0.0;
+
+  @override
+  Widget build(BuildContext context) {
+    return CupertinoPageScaffold(
+        navigationBar: CupertinoNavigationBar(
+          middle: Text("CupertinoDemoApp"),
+        ),
+        child: Center(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              /*todo CupertinoButton eg*/
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: CupertinoButton(
+                    child: Text("Login"),
+                    onPressed: () {
+                      print("Login is clicked");
+                    }),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: CupertinoButton.filled(
+                    child: Text("Login"),
+                    onPressed: () {
+                      print("Login is clicked");
+                    }),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: CupertinoButton.filled(
+                    child: Text("Login"), onPressed: null),
+              ),
+              CupertinoActivityIndicator(
+                color: Colors.lightBlue,
+                radius: 20,
+              ),
+              CupertinoCheckbox(
+                value: checkBoxValue,
+                activeColor: CupertinoColors.black,
+                onChanged: (value) {
+                  setState(() {
+                    checkBoxValue = value!;
+                  });
+                },
+              ),
+              CupertinoSwitch(
+                value: checkBoxValue,
+                activeColor: CupertinoColors.black,
+                onChanged: (value) {
+                  setState(() {
+                    checkBoxValue = value;
+                  });
+                },
+              ),
+              CupertinoSlider(
+                value: dragValue,
+                divisions: 5,
+                max: 100,
+                activeColor: CupertinoColors.black,
+                thumbColor: CupertinoColors.black,
+                onChangeStart: (value) {
+                  print("onChangeStart: $value");
+                },
+                onChanged: (value) {
+                  setState(() {
+                    dragValue = value;
+                  });
+                },
+                onChangeEnd: (value) {
+                  print("onChangeEnd: $value");
+                },
+              ),
+              CupertinoListTileEg(),
+              CupertinoFormSectionEg(),
+            ],
+          ),
+        ));
+  }
+}
+
+class CupertinoActionSheetEg extends StatelessWidget {
+  const CupertinoActionSheetEg({super.key});
+
+  void _showActionSheet(context) {
+    showCupertinoModalPopup(
+        context: context,
+        builder: (context) => CupertinoActionSheet(
+              title: Text("Title"),
+              message: Text("Message"),
+              actions: [
+                CupertinoActionSheetAction(
+                    isDefaultAction: true,
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: Text("Please wait")),
+                CupertinoActionSheetAction(
+                    isDefaultAction: false,
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: Text("Cancel")),
+                CupertinoActionSheetAction(
+                    isDestructiveAction: true,
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: Text("Delete")),
+              ],
+            ));
+  }
+
+  void _showAlertDialogue(context) {
+    showCupertinoDialog(
+        context: context,
+        builder: (context) => CupertinoAlertDialog(
+              title: Text("Title"),
+              content: Text("Content"),
+              actions: [
+                CupertinoDialogAction(
+                  isDefaultAction: true,
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: Text("No"),
+                ),
+                CupertinoDialogAction(
+                  isDestructiveAction: true,
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: Text("Yes"),
+                ),
+              ],
+            ));
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return CupertinoPageScaffold(
+        child: Center(
+      child: CupertinoButton(
+        child: Text("CupertinoActionSheet"),
+        // onPressed: () => _showActionSheet(context),
+        onPressed: () => _showAlertDialogue(context),
+      ),
+    ));
+  }
+}
+
+class CupertinoListTileEg extends StatelessWidget {
+  const CupertinoListTileEg({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return CupertinoPageScaffold(
+
+      child: CupertinoListSection(
+        header: const Text('My Reminders'),
+        children: [
+          CupertinoListTile(
+            title: const Text('Open pull request'),
+            leading: Container(
+              width: double.infinity,
+              height: double.infinity,
+              color: CupertinoColors.activeGreen,
+            ),
+            trailing: const CupertinoListTileChevron(),
+          ),
+          CupertinoListTile(
+            title: const Text('Push to master'),
+            leading: Container(
+              width: double.infinity,
+              height: double.infinity,
+              color: CupertinoColors.systemRed,
+            ),
+            additionalInfo: const Text('Not available'),
+          ),
+          CupertinoListTile(
+            title: Text("Title"),
+            leading: Container(
+              height: double.infinity,
+              width: double.infinity,
+              color: CupertinoColors.systemRed,
+            ),
+          )
+        ],
+      ),
+    );
+  }
+}
+
+class CupertinoFormSectionEg extends StatefulWidget {
+  const CupertinoFormSectionEg({super.key});
+
+  @override
+  State<CupertinoFormSectionEg> createState() => _CupertinoFormSectionEgState();
+}
+
+class _CupertinoFormSectionEgState extends State<CupertinoFormSectionEg> {
+
+  bool airplaneMode = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return CupertinoFormSection(
+      header: Text('Connectivity'),
+      children: [
+        CupertinoFormRow(
+          prefix: Text("Select"),
+          child: CupertinoSwitch(
+            value: airplaneMode,
+            onChanged: (bool value) {
+              setState(() {
+                airplaneMode = value;
+              });
+            },
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+

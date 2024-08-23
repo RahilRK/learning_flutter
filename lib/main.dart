@@ -53,9 +53,9 @@ class CupertinoMyApp extends StatelessWidget {
     return CupertinoApp(
       theme: CupertinoThemeData(brightness: Brightness.light),
       // home: CupertinoDemoApp(),
-      home: CupertinoTabScaffoldEg(),
+      // home: CupertinoTabScaffoldEg(),
       // home: CupertinoListTileEg(),
-      // home: CupertinoActionSheetEg(),
+      home: CupertinoActionSheetEg(),
     );
   }
 }
@@ -1253,6 +1253,21 @@ class _CupertinoDemoAppState extends State<CupertinoDemoApp> {
   ChooseGender? _character = ChooseGender.Male;
   String text = '';
   Sky _selectedSegment = Sky.Midnight;
+  late TextEditingController controller;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    controller = TextEditingController(text: "");
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    controller.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -1356,7 +1371,7 @@ class _CupertinoDemoAppState extends State<CupertinoDemoApp> {
               CupertinoFormSectionEg(),*/
 
               /*todo radio button eg*/
-              CupertinoListSection(
+              /*CupertinoListSection(
                 children: [
                   CupertinoListTile(
                     title: Text(ChooseGender.Male.name),
@@ -1383,10 +1398,10 @@ class _CupertinoDemoAppState extends State<CupertinoDemoApp> {
                     ),
                   ),
                 ],
-              ),
+              ),*/
 
-              /*todo CupertinoSearchTextField eg*/
-              Column(
+              /*todo Search TextField eg*/
+              /*Column(
                 children: [
                   Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -1403,7 +1418,9 @@ class _CupertinoDemoAppState extends State<CupertinoDemoApp> {
                     ),
                   ),
                 ],
-              ),
+              ),*/
+
+              /*todo Cupertino Segmented Control eg*/
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: CupertinoSegmentedControl(
@@ -1431,7 +1448,9 @@ class _CupertinoDemoAppState extends State<CupertinoDemoApp> {
                   },
                 ),
               ),
-              Padding(
+
+              /*todo Sliding Segmented Control eg*/
+              /*Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: CupertinoSlidingSegmentedControl(
                   backgroundColor: CupertinoColors.systemGrey2,
@@ -1459,7 +1478,31 @@ class _CupertinoDemoAppState extends State<CupertinoDemoApp> {
                     ),
                   },
                 ),
-              ),
+              ),*/
+
+              /*todo Cupertino TextField eg*/
+              /*CupertinoTextField(
+                placeholder: "Enter name",
+                controller: controller,
+                onChanged: (value){
+                  controller.text = value;
+                },
+              ),*/
+
+              Form(
+                autovalidateMode: AutovalidateMode.always,
+                child: CupertinoTextFormFieldRow(
+                  prefix: Text("Enter name"),
+                  placeholder: "Name",
+                  validator: (text) {
+                    print("text: $text");
+                    if (text == null || text.isEmpty) {
+                      return "Please enter the name";
+                    }
+                    return null;
+                  },
+                ),
+              )
             ],
           )),
     );
@@ -1485,6 +1528,8 @@ class CupertinoActionSheetEg extends StatefulWidget {
 
 class _CupertinoActionSheetEgState extends State<CupertinoActionSheetEg> {
   int _selectedFruit = 0;
+  Duration duration = const Duration(hours: 04, minutes: 30);
+  DateTime date = DateTime(2016, 10, 26);
 
   void _showPicker(child) {
     showCupertinoModalPopup(
@@ -1554,14 +1599,26 @@ class _CupertinoActionSheetEgState extends State<CupertinoActionSheetEg> {
             ));
   }
 
+  String _printDuration(Duration duration) {
+    String negativeSign = duration.isNegative ? '-' : '';
+    String twoDigits(int n) => n.toString().padLeft(2, "0");
+    String twoDigitMinutes = twoDigits(duration.inMinutes.remainder(60).abs());
+    String twoDigitSeconds = twoDigits(duration.inSeconds.remainder(60).abs());
+    return "$negativeSign${twoDigits(duration.inHours)}:$twoDigitMinutes:$twoDigitSeconds";
+  }
+
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
         child: Center(
       child: CupertinoButton(
-        child: Text("CupertinoActionSheet: ${_fruitNames[_selectedFruit]}"),
+        // child: Text("CupertinoActionSheet: ${_fruitNames[_selectedFruit]}"),
+        // child: Text("CupertinoActionSheet: Time is ${_printDuration(duration)}"),
+        child: Text("CupertinoActionSheet: Date is ${DateFormat('yyyy-MM-dd').format(date)}"),
         onPressed: () => _showPicker(
-          CupertinoPicker(
+
+          /*todo simple picker*/
+          /*CupertinoPicker(
             magnification: 1.22,
             squeeze: 1.2,
             useMagnifier: true,
@@ -1580,6 +1637,29 @@ class _CupertinoActionSheetEgState extends State<CupertinoActionSheetEg> {
             children: List<Widget>.generate(_fruitNames.length, (int index) {
               return Center(child: Text(_fruitNames[index]));
             }),
+          ),*/
+
+          /*todo time picker*/
+          /*CupertinoTimerPicker(
+            mode: CupertinoTimerPickerMode.hm,
+            initialTimerDuration: duration,
+            // This is called when the user changes the timer's
+            // duration.
+            onTimerDurationChanged: (Duration newDuration) {
+              setState(() => duration = newDuration);
+            },
+          ),*/
+
+          CupertinoDatePicker(
+            initialDateTime: date,
+            mode: CupertinoDatePickerMode.date,
+            use24hFormat: true,
+            // This shows day of week alongside day of month
+            showDayOfWeek: true,
+            // This is called when the user changes the date.
+            onDateTimeChanged: (DateTime newDate) {
+              setState(() => date = newDate);
+            },
           ),
         ),
         // onPressed: () => _showActionSheet(context),
@@ -1706,6 +1786,26 @@ class CupertinoTabScaffoldEg extends StatelessWidget {
           ],
         ),
         tabBuilder: (context, index) {
+          if (index == 0) {
+            return CupertinoTabView(
+              builder: (context) {
+                return HomeTab();
+              },
+            );
+          } else if (index == 1) {
+            return CupertinoTabView(
+              builder: (context) {
+                return SearchTab();
+              },
+            );
+          } else if (index == 2) {
+            return CupertinoTabView(
+              builder: (context) {
+                return ProfileTab();
+              },
+            );
+          }
+
           return CupertinoTabView(
             builder: (BuildContext context) {
               return Center(
@@ -1714,5 +1814,62 @@ class CupertinoTabScaffoldEg extends StatelessWidget {
             },
           );
         });
+  }
+}
+
+class HomeTab extends StatefulWidget {
+  const HomeTab({super.key});
+
+  @override
+  State<HomeTab> createState() => _HomeTabState();
+}
+
+class _HomeTabState extends State<HomeTab> {
+  @override
+  Widget build(BuildContext context) {
+    return CupertinoPageScaffold(
+      navigationBar: CupertinoNavigationBar(
+        middle: Text("Home"),
+      ),
+      child: Center(child: Text('Home')),
+    );
+  }
+}
+
+class SearchTab extends StatefulWidget {
+  const SearchTab({super.key});
+
+  @override
+  State<SearchTab> createState() => _SearchTabState();
+}
+
+class _SearchTabState extends State<SearchTab> {
+  @override
+  Widget build(BuildContext context) {
+    return CupertinoPageScaffold(
+      navigationBar: CupertinoNavigationBar(
+        middle: Text("Search"),
+      ),
+      child: Center(child: Text('Search')),
+    );
+  }
+}
+
+class ProfileTab extends StatefulWidget {
+  const ProfileTab({super.key});
+
+  @override
+  State<ProfileTab> createState() => _ProfileTabState();
+}
+
+class _ProfileTabState extends State<ProfileTab> {
+  @override
+  Widget build(BuildContext context) {
+    return CupertinoPageScaffold(
+      navigationBar: CupertinoNavigationBar(
+        middle: Text("Profile"),
+      ),
+      child: Center(child: Text('Profile')),
+    );
   }
 }

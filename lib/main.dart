@@ -36,7 +36,8 @@ class MaterialMyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const DemoScreen(title: 'Flutter Demo Home Page'),
+      // home: const DemoScreen(title: 'Flutter Demo Home Page'),
+      home: const DemoScreen(),
       // home: const PopupOptionMenuEg(),
       // home: NavigationBarEg(),
       // home: const MyHomePage(title: 'Flutter Demo Home Page'),
@@ -51,7 +52,8 @@ class CupertinoMyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return CupertinoApp(
       theme: CupertinoThemeData(brightness: Brightness.light),
-      home: CupertinoDemoApp(),
+      // home: CupertinoDemoApp(),
+      home: CupertinoTabScaffoldEg(),
       // home: CupertinoListTileEg(),
       // home: CupertinoActionSheetEg(),
     );
@@ -183,18 +185,7 @@ class _MyHomePageState extends State<MyHomePage> {
 }
 
 class DemoScreen extends StatefulWidget {
-  const DemoScreen({super.key, required this.title});
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
-  final String title;
+  const DemoScreen({super.key});
 
   @override
   State<DemoScreen> createState() => _DemoScreenState();
@@ -209,553 +200,449 @@ class _DemoScreenState extends State<DemoScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
     return Scaffold(
-      appBar: AppBar(
-        // TRY THIS: Try changing the color here to a specific color (to
-        // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
-        // change color while the other colors stay the same.
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        elevation: 8,
-        shadowColor: Colors.black,
-        // leading: Icon(Icons.home),
-        title: const Text("Home"),
-        actions: const [
-          Icon(Icons.search),
-          Icon(Icons.more_vert),
-        ],
-        // actionsIconTheme: IconThemeData(color: Colors.white),
-      ),
-      drawer: Drawer(
-        child: ListView(
-          children: [
-            DrawerHeader(
-              decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.inversePrimary,
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(16),
-                    child: Image.asset(
-                      "images/brainvire_logo.png",
-                      height: 54,
-                      width: 54,
-                    ),
-                  ),
-                  const Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: Text(
-                      "Brainvire",
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                  )
-                ],
-              ),
+      body: ListView(
+        children: [
+          /*todo flexible eg*/
+          Flexible(
+            flex: 2,
+            child: Container(
+              child: Text("First"),
+              color: Colors.blue,
+              padding: EdgeInsets.all(30),
+              alignment: Alignment.center,
             ),
-            const Column(
-              children: [
-                ListTile(
-                  leading: Icon(Icons.home),
-                  title: Text("Home"),
-                ),
-                ListTile(
-                  leading: Icon(Icons.photo),
-                  title: Text("Gallery"),
-                ),
-                ListTile(
-                  leading: Icon(Icons.settings),
-                  title: Text("Settings"),
-                ),
-                ListTile(
-                  leading: Icon(Icons.logout),
-                  title: Text("Logout"),
-                )
-              ],
-            )
-          ],
-        ),
-      ),
-      body: Center(
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          //
-          // TRY THIS: Invoke "debug painting" (choose the "Toggle Debug Paint"
-          // action in the IDE, or press "p" in the console), to see the
-          // wireframe for each widget.
-          children: <Widget>[
-            /*todo flexible eg*/
-            /*Flexible(
-              flex: 2,
+          ),
+          Flexible(
+              flex: 4,
               child: Container(
-                child: Text("First"),
-                color: Colors.blue,
+                child: Text("Second"),
+                color: Colors.green,
                 padding: EdgeInsets.all(30),
                 alignment: Alignment.center,
+              )),
+          Flexible(
+              flex: 6,
+              child: Container(
+                child: Text("Third"),
+                color: Colors.orange,
+                padding: EdgeInsets.all(30),
+                alignment: Alignment.center,
+              )),
+
+          /*todo Container eg*/
+          Center(
+            child: Container(
+              height: 250,
+              width: 250,
+              // padding: const EdgeInsets.all(16),
+              margin: const EdgeInsets.all(24),
+              // color: Colors.purpleAccent,
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                  color: Colors.lightBlue,
+                  border: Border.all(color: Colors.black, width: 3),
+                  // borderRadius: const BorderRadius.all(Radius.circular(16)),
+                  // boxShadow: const [BoxShadow(blurRadius: 15.0)],
+                  shape: BoxShape.circle),
+              child: const Text(
+                "Abc",
+                style: TextStyle(color: Colors.white, fontSize: 24),
               ),
             ),
-            Flexible(
-                flex: 4,
-                child: Container(
-                  child: Text("Second"),
-                  color: Colors.green,
-                  padding: EdgeInsets.all(30),
-                  alignment: Alignment.center,
-                )),
-            Flexible(
-                flex: 6,
-                child: Container(
-                  child: Text("Third"),
-                  color: Colors.orange,
-                  padding: EdgeInsets.all(30),
-                  alignment: Alignment.center,
-                ))*/
+          ),
 
-            /*todo Container eg*/
-            /*Center(
-              child: Container(
-                height: 250,
-                width: 250,
-                // padding: const EdgeInsets.all(16),
-                margin: const EdgeInsets.all(24),
-                // color: Colors.purpleAccent,
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                    color: Colors.lightBlue,
-                    border: Border.all(color: Colors.black, width: 3),
-                    // borderRadius: const BorderRadius.all(Radius.circular(16)),
-                    // boxShadow: const [BoxShadow(blurRadius: 15.0)],
-                    shape: BoxShape.circle),
-                child: const Text(
-                  "Abc",
-                  style: TextStyle(color: Colors.white, fontSize: 24),
-                ),
-              ),
-            )*/
-
-            /*todo Buttons eg*/
-            /*Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: TextButton.icon(
+          /*todo Buttons eg*/
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: TextButton.icon(
                 icon: Icon(Icons.location_on_outlined),
-                  label: Text("Get location"),
-                  style: TextButton.styleFrom(
+                label: Text("Get location"),
+                style: TextButton.styleFrom(
                     foregroundColor: Colors.black,
                     backgroundColor: Colors.red,
                     elevation: 16,
                     shadowColor: Colors.black,
                     side: BorderSide(color: Colors.black),
-                    shape: BeveledRectangleBorder(borderRadius: BorderRadius.circular(5.0))
-                  ),
-                  onPressed: () {
-                    print("onPressed");
-                  },
-                  onLongPress: () {
-                    print("onLongPress");
-                  }),
-            ),
+                    shape: BeveledRectangleBorder(
+                        borderRadius: BorderRadius.circular(5.0))),
+                onPressed: () {
+                  print("onPressed");
+                },
+                onLongPress: () {
+                  print("onLongPress");
+                }),
+          ),
 
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: ElevatedButton.icon(
-                  icon: Icon(Icons.location_on_outlined),
-                  label: Text("Get location"),
-                  style: ElevatedButton.styleFrom(
-                      foregroundColor: Colors.black,
-                      backgroundColor: Colors.red,
-                      elevation: 16,
-                      shadowColor: Colors.black,
-                      side: BorderSide(color: Colors.black),
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8))
-                  ),
-                  onPressed: () {
-                    print("onPressed");
-                  },
-                  onLongPress: () {
-                    print("onLongPress");
-                  }),
-            )*/
-            // child: Text("Text Button"))
-
-            /*todo TextField eg*/
-            /*Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: TextField(
-                keyboardType: TextInputType.number,
-                maxLines: 1,
-                maxLength: 10,
-
-                obscureText: true,//for password field
-                obscuringCharacter: "*",
-
-                // autofocus: true,
-                // enabled: false,
-                // readOnly: true,
-
-                decoration: InputDecoration(
-                    labelText: "Phone number",
-                    // hintText: "Phone number",
-                    // hintStyle: TextStyle(color: Colors.red),
-                    helperText: "Enter phone number",
-                    // icon: Icon(Icons.phone),
-                    prefixIcon: Icon(Icons.phone),
-                    // suffixIcon: Icon(Icons.more_horiz),
-                    prefixText: "+91",
-                    // suffixText: ".com",
-                    filled: true,
-                    fillColor: Colors.black12,
-                    border: OutlineInputBorder(
-                        // borderSide: BorderSide.none,
-                        // borderRadius: BorderRadius.circular(32)
-                        ),
-                     enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.blue)),
-                    focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.red)) ),
-              ),
-            )*/
-
-            /*todo image eg*/
-            /*Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Image.asset(
-                "images/brainvire_logo.png",
-                fit: BoxFit.fill,
-                // height: 100,
-                // width: 100,
-                semanticLabel: "This is demo image",
-                color: Colors.black12,
-                colorBlendMode: BlendMode.darken,
-              ),
-            ),
-
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Image.network(
-                "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
-                height: 100,
-                width: 100,
-                semanticLabel: "This is demo image",
-              ),
-            )*/
-
-            /*todo stack & positioned eg*/
-            /*Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Stack(
-                alignment: Alignment.center,
-                children: [
-                  Container(
-                    height: 250,
-                    width: 250,
-                    child: Text("Third"),
-                    color: Colors.orange,
-                    padding: EdgeInsets.all(30),
-                    alignment: Alignment.center,
-                  ),
-                  Container(
-                    height: 200,
-                    width: 200,
-                    child: Text("Second"),
-                    color: Colors.green,
-                    padding: EdgeInsets.all(30),
-                    alignment: Alignment.center,
-                  ),
-                  Positioned(
-                    top: 0,
-                    right: 0,
-                    child: Container(
-                      height: 150,
-                      width: 150,
-                      child: Text("First"),
-                      color: Colors.blue,
-                      padding: EdgeInsets.all(30),
-                      alignment: Alignment.center,
-                    ),
-                  ),
-                ],
-              ),
-            )*/
-
-            /*todo IndexedStack eg*/
-            /*Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: IndexedStack(
-                index: 2,
-                alignment: Alignment.center,
-                children: [
-                  Container(
-                    height: 250,
-                    width: 250,
-                    child: Text("Third"),
-                    color: Colors.orange,
-                    padding: EdgeInsets.all(30),
-                    alignment: Alignment.center,
-                  ),
-                  Container(
-                    height: 200,
-                    width: 200,
-                    child: Text("Second"),
-                    color: Colors.green,
-                    padding: EdgeInsets.all(30),
-                    alignment: Alignment.center,
-                  ),
-                  Positioned(
-                    top: 0,
-                    right: 0,
-                    child: Container(
-                      height: 150,
-                      width: 150,
-                      child: Text("First"),
-                      color: Colors.blue,
-                      padding: EdgeInsets.all(30),
-                      alignment: Alignment.center,
-                    ),
-                  ),
-                ],
-              ),
-            )*/
-
-            /*todo Clipper eg*/
-            /*Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: ClipOval(
-                // borderRadius: BorderRadius.circular(16),
-                child: Align(
-                  heightFactor: 0.5,
-                  widthFactor: 0.9,
-                  child: Image.network(
-                    "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
-                  ),
-                ),
-              ),
-            )*/
-
-            /*todo Radio button eg*/
-            /*Row(
-              children: [
-                Radio(
-                    value: 1,
-                    groupValue: _checkedRadioValue,
-                    onChanged: (value) {
-                      setState(() {
-                        _checkedRadioValue = value!;
-                      });
-                    }),
-                SizedBox(
-                  width: 10,
-                ),
-                Text("Red")
-              ],
-            ),
-            Row(
-              children: [
-                Radio(
-                    value: 2,
-                    groupValue: _checkedRadioValue,
-                    onChanged: (value) {
-                      setState(() {
-                        _checkedRadioValue = value!;
-                      });
-                    }),
-                SizedBox(
-                  width: 10,
-                ),
-                Text("Blue")
-              ],
-            ),
-            Row(
-              children: [
-                Radio(
-                    value: 3,
-                    groupValue: _checkedRadioValue,
-                    onChanged: (value) {
-                      setState(() {
-                        _checkedRadioValue = value!;
-                      });
-                    }),
-                SizedBox(
-                  width: 10,
-                ),
-                Text("Green")
-              ],
-            ),*/
-
-            /*todo Checkbox eg*/
-            /*Row(
-              children: [
-                Checkbox(
-                    value: _checkedBox1Value,
-                    onChanged: (value) {
-                      setState(() {
-                        _checkedBox1Value = value!;
-                      });
-                    }),
-                SizedBox(
-                  width: 10,
-                ),
-                Text("Audi")
-              ],
-            ),
-            Row(
-              children: [
-                Checkbox(
-                    value: _checkedBox2Value,
-                    onChanged: (value) {
-                      setState(() {
-                        _checkedBox2Value = value!;
-                      });
-                    }),
-                SizedBox(
-                  width: 10,
-                ),
-                Text("Mercedes")
-              ],
-            ),
-            Row(
-              children: [
-                Checkbox(
-                    value: _checkedBox3Value,
-                    onChanged: (value) {
-                      setState(() {
-                        _checkedBox3Value = value!;
-                      });
-                    }),
-                SizedBox(
-                  width: 10,
-                ),
-                Text("BMW")
-              ],
-            ),*/
-
-            /*todo card eg*/
-            /*Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Container(
-                  height: 300,
-                  width: 300,
-                  child: Card(
-                    margin: EdgeInsets.all(8),
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-                    color: Colors.red,
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: ElevatedButton.icon(
+                icon: Icon(Icons.location_on_outlined),
+                label: Text("Get location"),
+                style: ElevatedButton.styleFrom(
+                    foregroundColor: Colors.black,
+                    backgroundColor: Colors.red,
                     elevation: 16,
-                  )),
-            )*/
+                    shadowColor: Colors.black,
+                    side: BorderSide(color: Colors.black),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8))),
+                onPressed: () {
+                  print("onPressed");
+                },
+                onLongPress: () {
+                  print("onLongPress");
+                }),
+          ),
+          // child: Text("Text Button"))
 
-            /*todo Custom widget eg*/
-            /*CustomButton(
-              text: "Login",
-              foregroundColor: Colors.white,
-              backgroundColor: Colors.red,
-              onButtonClick: () {
-                print("onButtonClick");
-              },
-            )*/
+          /*todo TextField eg*/
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: TextField(
+              keyboardType: TextInputType.number,
+              maxLines: 1,
+              maxLength: 10,
 
-            /*todo SegmentedButton widget with Single selection eg*/
-            /*Padding(
-              padding: EdgeInsets.all(8.0),
-              child: SingleChoice(),
-            ),*/
+              obscureText: true,
+              //for password field
+              obscuringCharacter: "*",
 
-            /*todo SegmentedButton widget with Multiple selection eg*/
-            /*Padding(
-              padding: EdgeInsets.all(8.0),
-              child: MultipleChoice(),
-            )*/
+              // autofocus: true,
+              // enabled: false,
+              // readOnly: true,
 
-            /*todo Alert dialogue eg*/
-            /*Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: AlertDialogueEg(),
-            ),*/
+              decoration: InputDecoration(
+                  labelText: "Phone number",
+                  // hintText: "Phone number",
+                  // hintStyle: TextStyle(color: Colors.red),
+                  helperText: "Enter phone number",
+                  // icon: Icon(Icons.phone),
+                  prefixIcon: Icon(Icons.phone),
+                  // suffixIcon: Icon(Icons.more_horiz),
+                  prefixText: "+91",
+                  // suffixText: ".com",
+                  filled: true,
+                  fillColor: Colors.black12,
+                  border: OutlineInputBorder(
+                      // borderSide: BorderSide.none,
+                      // borderRadius: BorderRadius.circular(32)
+                      ),
+                  enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.blue)),
+                  focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.red))),
+            ),
+          ),
 
-            /*todo ListTile eg*/
-            /*Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Card(
-                child: ListTile(
-                  leading: Icon(Icons.abc_outlined),
-                  title: Text("This is title"),
-                  subtitle: Text("This is subtitle"),
-                  trailing: Icon(Icons.check),
-                  onTap: () {
-                    print("onTap");
-                  },
+          /*todo image eg*/
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Image.asset(
+              "images/brainvire_logo.png",
+              fit: BoxFit.fill,
+              // height: 100,
+              // width: 100,
+              semanticLabel: "This is demo image",
+              color: Colors.black12,
+              colorBlendMode: BlendMode.darken,
+            ),
+          ),
+
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Image.network(
+              "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
+              height: 100,
+              width: 100,
+              semanticLabel: "This is demo image",
+            ),
+          ),
+
+          /*todo stack & positioned eg*/
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                Container(
+                  height: 250,
+                  width: 250,
+                  child: Text("Third"),
+                  color: Colors.orange,
+                  padding: EdgeInsets.all(30),
+                  alignment: Alignment.center,
+                ),
+                Container(
+                  height: 200,
+                  width: 200,
+                  child: Text("Second"),
+                  color: Colors.green,
+                  padding: EdgeInsets.all(30),
+                  alignment: Alignment.center,
+                ),
+                Positioned(
+                  top: 0,
+                  right: 0,
+                  child: Container(
+                    height: 150,
+                    width: 150,
+                    child: Text("First"),
+                    color: Colors.blue,
+                    padding: EdgeInsets.all(30),
+                    alignment: Alignment.center,
+                  ),
+                ),
+              ],
+            ),
+          ),
+
+          /*todo IndexedStack eg*/
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: IndexedStack(
+              index: 2,
+              alignment: Alignment.center,
+              children: [
+                Container(
+                  height: 250,
+                  width: 250,
+                  child: Text("Third"),
+                  color: Colors.orange,
+                  padding: EdgeInsets.all(30),
+                  alignment: Alignment.center,
+                ),
+                Container(
+                  height: 200,
+                  width: 200,
+                  child: Text("Second"),
+                  color: Colors.green,
+                  padding: EdgeInsets.all(30),
+                  alignment: Alignment.center,
+                ),
+                Positioned(
+                  top: 0,
+                  right: 0,
+                  child: Container(
+                    height: 150,
+                    width: 150,
+                    child: Text("First"),
+                    color: Colors.blue,
+                    padding: EdgeInsets.all(30),
+                    alignment: Alignment.center,
+                  ),
+                ),
+              ],
+            ),
+          ),
+
+          /*todo Clipper eg*/
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: ClipOval(
+              // borderRadius: BorderRadius.circular(16),
+              child: Align(
+                heightFactor: 0.5,
+                widthFactor: 0.9,
+                child: Image.network(
+                  "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
                 ),
               ),
-            ),*/
-
-            /*todo BottomSheet eg*/
-            /*Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: BottomSheetEg(),
-            )*/
-
-            /*todo Date Picker eg*/
-            /*Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: DatePickerEg(),
-            ),*/
-
-            /*todo Time Picker eg*/
-            /*Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: TimePickerEg(),
-            ),*/
-
-            /*todo Chip eg*/
-            /*Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: ChipEg(),
-            ),*/
-
-            /*todo ListView eg*/
-            /*ListEg()*/
-
-            /*todo Horizontal ListView eg*/
-            /*HorizontalListEg()*/
-
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: DropdownMenuEg(),
-            )
-          ],
-          // crossAxisAlignment: CrossAxisAlignment.center,
-          // verticalDirection: VerticalDirection.up,
-          // mainAxisAlignment: MainAxisAlignment.center,
-        ),
-      ),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {
-          // Add your onPressed code here!
-          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            content: const Text('This is snake bar!'),
-            action: SnackBarAction(
-              label: "Dismiss",
-              onPressed: () {},
             ),
-          ));
-        },
-        label: const Text('Add'),
-        icon: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+          ),
+
+          /*todo Radio button eg*/
+          Row(
+            children: [
+              Radio(
+                  value: 1,
+                  groupValue: _checkedRadioValue,
+                  onChanged: (value) {
+                    setState(() {
+                      _checkedRadioValue = value!;
+                    });
+                  }),
+              SizedBox(
+                width: 10,
+              ),
+              Text("Red")
+            ],
+          ),
+          Row(
+            children: [
+              Radio(
+                  value: 2,
+                  groupValue: _checkedRadioValue,
+                  onChanged: (value) {
+                    setState(() {
+                      _checkedRadioValue = value!;
+                    });
+                  }),
+              SizedBox(
+                width: 10,
+              ),
+              Text("Blue")
+            ],
+          ),
+          Row(
+            children: [
+              Radio(
+                  value: 3,
+                  groupValue: _checkedRadioValue,
+                  onChanged: (value) {
+                    setState(() {
+                      _checkedRadioValue = value!;
+                    });
+                  }),
+              SizedBox(
+                width: 10,
+              ),
+              Text("Green")
+            ],
+          ),
+
+          /*todo Checkbox eg*/
+          Row(
+            children: [
+              Checkbox(
+                  value: _checkedBox1Value,
+                  onChanged: (value) {
+                    setState(() {
+                      _checkedBox1Value = value!;
+                    });
+                  }),
+              SizedBox(
+                width: 10,
+              ),
+              Text("Audi")
+            ],
+          ),
+          Row(
+            children: [
+              Checkbox(
+                  value: _checkedBox2Value,
+                  onChanged: (value) {
+                    setState(() {
+                      _checkedBox2Value = value!;
+                    });
+                  }),
+              SizedBox(
+                width: 10,
+              ),
+              Text("Mercedes")
+            ],
+          ),
+          Row(
+            children: [
+              Checkbox(
+                  value: _checkedBox3Value,
+                  onChanged: (value) {
+                    setState(() {
+                      _checkedBox3Value = value!;
+                    });
+                  }),
+              SizedBox(
+                width: 10,
+              ),
+              Text("BMW")
+            ],
+          ),
+
+          /*todo card eg*/
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Container(
+                height: 300,
+                width: 300,
+                child: Card(
+                  margin: EdgeInsets.all(8),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(16)),
+                  color: Colors.red,
+                  elevation: 16,
+                )),
+          ),
+
+          /*todo Custom widget eg*/
+          CustomButton(
+            text: "Login",
+            foregroundColor: Colors.white,
+            backgroundColor: Colors.red,
+            onButtonClick: () {
+              print("onButtonClick");
+            },
+          ),
+
+          /*todo SegmentedButton widget with Single selection eg*/
+          Padding(
+            padding: EdgeInsets.all(8.0),
+            child: SingleChoice(),
+          ),
+
+          /*todo SegmentedButton widget with Multiple selection eg*/
+          Padding(
+            padding: EdgeInsets.all(8.0),
+            child: MultipleChoice(),
+          ),
+
+          /*todo Alert dialogue eg*/
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: AlertDialogueEg(),
+          ),
+
+          /*todo ListTile eg*/
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Card(
+              child: ListTile(
+                leading: Icon(Icons.abc_outlined),
+                title: Text("This is title"),
+                subtitle: Text("This is subtitle"),
+                trailing: Icon(Icons.check),
+                onTap: () {
+                  print("onTap");
+                },
+              ),
+            ),
+          ),
+
+          /*todo BottomSheet eg*/
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: BottomSheetEg(),
+          ),
+
+          /*todo Date Picker eg*/
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: DatePickerEg(),
+          ),
+
+          /*todo Time Picker eg*/
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: TimePickerEg(),
+          ),
+
+          /*todo Chip eg*/
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: ChipEg(),
+          ),
+
+          /*todo ListView eg*/
+          ListEg(),
+
+          /*todo Horizontal ListView eg*/
+          HorizontalListEg(),
+
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: DropdownMenuEg(),
+          )
+        ],
+      ),
     );
   }
 }
@@ -1343,6 +1230,16 @@ class _DropdownMenuEgState extends State<DropdownMenuEg> {
 }
 
 /*todo Cupertino UI*/
+enum ChooseGender { Male, Female }
+
+enum Sky { Midnight, Viridian, Cerulean }
+
+Map<Sky, Color> skyColors = <Sky, Color>{
+  Sky.Midnight: const Color(0xff191970),
+  Sky.Viridian: const Color(0xff40826d),
+  Sky.Cerulean: const Color(0xff007ba7),
+};
+
 class CupertinoDemoApp extends StatefulWidget {
   const CupertinoDemoApp({super.key});
 
@@ -1353,22 +1250,44 @@ class CupertinoDemoApp extends StatefulWidget {
 class _CupertinoDemoAppState extends State<CupertinoDemoApp> {
   bool checkBoxValue = false;
   double dragValue = 0.0;
+  ChooseGender? _character = ChooseGender.Male;
+  String text = '';
+  Sky _selectedSegment = Sky.Midnight;
 
   @override
   Widget build(BuildContext context) {
-    return CupertinoPageScaffold(
-        navigationBar: CupertinoNavigationBar(
-          middle: Text("CupertinoDemoApp"),
-        ),
-        child: Center(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
+    return SafeArea(
+      child: CupertinoPageScaffold(
+          navigationBar: CupertinoNavigationBar(
+            leading: CupertinoButton(
+              child: Text(
+                'Back',
+                style: TextStyle(fontSize: 13),
+              ),
+              onPressed: () {
+                // Add your back button action here
+                Navigator.of(context).pop();
+              },
+            ),
+            middle: Text("CupertinoDemoApp"),
+            trailing: CupertinoButton(
+              child: Text(
+                'Save',
+                style: TextStyle(fontSize: 13),
+              ),
+              onPressed: () {
+                // Add your save button action here
+              },
+            ),
+          ),
+          child: CupertinoListSection(
+            separatorColor: Colors.transparent,
             children: [
               /*todo CupertinoButton eg*/
-              Padding(
+              /*Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: CupertinoButton(
-                    child: Text("Login"),
+                    child: Text("Login 1"),
                     onPressed: () {
                       print("Login is clicked");
                     }),
@@ -1376,7 +1295,7 @@ class _CupertinoDemoAppState extends State<CupertinoDemoApp> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: CupertinoButton.filled(
-                    child: Text("Login"),
+                    child: Text("Login 2"),
                     onPressed: () {
                       print("Login is clicked");
                     }),
@@ -1384,12 +1303,15 @@ class _CupertinoDemoAppState extends State<CupertinoDemoApp> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: CupertinoButton.filled(
-                    child: Text("Login"), onPressed: null),
-              ),
-              CupertinoActivityIndicator(
+                    child: Text("Login 3"), onPressed: null),
+              ),*/
+
+              /*todo normal widgets*/
+              /*CupertinoActivityIndicator(
                 color: Colors.lightBlue,
                 radius: 20,
               ),
+
               CupertinoCheckbox(
                 value: checkBoxValue,
                 activeColor: CupertinoColors.black,
@@ -1399,6 +1321,7 @@ class _CupertinoDemoAppState extends State<CupertinoDemoApp> {
                   });
                 },
               ),
+
               CupertinoSwitch(
                 value: checkBoxValue,
                 activeColor: CupertinoColors.black,
@@ -1408,6 +1331,7 @@ class _CupertinoDemoAppState extends State<CupertinoDemoApp> {
                   });
                 },
               ),
+
               CupertinoSlider(
                 value: dragValue,
                 divisions: 5,
@@ -1425,17 +1349,156 @@ class _CupertinoDemoAppState extends State<CupertinoDemoApp> {
                 onChangeEnd: (value) {
                   print("onChangeEnd: $value");
                 },
+              ),*/
+
+              /*todo list*/
+              /*CupertinoListTileEg(),
+              CupertinoFormSectionEg(),*/
+
+              /*todo radio button eg*/
+              CupertinoListSection(
+                children: [
+                  CupertinoListTile(
+                    title: Text(ChooseGender.Male.name),
+                    leading: CupertinoRadio(
+                      value: ChooseGender.Male,
+                      onChanged: (value) {
+                        setState(() {
+                          _character = value;
+                        });
+                      },
+                      groupValue: _character,
+                    ),
+                  ),
+                  CupertinoListTile(
+                    title: Text(ChooseGender.Female.name),
+                    leading: CupertinoRadio(
+                      value: ChooseGender.Female,
+                      onChanged: (value) {
+                        setState(() {
+                          _character = value;
+                        });
+                      },
+                      groupValue: _character,
+                    ),
+                  ),
+                ],
               ),
-              CupertinoListTileEg(),
-              CupertinoFormSectionEg(),
+
+              /*todo CupertinoSearchTextField eg*/
+              Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(text),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: CupertinoSearchTextFieldEg(
+                      fieldValue: (String value) {
+                        setState(() {
+                          text = value;
+                        });
+                      },
+                    ),
+                  ),
+                ],
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: CupertinoSegmentedControl(
+                  selectedColor: skyColors[_selectedSegment],
+                  groupValue: _selectedSegment,
+                  padding: const EdgeInsets.symmetric(horizontal: 12),
+                  onValueChanged: (value) {
+                    setState(() {
+                      _selectedSegment = value;
+                    });
+                  },
+                  children: {
+                    Sky.Midnight: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 20),
+                      child: Text(Sky.Midnight.name),
+                    ),
+                    Sky.Viridian: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 20),
+                      child: Text(Sky.Viridian.name),
+                    ),
+                    Sky.Cerulean: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 20),
+                      child: Text(Sky.Cerulean.name),
+                    ),
+                  },
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: CupertinoSlidingSegmentedControl(
+                  backgroundColor: CupertinoColors.systemGrey2,
+                  thumbColor: skyColors[_selectedSegment]!,
+                  groupValue: _selectedSegment,
+                  onValueChanged: (value) {
+                    if (value != null) {
+                      setState(() {
+                        _selectedSegment = value;
+                      });
+                    }
+                  },
+                  children: {
+                    Sky.Midnight: Text(
+                      Sky.Midnight.name,
+                      style: TextStyle(color: CupertinoColors.white),
+                    ),
+                    Sky.Viridian: Text(
+                      Sky.Viridian.name,
+                      style: TextStyle(color: CupertinoColors.white),
+                    ),
+                    Sky.Cerulean: Text(
+                      Sky.Cerulean.name,
+                      style: TextStyle(color: CupertinoColors.white),
+                    ),
+                  },
+                ),
+              ),
             ],
-          ),
-        ));
+          )),
+    );
   }
 }
 
-class CupertinoActionSheetEg extends StatelessWidget {
+const double _kItemExtent = 32.0;
+const List<String> _fruitNames = <String>[
+  'Apple',
+  'Mango',
+  'Banana',
+  'Orange',
+  'Pineapple',
+  'Strawberry',
+];
+
+class CupertinoActionSheetEg extends StatefulWidget {
   const CupertinoActionSheetEg({super.key});
+
+  @override
+  State<CupertinoActionSheetEg> createState() => _CupertinoActionSheetEgState();
+}
+
+class _CupertinoActionSheetEgState extends State<CupertinoActionSheetEg> {
+  int _selectedFruit = 0;
+
+  void _showPicker(child) {
+    showCupertinoModalPopup(
+        context: context,
+        builder: (context) => Container(
+              height: 254,
+              padding: EdgeInsets.only(top: 6),
+              color: CupertinoColors.systemBackground.resolveFrom(context),
+              child: SafeArea(
+                top: false,
+                child: child,
+              ),
+            ));
+  }
 
   void _showActionSheet(context) {
     showCupertinoModalPopup(
@@ -1496,9 +1559,31 @@ class CupertinoActionSheetEg extends StatelessWidget {
     return CupertinoPageScaffold(
         child: Center(
       child: CupertinoButton(
-        child: Text("CupertinoActionSheet"),
+        child: Text("CupertinoActionSheet: ${_fruitNames[_selectedFruit]}"),
+        onPressed: () => _showPicker(
+          CupertinoPicker(
+            magnification: 1.22,
+            squeeze: 1.2,
+            useMagnifier: true,
+            itemExtent: _kItemExtent,
+            // This sets the initial item.
+            scrollController: FixedExtentScrollController(
+              initialItem: _selectedFruit,
+            ),
+            // This is called when selected item is changed.
+            onSelectedItemChanged: (int selectedItem) {
+              print("selectedItem: $selectedItem");
+              setState(() {
+                _selectedFruit = selectedItem;
+              });
+            },
+            children: List<Widget>.generate(_fruitNames.length, (int index) {
+              return Center(child: Text(_fruitNames[index]));
+            }),
+          ),
+        ),
         // onPressed: () => _showActionSheet(context),
-        onPressed: () => _showAlertDialogue(context),
+        // onPressed: () => _showAlertDialogue(context),
       ),
     ));
   }
@@ -1510,7 +1595,6 @@ class CupertinoListTileEg extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
-
       child: CupertinoListSection(
         header: const Text('My Reminders'),
         children: [
@@ -1554,7 +1638,6 @@ class CupertinoFormSectionEg extends StatefulWidget {
 }
 
 class _CupertinoFormSectionEgState extends State<CupertinoFormSectionEg> {
-
   bool airplaneMode = false;
 
   @override
@@ -1578,4 +1661,58 @@ class _CupertinoFormSectionEgState extends State<CupertinoFormSectionEg> {
   }
 }
 
+class CupertinoSearchTextFieldEg extends StatelessWidget {
+  const CupertinoSearchTextFieldEg({
+    super.key,
+    required this.fieldValue,
+  });
 
+  final ValueChanged<String> fieldValue;
+
+  @override
+  Widget build(BuildContext context) {
+    return CupertinoSearchTextField(
+      placeholder: 'Search',
+      onChanged: (String value) {
+        fieldValue('The text has changed to: $value');
+      },
+      onSubmitted: (String value) {
+        fieldValue('Submitted text: $value');
+      },
+    );
+  }
+}
+
+class CupertinoTabScaffoldEg extends StatelessWidget {
+  const CupertinoTabScaffoldEg({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return CupertinoTabScaffold(
+        tabBar: CupertinoTabBar(
+          items: const [
+            BottomNavigationBarItem(
+              icon: Icon(CupertinoIcons.home),
+              label: 'Home',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(CupertinoIcons.search),
+              label: 'Search',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(CupertinoIcons.person),
+              label: 'Profile',
+            ),
+          ],
+        ),
+        tabBuilder: (context, index) {
+          return CupertinoTabView(
+            builder: (BuildContext context) {
+              return Center(
+                child: Text('Content of tab $index'),
+              );
+            },
+          );
+        });
+  }
+}

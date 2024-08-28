@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:learning_flutter/route_generator.dart';
 import 'package:learning_flutter/route_generator_for_bottom_nav.dart';
+import 'package:learning_flutter/route_generator_for_nav_drawer.dart';
 
 void main() {
   runApp(const MaterialMyApp());
@@ -45,8 +46,8 @@ class MaterialMyApp extends StatelessWidget {
       // home: const MyHomePage(title: 'Flutter Demo Home Page'),
       // home: DemoScreen(),
       // home: FirstPage(),
-      home: NavDrawer(),
-      // initialRoute: '/',
+      // home: NavDrawer(),
+      initialRoute: '/',
 
       /*todo 2nd way to navigate*/
       /*routes: {
@@ -54,7 +55,7 @@ class MaterialMyApp extends StatelessWidget {
       },*/
 
       /*todo 3rd way to navigate*/
-      // onGenerateRoute: RouteGeneratorForBottomNav.generateRoute,
+      onGenerateRoute: RouteGeneratorForNavDrawer.generateRoute,
     );
   }
 }
@@ -990,7 +991,7 @@ class _SettingsState extends State<Settings> {
             ),
             ElevatedButton(
                 onPressed: () {
-                  Navigator.pushNamed(context, '/DetailScreen',
+                  Navigator.pushNamed(context, '/NormalScreen',
                       arguments: 'I came from Settings page');
                 },
                 child: const Text('Press here to navigate'))
@@ -1023,6 +1024,15 @@ class _MessageState extends State<Message> {
               'Message',
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
             ),
+            Divider(
+              height: 16,
+              color: Colors.transparent,
+            ),
+            ElevatedButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, '/NormalScreen');
+                },
+                child: const Text('Press here to navigate'))
           ],
         ),
       ),
@@ -1051,6 +1061,16 @@ class _ProfileState extends State<Profile> {
               'Profile',
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
             ),
+            Divider(
+              height: 16,
+              color: Colors.transparent,
+            ),
+            ElevatedButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, '/DetailScreen',
+                      arguments: 'I came from Profile page');
+                },
+                child: const Text('Press here to navigate'))
           ],
         ),
       ),
@@ -1487,7 +1507,7 @@ class NavDrawer extends StatefulWidget {
 class _NavDrawerState extends State<NavDrawer> {
   int screenIndex = 0;
 
-  void handleScreenChanged(int selectedScreen) {
+  void onNavDrawerSelected(int selectedScreen) {
     setState(() {
       screenIndex = selectedScreen;
       // Then close the drawer
@@ -1495,7 +1515,16 @@ class _NavDrawerState extends State<NavDrawer> {
     });
   }
 
+  void onBottomNavSelected(int selectedScreen) {
+    setState(() {
+      screenIndex = selectedScreen;
+    });
+  }
+
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+
+  NavigationDestinationLabelBehavior labelBehavior =
+      NavigationDestinationLabelBehavior.onlyShowSelected;
 
   @override
   Widget build(BuildContext context) {
@@ -1505,7 +1534,7 @@ class _NavDrawerState extends State<NavDrawer> {
           title: Text(destinations[screenIndex].label),
         ),
         drawer: NavigationDrawer(
-          onDestinationSelected: handleScreenChanged,
+          onDestinationSelected: onNavDrawerSelected,
           selectedIndex: screenIndex,
           children: <Widget>[
             Padding(
@@ -1530,6 +1559,22 @@ class _NavDrawerState extends State<NavDrawer> {
             ),
           ],
         ),
+        bottomNavigationBar: NavigationBar(
+      labelBehavior: labelBehavior,
+      onDestinationSelected: onBottomNavSelected,
+      indicatorColor: Colors.amber,
+      selectedIndex: screenIndex,
+          destinations: destinations.map(
+                (ExampleDestination destination) {
+              return NavigationDestination(
+                label: destination.label,
+                icon: destination.icon,
+                selectedIcon: destination.selectedIcon,
+                tooltip: destination.label,
+              );
+            },
+          ).toList(),
+    ),
         body: destinations.elementAt(screenIndex).selectedScreen);
   }
 }

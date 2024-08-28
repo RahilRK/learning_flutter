@@ -45,8 +45,8 @@ class MaterialMyApp extends StatelessWidget {
       // home: const MyHomePage(title: 'Flutter Demo Home Page'),
       // home: DemoScreen(),
       // home: FirstPage(),
-      // home: NavigationBarEg(),
-      initialRoute: '/',
+      home: NavDrawer(),
+      // initialRoute: '/',
 
       /*todo 2nd way to navigate*/
       /*routes: {
@@ -54,7 +54,7 @@ class MaterialMyApp extends StatelessWidget {
       },*/
 
       /*todo 3rd way to navigate*/
-      onGenerateRoute: RouteGeneratorForBottomNav.generateRoute,
+      // onGenerateRoute: RouteGeneratorForBottomNav.generateRoute,
     );
   }
 }
@@ -905,24 +905,23 @@ class _NavigationBarEgState extends State<NavigationBarEg> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: NavigationBar(
-        labelBehavior: labelBehavior,
-        onDestinationSelected: (index) {
-          setState(() {
-            currentPageIndex = index;
-          });
-        },
-        indicatorColor: Colors.amber,
-        selectedIndex: currentPageIndex,
-        destinations: const [
-          NavigationDestination(icon: Icon(Icons.dashboard), label: 'Dashboard'),
-          NavigationDestination(
-              icon: Badge(child: Icon(Icons.settings)),
-              label: 'Settings'),
-        ],
-      ),
-      body: pageList.elementAt(currentPageIndex)
-    );
+        bottomNavigationBar: NavigationBar(
+          labelBehavior: labelBehavior,
+          onDestinationSelected: (index) {
+            setState(() {
+              currentPageIndex = index;
+            });
+          },
+          indicatorColor: Colors.amber,
+          selectedIndex: currentPageIndex,
+          destinations: const [
+            NavigationDestination(
+                icon: Icon(Icons.dashboard), label: 'Dashboard'),
+            NavigationDestination(
+                icon: Badge(child: Icon(Icons.settings)), label: 'Settings'),
+          ],
+        ),
+        body: pageList.elementAt(currentPageIndex));
   }
 }
 
@@ -965,9 +964,10 @@ class _DashboardState extends State<Dashboard> {
 }
 
 class Settings extends StatefulWidget {
+  const Settings({
+    super.key,
+  });
 
-  const Settings({super.key,});
-  
   @override
   State<Settings> createState() => _SettingsState();
 }
@@ -976,9 +976,6 @@ class _SettingsState extends State<Settings> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Settings'),
-      ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -993,7 +990,8 @@ class _SettingsState extends State<Settings> {
             ),
             ElevatedButton(
                 onPressed: () {
-                  Navigator.pushNamed(context, '/DetailScreen',arguments: 'I came from Settings page');
+                  Navigator.pushNamed(context, '/DetailScreen',
+                      arguments: 'I came from Settings page');
                 },
                 child: const Text('Press here to navigate'))
           ],
@@ -1003,6 +1001,90 @@ class _SettingsState extends State<Settings> {
   }
 }
 
+
+class Message extends StatefulWidget {
+  const Message({
+    super.key,
+  });
+
+  @override
+  State<Message> createState() => _MessageState();
+}
+
+class _MessageState extends State<Message> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              'Message',
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class Profile extends StatefulWidget {
+  const Profile({
+    super.key,
+  });
+
+  @override
+  State<Profile> createState() => _ProfileState();
+}
+
+class _ProfileState extends State<Profile> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              'Profile',
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class Favourite extends StatefulWidget {
+  const Favourite({
+    super.key,
+  });
+
+  @override
+  State<Favourite> createState() => _FavouriteState();
+}
+
+class _FavouriteState extends State<Favourite> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              'Favourite',
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
 
 class NormalScreen extends StatelessWidget {
   const NormalScreen({super.key});
@@ -1027,7 +1109,6 @@ class NormalScreen extends StatelessWidget {
     );
   }
 }
-
 
 class DetailScreen extends StatelessWidget {
   final String data;
@@ -1054,7 +1135,6 @@ class DetailScreen extends StatelessWidget {
     );
   }
 }
-
 
 class DatePickerEg extends StatefulWidget {
   const DatePickerEg({super.key});
@@ -1374,6 +1454,83 @@ class _DropdownMenuEgState extends State<DropdownMenuEg> {
         ),
       ],
     );
+  }
+}
+
+class ExampleDestination {
+  const ExampleDestination(
+      this.label, this.icon, this.selectedIcon, this.selectedScreen);
+
+  final String label;
+  final Widget icon;
+  final Widget selectedIcon;
+  final Widget selectedScreen;
+}
+
+const List<ExampleDestination> destinations = <ExampleDestination>[
+  ExampleDestination(
+      'Messages', Icon(Icons.widgets_outlined),
+      Icon(Icons.widgets), Message()),
+  ExampleDestination('Profile', Icon(Icons.format_paint_outlined),
+      Icon(Icons.format_paint), Profile()),
+  ExampleDestination('Favourite', Icon(Icons.bookmark_border_rounded),
+      Icon(Icons.bookmark), Favourite()),
+];
+
+class NavDrawer extends StatefulWidget {
+  const NavDrawer({super.key});
+
+  @override
+  State<NavDrawer> createState() => _NavDrawerState();
+}
+
+class _NavDrawerState extends State<NavDrawer> {
+  int screenIndex = 0;
+
+  void handleScreenChanged(int selectedScreen) {
+    setState(() {
+      screenIndex = selectedScreen;
+      // Then close the drawer
+      Navigator.pop(context);
+    });
+  }
+
+  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        key: scaffoldKey,
+        appBar: AppBar(
+          title: Text(destinations[screenIndex].label),
+        ),
+        drawer: NavigationDrawer(
+          onDestinationSelected: handleScreenChanged,
+          selectedIndex: screenIndex,
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.fromLTRB(28, 16, 16, 10),
+              child: Text(
+                'Header',
+                style: Theme.of(context).textTheme.titleSmall,
+              ),
+            ),
+            ...destinations.map(
+              (ExampleDestination destination) {
+                return NavigationDrawerDestination(
+                  label: Text(destination.label),
+                  icon: destination.icon,
+                  selectedIcon: destination.selectedIcon,
+                );
+              },
+            ),
+            const Padding(
+              padding: EdgeInsets.fromLTRB(28, 16, 28, 10),
+              child: Divider(),
+            ),
+          ],
+        ),
+        body: destinations.elementAt(screenIndex).selectedScreen);
   }
 }
 
@@ -2141,7 +2298,8 @@ class FirstPage extends StatelessWidget {
                   /*Navigator.pushNamed(context, '/secondPage');*/
 
                   /*todo 3rd way to navigate*/
-                  Navigator.pushNamed(context, '/secondPage',arguments: 'I came from first page');
+                  Navigator.pushNamed(context, '/secondPage',
+                      arguments: 'I came from first page');
                 },
                 child: const Text('Press here to navigate'))
           ],

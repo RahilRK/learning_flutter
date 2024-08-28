@@ -3,10 +3,12 @@ import 'dart:ffi';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:learning_flutter/route_generator.dart';
+import 'package:learning_flutter/route_generator_for_bottom_nav.dart';
 
 void main() {
-  // runApp(const MaterialMyApp());
-  runApp(const CupertinoMyApp());
+  runApp(const MaterialMyApp());
+  // runApp(const CupertinoMyApp());
 }
 
 class MaterialMyApp extends StatelessWidget {
@@ -34,13 +36,25 @@ class MaterialMyApp extends StatelessWidget {
         // This works for code too, not just values: Most code changes can be
         // tested with just a hot reload.
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
+        useMaterial3: false,
       ),
       // home: const DemoScreen(title: 'Flutter Demo Home Page'),
-      home: const DemoScreen(),
+      // home: const DemoScreen(),
+      // home: const MyFormEg(),
       // home: const PopupOptionMenuEg(),
-      // home: NavigationBarEg(),
       // home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      // home: DemoScreen(),
+      // home: FirstPage(),
+      // home: NavigationBarEg(),
+      initialRoute: '/',
+
+      /*todo 2nd way to navigate*/
+      /*routes: {
+        '/secondPage':(_)=>SecondPage(data: 'ABC')
+      },*/
+
+      /*todo 3rd way to navigate*/
+      onGenerateRoute: RouteGeneratorForBottomNav.generateRoute,
     );
   }
 }
@@ -52,10 +66,10 @@ class CupertinoMyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return CupertinoApp(
       theme: CupertinoThemeData(brightness: Brightness.light),
-      // home: CupertinoDemoApp(),
+      home: CupertinoDemoApp(),
       // home: CupertinoTabScaffoldEg(),
       // home: CupertinoListTileEg(),
-      home: CupertinoActionSheetEg(),
+      // home: CupertinoActionSheetEg(),
     );
   }
 }
@@ -198,11 +212,56 @@ class _DemoScreenState extends State<DemoScreen> {
   bool _checkedBox2Value = false;
   bool _checkedBox3Value = false;
 
+  static const List<String> _kOptions = <String>[
+    'aardvark',
+    'bobcat',
+    'chameleon',
+  ];
+
+  Future<String> mFuture = Future.delayed(
+    const Duration(seconds: 2),
+    () => 'Rahil',
+  );
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: ListView(
         children: [
+          /*todo FutureBuilder eg*/
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: FutureBuilder(
+                future: mFuture,
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    return Text('${snapshot.data}');
+                  } else if (snapshot.hasError) {
+                    return Text('${snapshot.error}');
+                  } else {
+                    return const Text('No data found');
+                  }
+                }),
+          ),
+
+          /*todo Autocomplete eg*/
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Autocomplete(
+              optionsBuilder: (value) {
+                if (value.text == '') {
+                  return const Iterable<String>.empty();
+                }
+                return _kOptions.where((String option) {
+                  return option.contains(value.text.toLowerCase());
+                });
+              },
+              onSelected: (selectedText) {
+                print('You selected $selectedText');
+              },
+            ),
+          ),
+
           /*todo flexible eg*/
           Flexible(
             flex: 2,
@@ -640,7 +699,7 @@ class _DemoScreenState extends State<DemoScreen> {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: DropdownMenuEg(),
-          )
+          ),
         ],
       ),
     );
@@ -826,6 +885,11 @@ class BottomSheetEg extends StatelessWidget {
   }
 }
 
+List<Widget> pageList = [
+  const Dashboard(),
+  const Settings(),
+];
+
 class NavigationBarEg extends StatefulWidget {
   const NavigationBarEg({super.key});
 
@@ -851,62 +915,146 @@ class _NavigationBarEgState extends State<NavigationBarEg> {
         indicatorColor: Colors.amber,
         selectedIndex: currentPageIndex,
         destinations: const [
-          NavigationDestination(icon: Icon(Icons.home), label: 'Home'),
+          NavigationDestination(icon: Icon(Icons.dashboard), label: 'Dashboard'),
           NavigationDestination(
-              icon: Badge(child: Icon(Icons.notifications_sharp)),
-              label: 'Notifications'),
-          NavigationDestination(
-            icon: Badge(
-              label: Text('2'),
-              child: Icon(Icons.messenger_sharp),
-            ),
-            label: 'Messages',
-          ),
+              icon: Badge(child: Icon(Icons.settings)),
+              label: 'Settings'),
         ],
       ),
-      body: [
-        /// Home page
-        Card(
-          shadowColor: Colors.transparent,
-          margin: const EdgeInsets.all(8.0),
-          child: SizedBox.expand(
-            child: Center(
-              child: Text(
-                'Home page',
-              ),
-            ),
-          ),
-        ),
-
-        /// Notification page
-        Card(
-          shadowColor: Colors.transparent,
-          margin: const EdgeInsets.all(8.0),
-          child: SizedBox.expand(
-            child: Center(
-              child: Text(
-                'Notification page',
-              ),
-            ),
-          ),
-        ),
-
-        /// Message page
-        Card(
-          shadowColor: Colors.transparent,
-          margin: const EdgeInsets.all(8.0),
-          child: SizedBox.expand(
-            child: Center(
-              child: Text(
-                'Message page',
-              ),
-            ),
-          ),
-        ),
-      ][currentPageIndex],
+      body: pageList.elementAt(currentPageIndex)
     );
   }
 }
+
+class Dashboard extends StatefulWidget {
+  const Dashboard({super.key});
+
+  @override
+  State<Dashboard> createState() => _DashboardState();
+}
+
+class _DashboardState extends State<Dashboard> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Dashboard'),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              'Dashboard',
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
+            ),
+            Divider(
+              height: 16,
+              color: Colors.transparent,
+            ),
+            ElevatedButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, '/NormalScreen');
+                },
+                child: const Text('Press here to navigate'))
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class Settings extends StatefulWidget {
+
+  const Settings({super.key,});
+  
+  @override
+  State<Settings> createState() => _SettingsState();
+}
+
+class _SettingsState extends State<Settings> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Settings'),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              'Settings',
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
+            ),
+            Divider(
+              height: 16,
+              color: Colors.transparent,
+            ),
+            ElevatedButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, '/DetailScreen',arguments: 'I came from Settings page');
+                },
+                child: const Text('Press here to navigate'))
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+
+class NormalScreen extends StatelessWidget {
+  const NormalScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('NormalScreen'),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              'NormalScreen',
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+
+class DetailScreen extends StatelessWidget {
+  final String data;
+
+  const DetailScreen({super.key, required this.data});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('DetailScreen'),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              'Data: $data',
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
 
 class DatePickerEg extends StatefulWidget {
   const DatePickerEg({super.key});
@@ -1614,9 +1762,9 @@ class _CupertinoActionSheetEgState extends State<CupertinoActionSheetEg> {
       child: CupertinoButton(
         // child: Text("CupertinoActionSheet: ${_fruitNames[_selectedFruit]}"),
         // child: Text("CupertinoActionSheet: Time is ${_printDuration(duration)}"),
-        child: Text("CupertinoActionSheet: Date is ${DateFormat('yyyy-MM-dd').format(date)}"),
+        child: Text(
+            "CupertinoActionSheet: Date is ${DateFormat('yyyy-MM-dd').format(date)}"),
         onPressed: () => _showPicker(
-
           /*todo simple picker*/
           /*CupertinoPicker(
             magnification: 1.22,
@@ -1870,6 +2018,161 @@ class _ProfileTabState extends State<ProfileTab> {
         middle: Text("Profile"),
       ),
       child: Center(child: Text('Profile')),
+    );
+  }
+}
+
+class MyFormEg extends StatefulWidget {
+  const MyFormEg({super.key});
+
+  @override
+  State<MyFormEg> createState() => _MyFormEgState();
+}
+
+class _MyFormEgState extends State<MyFormEg> {
+  final _formKey = GlobalKey<FormState>();
+  final focus = FocusNode();
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('My Form'),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Form(
+            key: _formKey,
+            child: Column(
+              children: [
+                TextFormField(
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter the name';
+                    }
+                    return null;
+                  },
+                  keyboardType: TextInputType.text,
+                  maxLines: 1,
+                  maxLength: 15,
+                  onFieldSubmitted: (value) {
+                    FocusScope.of(context).requestFocus(focus);
+                  },
+                  decoration: InputDecoration(
+                    labelText: "Name",
+                    hintText: "Name",
+                    // hintStyle: TextStyle(color: Colors.red),
+                    helperText: "Enter name",
+                    border: OutlineInputBorder(),
+                  ),
+                ),
+                Divider(
+                  height: 16,
+                  color: Colors.transparent,
+                ),
+                TextFormField(
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter the mobile number';
+                    } else if (value.length != 10) {
+                      return 'Invalid mobile number';
+                    }
+                    return null;
+                  },
+                  focusNode: focus,
+                  keyboardType: TextInputType.number,
+                  maxLines: 1,
+                  maxLength: 10,
+                  decoration: InputDecoration(
+                    labelText: "Mobile number",
+                    hintText: "Mobile number",
+                    // hintStyle: TextStyle(color: Colors.red),
+                    helperText: "Enter mobile number",
+                    prefixText: '+91',
+                    border: OutlineInputBorder(),
+                  ),
+                ),
+                ElevatedButton(
+                    onPressed: () {
+                      if (_formKey.currentState!.validate()) {
+                        _formKey.currentState!.save();
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(content: Text('Submitted Data')),
+                        );
+                      }
+                    },
+                    child: const Text('Submit'))
+              ],
+            )),
+      ),
+    );
+  }
+}
+
+class FirstPage extends StatelessWidget {
+  const FirstPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('First page'),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              'First page',
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
+            ),
+            Divider(
+              height: 16,
+              color: Colors.transparent,
+            ),
+            ElevatedButton(
+                onPressed: () {
+                  /*todo 1st way to navigate*/
+                  /*Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => SecondPage(data: 'Rahil'))
+                  );*/
+
+                  /*todo 2nd way to navigate*/
+                  /*Navigator.pushNamed(context, '/secondPage');*/
+
+                  /*todo 3rd way to navigate*/
+                  Navigator.pushNamed(context, '/secondPage',arguments: 'I came from first page');
+                },
+                child: const Text('Press here to navigate'))
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class SecondPage extends StatelessWidget {
+  final String data;
+
+  const SecondPage({super.key, required this.data});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Second page'),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              'Data: $data',
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

@@ -6,9 +6,12 @@ import 'package:intl/intl.dart';
 import 'package:learning_flutter/route_generator.dart';
 import 'package:learning_flutter/route_generator_for_bottom_nav.dart';
 import 'package:learning_flutter/route_generator_for_nav_drawer.dart';
+import 'package:learning_flutter/textStyle/appTextStyle.dart';
+import 'package:learning_flutter/theme/theme.dart';
 
 void main() {
-  runApp(const MaterialMyApp());
+  // runApp(const MaterialMyApp());
+  runApp(const DarkModeMyApp());
   // runApp(const CupertinoMyApp());
 }
 
@@ -38,16 +41,20 @@ class MaterialMyApp extends StatelessWidget {
         // tested with just a hot reload.
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: false,
+        textTheme: TextTheme(
+          displaySmall: TextStyle(fontSize: 14, fontWeight: FontWeight.normal, color: Colors.red), 
+          displayMedium: TextStyle(fontSize: 18, fontWeight: FontWeight.w400, color: Colors.blue), 
+          displayLarge: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.green), 
+        ),
       ),
       // home: const DemoScreen(title: 'Flutter Demo Home Page'),
       // home: const DemoScreen(),
       // home: const MyFormEg(),
       // home: const PopupOptionMenuEg(),
       // home: const MyHomePage(title: 'Flutter Demo Home Page'),
-      // home: DemoScreen(),
+      home: DemoScreen(),
       // home: FirstPage(),
-      // home: NavDrawer(),
-      initialRoute: '/',
+      // initialRoute: '/',
 
       /*todo 2nd way to navigate*/
       /*routes: {
@@ -55,7 +62,7 @@ class MaterialMyApp extends StatelessWidget {
       },*/
 
       /*todo 3rd way to navigate*/
-      onGenerateRoute: RouteGeneratorForNavDrawer.generateRoute,
+      // onGenerateRoute: RouteGeneratorForNavDrawer.generateRoute,
     );
   }
 }
@@ -74,6 +81,58 @@ class CupertinoMyApp extends StatelessWidget {
     );
   }
 }
+
+class DarkModeMyApp extends StatefulWidget {
+  const DarkModeMyApp({super.key});
+
+  @override
+  State<DarkModeMyApp> createState() => _DarkModeMyAppState();
+}
+
+class _DarkModeMyAppState extends State<DarkModeMyApp> {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      theme: lightTheme,
+      darkTheme: darkTheme,
+      home: DarkModeScreen(),
+    );
+  }
+}
+
+
+class DarkModeScreen extends StatefulWidget {
+  const DarkModeScreen({super.key});
+
+  @override
+  State<DarkModeScreen> createState() => _DarkModeScreenState();
+}
+
+class _DarkModeScreenState extends State<DarkModeScreen> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('Dark Mode Screen'), elevation: 16,),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            /*todo Buttons eg*/
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: ElevatedButton(
+                onPressed: () {},
+                child: Text('Login'),
+              ),
+            ),
+            // child: Text("Text Button"))
+          ],
+        ),
+      ),
+    );
+  }
+}
+
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
@@ -229,6 +288,21 @@ class _DemoScreenState extends State<DemoScreen> {
     return Scaffold(
       body: ListView(
         children: [
+          
+          /*todo TextView with TextStyle theme*/
+          /*Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              children: [
+                Text('Red', style: Theme.of(context).textTheme.displaySmall),
+                Text('Blue', style: Theme.of(context).textTheme.displayMedium),
+                Text('Green', style: Theme.of(context).textTheme.displayLarge),
+                Text('Black', style: boldItalicStyle()),
+                Text('Custom Font', style: customFontStyle()),
+              ],
+            ),
+          ),*/
+          
           /*todo FutureBuilder eg*/
           Padding(
             padding: const EdgeInsets.all(8.0),

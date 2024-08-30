@@ -3,6 +3,7 @@ import 'dart:ffi';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:learning_flutter/demoApi.dart';
 import 'package:learning_flutter/route_generator.dart';
 import 'package:learning_flutter/route_generator_for_bottom_nav.dart';
 import 'package:learning_flutter/route_generator_for_nav_drawer.dart';
@@ -10,8 +11,8 @@ import 'package:learning_flutter/textStyle/appTextStyle.dart';
 import 'package:learning_flutter/theme/theme.dart';
 
 void main() {
-  // runApp(const MaterialMyApp());
-  runApp(const DarkModeMyApp());
+  runApp(const MaterialMyApp());
+  // runApp(const DarkModeMyApp());
   // runApp(const CupertinoMyApp());
 }
 
@@ -52,7 +53,8 @@ class MaterialMyApp extends StatelessWidget {
       // home: const MyFormEg(),
       // home: const PopupOptionMenuEg(),
       // home: const MyHomePage(title: 'Flutter Demo Home Page'),
-      home: DemoScreen(),
+      // home: DemoScreen(),
+      home: ApiDemo(),
       // home: FirstPage(),
       // initialRoute: '/',
 
@@ -100,7 +102,6 @@ class _DarkModeMyAppState extends State<DarkModeMyApp> {
   }
 }
 
-
 class DarkModeScreen extends StatefulWidget {
   const DarkModeScreen({super.key});
 
@@ -132,7 +133,6 @@ class _DarkModeScreenState extends State<DarkModeScreen> {
     );
   }
 }
-
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});

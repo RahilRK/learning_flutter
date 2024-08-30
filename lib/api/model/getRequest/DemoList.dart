@@ -4,8 +4,8 @@
 /// url : "https://via.placeholder.com/600/92c952"
 /// thumbnailUrl : "https://via.placeholder.com/150/92c952"
 
-class Demo {
-  Demo({
+class DemoList {
+  DemoList({
       num? albumId, 
       num? id, 
       String? title, 
@@ -18,7 +18,7 @@ class Demo {
     _thumbnailUrl = thumbnailUrl;
 }
 
-  Demo.fromJson(dynamic json) {
+  DemoList.fromJson(dynamic json) {
     _albumId = json['albumId'];
     _id = json['id'];
     _title = json['title'];
@@ -30,12 +30,12 @@ class Demo {
   String? _title;
   String? _url;
   String? _thumbnailUrl;
-Demo copyWith({  num? albumId,
+DemoList copyWith({  num? albumId,
   num? id,
   String? title,
   String? url,
   String? thumbnailUrl,
-}) => Demo(  albumId: albumId ?? _albumId,
+}) => DemoList(  albumId: albumId ?? _albumId,
   id: id ?? _id,
   title: title ?? _title,
   url: url ?? _url,

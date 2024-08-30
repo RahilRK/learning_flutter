@@ -3,7 +3,8 @@ import 'dart:ffi';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:learning_flutter/demoApi.dart';
+import 'package:learning_flutter/api/model/getRequest/getReqApiDemo.dart';
+import 'package:learning_flutter/api/model/postRequest/postReqApiDemo.dart';
 import 'package:learning_flutter/route_generator.dart';
 import 'package:learning_flutter/route_generator_for_bottom_nav.dart';
 import 'package:learning_flutter/route_generator_for_nav_drawer.dart';
@@ -54,7 +55,8 @@ class MaterialMyApp extends StatelessWidget {
       // home: const PopupOptionMenuEg(),
       // home: const MyHomePage(title: 'Flutter Demo Home Page'),
       // home: DemoScreen(),
-      home: ApiDemo(),
+      // home: GetApiDemo(),
+      home: PostApiDemo(),
       // home: FirstPage(),
       // initialRoute: '/',
 

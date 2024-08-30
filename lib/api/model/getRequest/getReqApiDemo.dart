@@ -3,18 +3,19 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
 
-import 'package:learning_flutter/model/Demo.dart';
+import 'DemoList.dart';
 
-List<Demo> mList = [];
 
-class ApiDemo extends StatefulWidget {
-  const ApiDemo({super.key});
+List<DemoList> mList = [];
+
+class GetApiDemo extends StatefulWidget {
+  const GetApiDemo({super.key});
 
   @override
-  State<ApiDemo> createState() => _ApiDemoState();
+  State<GetApiDemo> createState() => _GetApiDemoState();
 }
 
-class _ApiDemoState extends State<ApiDemo> {
+class _GetApiDemoState extends State<GetApiDemo> {
   @override
   void initState() {
     // TODO: implement initState
@@ -22,7 +23,7 @@ class _ApiDemoState extends State<ApiDemo> {
     getData();
   }
 
-  Future<List<Demo>> getData() async {
+  Future<List<DemoList>> getData() async {
     // This example uses the Google Books API to search for books about http.
     // https://developers.google.com/books/docs/overview
     var url = 'https://jsonplaceholder.typicode.com/photos';
@@ -34,7 +35,7 @@ class _ApiDemoState extends State<ApiDemo> {
       print('response: ${response.body}');
       var jsonResponse = convert.jsonDecode(response.body);
       for (Map<String, dynamic> map in jsonResponse) {
-        mList.add(Demo.fromJson(map));
+        mList.add(DemoList.fromJson(map));
       }
       print('mList: ${mList.length}.');
       return mList;
@@ -54,13 +55,33 @@ class _ApiDemoState extends State<ApiDemo> {
           future: getData(),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
-              return ListView.builder(
-                  itemCount: mList.length,
-                  itemBuilder: (context, index) {
-                    return ListTile(
+              return ListView.separated(
+                physics: BouncingScrollPhysics(),
+                // itemCount: mList.length,
+                itemCount: 20,
+                itemBuilder: (context, index) {
+                  return Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: ListTile(
+                      leading: ClipOval(
+                          child: Image.network(mList[index].thumbnailUrl!,
+                              fit: BoxFit.cover)),
                       title: Text(mList[index].title!),
-                    );
-                  });
+                    ),
+                  );
+                },
+                separatorBuilder: (BuildContext context, int index) {
+                  return Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: ListTile(
+                      leading: ClipOval(
+                          child: Image.network(mList[index].thumbnailUrl!,
+                              fit: BoxFit.cover)),
+                      title: Text(mList[index].title!),
+                    ),
+                  );
+                },
+              );
             } else {
               return Center(
                 child: CircularProgressIndicator(),

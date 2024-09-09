@@ -4,12 +4,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:learning_flutter/api/model/getRequest/getReqApiDemo.dart';
-import 'package:learning_flutter/api/model/postRequest/postReqApiDemo.dart';
 import 'package:learning_flutter/route_generator.dart';
 import 'package:learning_flutter/route_generator_for_bottom_nav.dart';
 import 'package:learning_flutter/route_generator_for_nav_drawer.dart';
 import 'package:learning_flutter/textStyle/appTextStyle.dart';
+import 'package:learning_flutter/theme/color.dart';
 import 'package:learning_flutter/theme/theme.dart';
+import 'package:learning_flutter/united_pharmacy/registration/login_tab.dart';
 
 void main() {
   runApp(const MaterialMyApp());
@@ -41,13 +42,14 @@ class MaterialMyApp extends StatelessWidget {
         //
         // This works for code too, not just values: Most code changes can be
         // tested with just a hot reload.
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        // colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: AppColor.color_247EAD),
         useMaterial3: false,
-        textTheme: TextTheme(
+        /*textTheme: TextTheme(
           displaySmall: TextStyle(fontSize: 14, fontWeight: FontWeight.normal, color: Colors.red), 
           displayMedium: TextStyle(fontSize: 18, fontWeight: FontWeight.w400, color: Colors.blue), 
           displayLarge: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.green), 
-        ),
+        ),*/
       ),
       // home: const DemoScreen(title: 'Flutter Demo Home Page'),
       // home: const DemoScreen(),
@@ -56,7 +58,8 @@ class MaterialMyApp extends StatelessWidget {
       // home: const MyHomePage(title: 'Flutter Demo Home Page'),
       // home: DemoScreen(),
       // home: GetApiDemo(),
-      home: PostApiDemo(),
+      // home: PostApiDemo(),
+      home: LoginTab(),
       // home: FirstPage(),
       // initialRoute: '/',
 

@@ -38,7 +38,7 @@ class _EmailTabState extends State<EmailTab> {
                 maxLengthEnforcement: MaxLengthEnforcement.none,
                 decoration: InputDecoration(
                   labelStyle: TextStyle(
-                      color: AppColor.color_B6B7B7,
+                      // color: AppColor.color_B6B7B7,
                       fontSize: 16,
                       fontWeight: FontWeight.w500),
                   counterText: "",
@@ -67,7 +67,7 @@ class _EmailTabState extends State<EmailTab> {
                 ],
                 decoration: InputDecoration(
                   labelStyle: TextStyle(
-                      color: AppColor.color_B6B7B7,
+                      // color: AppColor.color_B6B7B7,
                       fontSize: 16,
                       fontWeight: FontWeight.w500),
                   counterText: "",

@@ -40,7 +40,10 @@ class _MobileNumberTabState extends State<MobileNumberTab> {
                   LengthLimitingTextInputFormatter(10),
                 ],
                 decoration: InputDecoration(
-                  labelStyle: TextStyle(color: AppColor.color_B6B7B7, fontSize: 16, fontWeight: FontWeight.w500),
+                  labelStyle: TextStyle(
+                      // color: AppColor.color_B6B7B7,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500),
                   counterText: "",
                   labelText: AppString.MobileNumber,
                   prefixIcon: Padding(
@@ -55,8 +58,9 @@ class _MobileNumberTabState extends State<MobileNumberTab> {
                   filled: true,
                   fillColor: AppColor.white,
                   border: OutlineInputBorder(
-                      // borderSide: BorderSide.none,
-                      borderRadius: BorderRadius.circular(8),),
+                    // borderSide: BorderSide.none,
+                    borderRadius: BorderRadius.circular(8),
+                  ),
                   enabledBorder: OutlineInputBorder(
                       borderSide: BorderSide(color: AppColor.color_DDDDDD)),
                 ),
@@ -75,7 +79,10 @@ class _MobileNumberTabState extends State<MobileNumberTab> {
                   LengthLimitingTextInputFormatter(16),
                 ],
                 decoration: InputDecoration(
-                  labelStyle: TextStyle(color: AppColor.color_B6B7B7, fontSize: 16, fontWeight: FontWeight.w500),
+                  labelStyle: TextStyle(
+                      // color: AppColor.color_B6B7B7,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500),
                   counterText: "",
                   suffixIcon: Padding(
                     padding: const EdgeInsets.all(12.0),

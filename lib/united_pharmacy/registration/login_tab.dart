@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:learning_flutter/theme/color.dart';
+import 'package:learning_flutter/theme/string.dart';
 import 'package:learning_flutter/united_pharmacy/registration/email_tab.dart';
 import 'package:learning_flutter/united_pharmacy/registration/mobile_number_tab.dart';
 
@@ -35,7 +36,7 @@ class _LoginTabState extends State<LoginTab>
             Align(
                 alignment: Alignment.centerRight,
                 child: Text(
-                  'Skip',
+                  AppString.Skip,
                   style: TextStyle(color: AppColor.white, fontSize: 14, fontWeight: FontWeight.normal),
                 )),
             Align(
@@ -68,7 +69,7 @@ class _LoginTabState extends State<LoginTab>
                 color: Colors.indigo.shade500,
               ),*/
                 child: Text(
-                  'Mobile Number',
+                  AppString.MobileNumber,
                 ),
               ),
               Tab(
@@ -78,7 +79,7 @@ class _LoginTabState extends State<LoginTab>
                   color: Colors.indigo.shade500,
                 )*/
                   child: Text(
-                'Email',
+                AppString.Email,
               )),
             ],
             tabAlignment: TabAlignment.center,

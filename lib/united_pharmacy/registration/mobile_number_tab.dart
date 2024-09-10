@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:learning_flutter/theme/color.dart';
+import 'package:learning_flutter/theme/string.dart';
 
 import '../common/common_widget.dart';
 
@@ -26,7 +27,7 @@ class _MobileNumberTabState extends State<MobileNumberTab> {
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.only(left: 35, right: 35),
-        child: Column(
+        child: ListView(
           children: [
             SizedBox(height: 28),
             TextField(
@@ -38,7 +39,7 @@ class _MobileNumberTabState extends State<MobileNumberTab> {
               ],
               decoration: InputDecoration(
                 counterText: "",
-                labelText: "Mobile Number",
+                labelText: AppString.MobileNumber,
                 prefixIcon: Padding(
                   padding: const EdgeInsets.only(left: 16, right: 4),
                   child: Image.asset(
@@ -47,7 +48,7 @@ class _MobileNumberTabState extends State<MobileNumberTab> {
                     width: 28,
                   ),
                 ),
-                prefixText: "+966   ",
+                prefixText: AppString.m966,
                 filled: true,
                 fillColor: AppColor.white,
                 border: OutlineInputBorder(
@@ -84,7 +85,7 @@ class _MobileNumberTabState extends State<MobileNumberTab> {
                     },
                   ),
                 ),
-                labelText: "Password",
+                labelText: AppString.Password,
                 filled: true,
                 fillColor: AppColor.white,
                 border: OutlineInputBorder(
@@ -94,20 +95,44 @@ class _MobileNumberTabState extends State<MobileNumberTab> {
             ),
             SizedBox(height: 16),
             Align(
-              alignment: Alignment.centerRight,
+                alignment: Alignment.centerRight,
                 child: Text(
-              'Forgot Password?',
-              style: TextStyle(color: AppColor.black, fontSize: 14, fontWeight: FontWeight.w500),
-            )),
+                  AppString.ForgotPassword,
+                  style: TextStyle(
+                      color: AppColor.black,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500),
+                )),
             SizedBox(height: 16),
             CustomButton(
-              text: "Login",
+              text: AppString.Login,
               foregroundColor: AppColor.white,
               backgroundColor: AppColor.color_0A195C,
-              onButtonClick: () {
-
-              },
+              onButtonClick: () {},
             ),
+            SizedBox(height: 111),
+            Align(
+                alignment: Alignment.center,
+                child: Text(
+                  AppString.Dont_have_an_Account,
+                  style: TextStyle(
+                      color: AppColor.black,
+                      fontSize: 12,
+                      fontWeight: FontWeight.w500),
+                )),
+            SizedBox(height: 2),
+            Align(
+                alignment: Alignment.center,
+                child: Text(
+                  AppString.Create_an_Account,
+                  style: TextStyle(
+                    color: AppColor.color_3F9ACC,
+                    fontSize: 14,
+                    fontWeight: FontWeight.bold,
+                    decoration: TextDecoration.underline,
+                  ),
+                )),
+            SizedBox(height: 166),
           ],
         ),
       ),

@@ -19,11 +19,16 @@ class CustomButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: double.infinity,
+      height: 44,
       child: ElevatedButton(
           onPressed: onButtonClick,
-          style: TextButton.styleFrom(
+          style: ElevatedButton.styleFrom(
+            textStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             foregroundColor: foregroundColor,
             backgroundColor: backgroundColor,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8), // <-- Radius
+            ),
           ),
           child: Text(text)),
     );

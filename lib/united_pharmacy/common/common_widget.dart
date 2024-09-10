@@ -1,8 +1,10 @@
-
 import 'package:flutter/material.dart';
+import 'package:learning_flutter/theme/color.dart';
 
-class CustomButton extends StatelessWidget {
-  const CustomButton({
+import '../../theme/string.dart';
+
+class CommonElevatedButton extends StatelessWidget {
+  const CommonElevatedButton({
     super.key,
     required this.text,
     required this.foregroundColor,
@@ -31,6 +33,67 @@ class CustomButton extends StatelessWidget {
             ),
           ),
           child: Text(text)),
+    );
+  }
+}
+
+class CommonOutlinedButtonWithIcon extends StatelessWidget {
+  const CommonOutlinedButtonWithIcon({
+    super.key,
+    required this.text,
+    required this.iconPath,
+    required this.onButtonClick,
+  });
+
+  final String text;
+  final String iconPath;
+  final Function()? onButtonClick;
+
+  @override
+  Widget build(BuildContext context) {
+    return Wrap(
+      children: [
+        InkWell(
+          child: Container(
+            width: double.infinity,
+            height: 44,
+            decoration: BoxDecoration(
+              border: Border.all(
+                color: AppColor.black,
+              ),
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.only(left: 16.0),
+              child: Stack(
+                // mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Align(
+                      alignment: Alignment.centerLeft,
+                      child: Image.asset(
+                        iconPath,
+                        height: 24,
+                        width: 24,
+                      )),
+                  Align(
+                    alignment: Alignment.center,
+                    child: Text(
+                      text,
+                      style: TextStyle(
+                        color: AppColor.black,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          onTap: onButtonClick,
+        )
+      ],
     );
   }
 }

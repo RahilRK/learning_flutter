@@ -30,67 +30,79 @@ class _MobileNumberTabState extends State<MobileNumberTab> {
         child: ListView(
           children: [
             SizedBox(height: 28),
-            TextField(
-              keyboardType: TextInputType.number,
-              maxLines: 1,
-              maxLengthEnforcement: MaxLengthEnforcement.none,
-              inputFormatters: [
-                LengthLimitingTextInputFormatter(10),
-              ],
-              decoration: InputDecoration(
-                counterText: "",
-                labelText: AppString.MobileNumber,
-                prefixIcon: Padding(
-                  padding: const EdgeInsets.only(left: 16, right: 4),
-                  child: Image.asset(
-                    'images/saudi_arabia.png',
-                    height: 18,
-                    width: 28,
+            SizedBox(
+              height: 54,
+              child: TextField(
+                keyboardType: TextInputType.number,
+                maxLines: 1,
+                maxLengthEnforcement: MaxLengthEnforcement.none,
+                inputFormatters: [
+                  LengthLimitingTextInputFormatter(10),
+                ],
+                decoration: InputDecoration(
+                  labelStyle: TextStyle(color: AppColor.color_B6B7B7, fontSize: 16, fontWeight: FontWeight.w500),
+                  counterText: "",
+                  labelText: AppString.MobileNumber,
+                  prefixIcon: Padding(
+                    padding: const EdgeInsets.only(left: 16, right: 4),
+                    child: Image.asset(
+                      'images/saudi_arabia.png',
+                      height: 18,
+                      width: 28,
+                    ),
                   ),
+                  prefixText: AppString.m966,
+                  filled: true,
+                  fillColor: AppColor.white,
+                  border: OutlineInputBorder(
+                      // borderSide: BorderSide.none,
+                      borderRadius: BorderRadius.circular(8),),
+                  enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: AppColor.color_DDDDDD)),
                 ),
-                prefixText: AppString.m966,
-                filled: true,
-                fillColor: AppColor.white,
-                border: OutlineInputBorder(
-                    // borderSide: BorderSide.none,
-                    borderRadius: BorderRadius.circular(8)),
               ),
             ),
             SizedBox(height: 16),
-            TextField(
-              keyboardType: TextInputType.text,
-              maxLines: 1,
-              obscureText: !_passwordVisible,
-              obscuringCharacter: "*",
-              maxLengthEnforcement: MaxLengthEnforcement.none,
-              inputFormatters: [
-                LengthLimitingTextInputFormatter(16),
-              ],
-              decoration: InputDecoration(
-                counterText: "",
-                suffixIcon: Padding(
-                  padding: const EdgeInsets.all(12.0),
-                  child: InkWell(
-                    child: Image.asset(
-                      _passwordVisible
-                          ? "images/show_password_eye.png"
-                          : "images/hide_password_eye.png",
-                      width: 8,
-                      height: 8,
+            SizedBox(
+              height: 54,
+              child: TextField(
+                keyboardType: TextInputType.text,
+                maxLines: 1,
+                obscureText: !_passwordVisible,
+                obscuringCharacter: "*",
+                maxLengthEnforcement: MaxLengthEnforcement.none,
+                inputFormatters: [
+                  LengthLimitingTextInputFormatter(16),
+                ],
+                decoration: InputDecoration(
+                  labelStyle: TextStyle(color: AppColor.color_B6B7B7, fontSize: 16, fontWeight: FontWeight.w500),
+                  counterText: "",
+                  suffixIcon: Padding(
+                    padding: const EdgeInsets.all(12.0),
+                    child: InkWell(
+                      child: Image.asset(
+                        _passwordVisible
+                            ? "images/show_password_eye.png"
+                            : "images/hide_password_eye.png",
+                        width: 8,
+                        height: 8,
+                      ),
+                      onTap: () {
+                        setState(() {
+                          _passwordVisible = !_passwordVisible;
+                        });
+                      },
                     ),
-                    onTap: () {
-                      setState(() {
-                        _passwordVisible = !_passwordVisible;
-                      });
-                    },
                   ),
+                  labelText: AppString.Password,
+                  filled: true,
+                  fillColor: AppColor.white,
+                  border: OutlineInputBorder(
+                      // borderSide: BorderSide.none,
+                      borderRadius: BorderRadius.circular(8)),
+                  enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: AppColor.color_DDDDDD)),
                 ),
-                labelText: AppString.Password,
-                filled: true,
-                fillColor: AppColor.white,
-                border: OutlineInputBorder(
-                    // borderSide: BorderSide.none,
-                    borderRadius: BorderRadius.circular(8)),
               ),
             ),
             SizedBox(height: 16),
@@ -104,7 +116,7 @@ class _MobileNumberTabState extends State<MobileNumberTab> {
                       fontWeight: FontWeight.w500),
                 )),
             SizedBox(height: 16),
-            CustomButton(
+            CommonElevatedButton(
               text: AppString.Login,
               foregroundColor: AppColor.white,
               backgroundColor: AppColor.color_0A195C,

@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:learning_flutter/preference/MyPref.dart';
+import 'package:learning_flutter/united_pharmacy/api_helper.dart';
 import 'package:learning_flutter/united_pharmacy/common/common_widget.dart';
+import 'package:learning_flutter/united_pharmacy/model/LoginRequest.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../theme/color.dart';
 import '../../theme/string.dart';
@@ -27,6 +31,8 @@ class _EmailTabState extends State<EmailTab> {
   late GlobalKey<FormFieldState> emailKey;
   late GlobalKey<FormFieldState> passwordKey;
 
+  late BuildContext dialogContext;
+
   @override
   void initState() {
     // TODO: implement initState
@@ -39,6 +45,22 @@ class _EmailTabState extends State<EmailTab> {
       emailKey,
       passwordKey,
     ];
+
+    /*MyPref.addStringToSF("customerEmail", 'Raj RK');
+    MyPref.addIntToSF("customerId", 325);
+    MyPref.addBoolToSF("customerOnline", false);
+
+    MyPref.getStringValuesSF('customerEmail').then((value) {
+      print(value);
+    });
+
+    MyPref.getIntValuesSF('customerId').then((value) {
+      print(value);
+    });
+
+    MyPref.getBoolValuesSF('customerOnline').then((value) {
+      print(value);
+    });*/
   }
 
   bool validate() {
@@ -47,8 +69,28 @@ class _EmailTabState extends State<EmailTab> {
 
   void save() {
     fieldKeys.forEach((element) => element.currentState!.save());
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Submitted Data')),
+    getEmailLogin();
+  }
+
+  void showProgress() {
+    showDialog(
+      context: context,
+      builder: (context) {
+        dialogContext = context;
+        return Dialog(
+          surfaceTintColor: Color(0x00ffffff),
+          backgroundColor: Colors.transparent,
+          insetPadding: EdgeInsets.zero,
+          child: new Container(
+              color: Colors.transparent,
+              alignment: FractionalOffset.center,
+              // height: 0.0,
+              padding: const EdgeInsets.all(0.0),
+              child: Container(
+                  height: 32, width: 32, child: CircularProgressIndicator())),
+        );
+      },
+      barrierColor: Colors.black38,
     );
   }
 
@@ -56,7 +98,6 @@ class _EmailTabState extends State<EmailTab> {
     return TextFormField(
       key: emailKey,
       validator: (value) {
-
         if (!isButtonPressed) {
           return null;
         }
@@ -71,7 +112,7 @@ class _EmailTabState extends State<EmailTab> {
         isError = false;
         return null;
       },
-      onChanged: (value){
+      onChanged: (value) {
         isButtonPressed = false;
         if (isError) {
           _formKey.currentState?.validate();
@@ -108,7 +149,6 @@ class _EmailTabState extends State<EmailTab> {
     return TextFormField(
       key: passwordKey,
       validator: (value) {
-
         if (!isButtonPressed) {
           return null;
         }
@@ -203,7 +243,6 @@ class _EmailTabState extends State<EmailTab> {
                 foregroundColor: AppColor.white,
                 backgroundColor: AppColor.color_0A195C,
                 onButtonClick: () {
-
                   isButtonPressed = true;
                   if (!validate()) {
                     return;
@@ -267,8 +306,7 @@ class _EmailTabState extends State<EmailTab> {
               CommonOutlinedButtonWithIcon(
                 text: AppString.Continue_with_Facebook,
                 iconPath: 'images/facebook_icon.png',
-                onButtonClick: () {
-                },
+                onButtonClick: () {},
               ),
               SizedBox(height: 44),
               Align(
@@ -298,5 +336,52 @@ class _EmailTabState extends State<EmailTab> {
         ),
       ),
     );
+  }
+
+  // Visibility(visible: showProgress, child: Align(alignment: Alignment.center,child: CircularProgressIndicator()))
+
+  void getEmailLogin() {
+    showProgress();
+    var loginReq = LoginRequest(
+        websiteId: "1",
+        storeId: "1",
+        quoteId: "0",
+        mFactor: "2.625",
+        currency: "SAR",
+        username: _email,
+        password: _password,
+        os: "android");
+
+    emailLogin(loginReq).then((data) {
+      /*setState(() {
+        showProgress = false;
+      });*/
+      Navigator.pop(dialogContext);
+
+      var success = data.success ?? false;
+      if (success) {
+        var customerToken = data.customerToken ?? "";
+        var customerId = data.customerId ?? "";
+        MyPref.addBoolToSF("customerLogin", true);
+        MyPref.addStringToSF("customerToken", customerToken);
+        MyPref.addStringToSF("customerId", customerId);
+      }
+      else {
+
+        var message = data.message??"";
+        if(message.isNotEmpty) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text(message)),
+          );
+        }
+      }
+    }, onError: (e) {
+      /*setState(() {
+        showProgress = false;
+      });*/
+      Navigator.pop(dialogContext);
+
+      print(e);
+    });
   }
 }

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:learning_flutter/theme/color.dart';
 import 'package:learning_flutter/theme/string.dart';
-import 'package:learning_flutter/united_pharmacy/registration/email_tab.dart';
-import 'package:learning_flutter/united_pharmacy/registration/mobile_number_tab.dart';
+import 'package:learning_flutter/united_pharmacy/login/email_tab.dart';
+import 'package:learning_flutter/united_pharmacy/login/mobile_number_tab.dart';
 
 class LoginTab extends StatefulWidget {
   const LoginTab({super.key});

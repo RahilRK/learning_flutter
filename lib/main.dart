@@ -10,7 +10,8 @@ import 'package:learning_flutter/route_generator_for_nav_drawer.dart';
 import 'package:learning_flutter/textStyle/appTextStyle.dart';
 import 'package:learning_flutter/theme/color.dart';
 import 'package:learning_flutter/theme/theme.dart';
-import 'package:learning_flutter/united_pharmacy/registration/login_tab.dart';
+import 'package:learning_flutter/united_pharmacy/login/login_tab.dart';
+import 'package:learning_flutter/united_pharmacy/registration/registration.dart';
 
 void main() {
   runApp(const MaterialMyApp());
@@ -59,7 +60,8 @@ class MaterialMyApp extends StatelessWidget {
       // home: DemoScreen(),
       // home: GetApiDemo(),
       // home: PostApiDemo(),
-      home: LoginTab(),
+      // home: LoginTab(),
+      home: Registration(),
       // home: FirstPage(),
       // initialRoute: '/',
 

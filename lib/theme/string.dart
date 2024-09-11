@@ -21,4 +21,14 @@ abstract class AppString {
   static const Continue_with_Apple = 'Continue with Apple';
   static const Continue_with_Google = 'Continue with Google';
   static const Continue_with_Facebook = 'Continue with Facebook';
+
+  /*todo registration*/
+  static const SignUp = 'Sign Up';
+  static const FirstName = 'First Name*';
+  static const LastName = 'Last Name*';
+  static const Email_ = 'Email*';
+  static const Password_ = 'Password*';
+  static const ConfirmPassword = 'Confirm Password*';
+  static const MobileNumber_ = 'Mobile Number*';
+  static const SendVerificationCode = 'Send Verification Code';
 }

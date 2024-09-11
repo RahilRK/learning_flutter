@@ -13,7 +13,12 @@ class EmailTab extends StatefulWidget {
 }
 
 class _EmailTabState extends State<EmailTab> {
+  final _formKey = GlobalKey<FormState>();
+  final focus = FocusNode();
   bool _passwordVisible = false;
+
+  bool isError = false;
+  bool isButtonPressed = false;
 
   late String _email;
   late String _password;
@@ -21,12 +26,6 @@ class _EmailTabState extends State<EmailTab> {
   late List<GlobalKey<FormFieldState>> fieldKeys;
   late GlobalKey<FormFieldState> emailKey;
   late GlobalKey<FormFieldState> passwordKey;
-
-  final _formKey = GlobalKey<FormState>();
-  final focus = FocusNode();
-
-  bool isError = false;
-  bool isButtonPressed = false;
 
   @override
   void initState() {

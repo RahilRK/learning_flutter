@@ -97,3 +97,35 @@ class CommonOutlinedButtonWithIcon extends StatelessWidget {
     );
   }
 }
+
+class CommonToolbar extends StatelessWidget {
+  const CommonToolbar({super.key, required this.toolbarText,});
+
+  final String toolbarText;
+
+  @override
+  Widget build(BuildContext context) {
+    return AppBar(leading: Icon(Icons.arrow_back_ios), title: Text(toolbarText),);
+  }
+}
+
+AppBar commonAppBar(BuildContext context, String title) {
+  return AppBar(
+    leading: InkWell(
+        onTap: () {
+          Navigator.pop(context);
+        },
+        child: Icon(
+          Icons.arrow_back_ios,
+          color: AppColor.black,
+        )),
+    title: Text(
+      title,
+      style: TextStyle(
+          color: AppColor.black, fontSize: 16, fontWeight: FontWeight.bold),
+    ),
+    backgroundColor: AppColor.white,
+    elevation: 2,
+  );
+}
+

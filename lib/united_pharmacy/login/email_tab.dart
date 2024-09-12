@@ -4,6 +4,7 @@ import 'package:learning_flutter/preference/MyPref.dart';
 import 'package:learning_flutter/united_pharmacy/api_helper.dart';
 import 'package:learning_flutter/united_pharmacy/common/common_widget.dart';
 import 'package:learning_flutter/united_pharmacy/model/LoginRequest.dart';
+import 'package:lottie/lottie.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../theme/color.dart';
@@ -81,13 +82,21 @@ class _EmailTabState extends State<EmailTab> {
           surfaceTintColor: Color(0x00ffffff),
           backgroundColor: Colors.transparent,
           insetPadding: EdgeInsets.zero,
-          child: new Container(
+          child: Container(
               color: Colors.transparent,
               alignment: FractionalOffset.center,
               // height: 0.0,
               padding: const EdgeInsets.all(0.0),
-              child: Container(
-                  height: 32, width: 32, child: CircularProgressIndicator())),
+              // child: Container(height: 32, width: 32, child: CircularProgressIndicator())),
+              child: ClipOval(
+                child: Lottie.asset(
+                  "assets/animations/united_pharmacy_loader.json",
+                  // Can add other properties on how you would like the anim to display
+                  fit: BoxFit.cover,
+                  width: 124,
+                  height: 124,
+                ),
+              )),
         );
       },
       barrierColor: Colors.black38,
@@ -292,20 +301,8 @@ class _EmailTabState extends State<EmailTab> {
               ),
               SizedBox(height: 8),
               CommonOutlinedButtonWithIcon(
-                text: AppString.Continue_with_Apple,
-                iconPath: 'images/apple_icon.png',
-                onButtonClick: () {},
-              ),
-              SizedBox(height: 12),
-              CommonOutlinedButtonWithIcon(
                 text: AppString.Continue_with_Google,
                 iconPath: 'images/google_icon.png',
-                onButtonClick: () {},
-              ),
-              SizedBox(height: 12),
-              CommonOutlinedButtonWithIcon(
-                text: AppString.Continue_with_Facebook,
-                iconPath: 'images/facebook_icon.png',
                 onButtonClick: () {},
               ),
               SizedBox(height: 44),
@@ -321,13 +318,18 @@ class _EmailTabState extends State<EmailTab> {
               SizedBox(height: 2),
               Align(
                   alignment: Alignment.center,
-                  child: Text(
-                    AppString.Create_an_Account,
-                    style: TextStyle(
-                      color: AppColor.color_3F9ACC,
-                      fontSize: 14,
-                      fontWeight: FontWeight.bold,
-                      decoration: TextDecoration.underline,
+                  child: InkWell(
+                    onTap: () {
+                      Navigator.pushNamed(context, '/Registration');
+                    },
+                    child: Text(
+                      AppString.Create_an_Account,
+                      style: TextStyle(
+                        color: AppColor.color_3F9ACC,
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
+                        decoration: TextDecoration.underline,
+                      ),
                     ),
                   )),
               SizedBox(height: 49),
@@ -365,11 +367,11 @@ class _EmailTabState extends State<EmailTab> {
         MyPref.addBoolToSF("customerLogin", true);
         MyPref.addStringToSF("customerToken", customerToken);
         MyPref.addStringToSF("customerId", customerId);
-      }
-      else {
 
-        var message = data.message??"";
-        if(message.isNotEmpty) {
+        Navigator.pushReplacementNamed(context, '/DashboardTab');
+      } else {
+        var message = data.message ?? "";
+        if (message.isNotEmpty) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text(message)),
           );

@@ -30,6 +30,7 @@ class _RegistrationState extends State<Registration> {
   late String _email;
   late String _password;
   late String _confirmPassword;
+  late String _mobileNumber;
 
   late List<GlobalKey<FormFieldState>> fieldKeys;
   late GlobalKey<FormFieldState> firstNameKey;
@@ -37,6 +38,7 @@ class _RegistrationState extends State<Registration> {
   late GlobalKey<FormFieldState> emailKey;
   late GlobalKey<FormFieldState> passwordKey;
   late GlobalKey<FormFieldState> confirmPasswordKey;
+  late GlobalKey<FormFieldState> mobileNumberKey;
 
   late BuildContext dialogContext;
 
@@ -52,12 +54,14 @@ class _RegistrationState extends State<Registration> {
     emailKey = GlobalKey<FormFieldState>();
     passwordKey = GlobalKey<FormFieldState>();
     confirmPasswordKey = GlobalKey<FormFieldState>();
+    mobileNumberKey = GlobalKey<FormFieldState>();
     fieldKeys = [
       firstNameKey,
       lastNameKey,
       emailKey,
       passwordKey,
       confirmPasswordKey,
+      mobileNumberKey
     ];
   }
 
@@ -115,15 +119,18 @@ class _RegistrationState extends State<Registration> {
       onSaved: (value) {
         _firstName = value!;
       },
-      onFieldSubmitted: (value) {
+      /*onFieldSubmitted: (value) {
         FocusScope.of(context).requestFocus(focus);
-      },
+      },*/
+      textInputAction: TextInputAction.next,
+      onEditingComplete: () => FocusScope.of(context).nextFocus(),
+      // focus to next
       keyboardType: TextInputType.text,
       maxLines: 1,
       maxLengthEnforcement: MaxLengthEnforcement.none,
       decoration: InputDecoration(
         labelStyle: TextStyle(
-          // color: AppColor.color_B6B7B7,
+            // color: AppColor.color_B6B7B7,
             fontSize: 16,
             fontWeight: FontWeight.w500),
         counterText: "",
@@ -131,7 +138,7 @@ class _RegistrationState extends State<Registration> {
         filled: true,
         fillColor: AppColor.white,
         border: OutlineInputBorder(
-          // borderSide: BorderSide.none,
+            // borderSide: BorderSide.none,
             borderRadius: BorderRadius.circular(8)),
         enabledBorder: OutlineInputBorder(
             borderSide: BorderSide(color: AppColor.color_DDDDDD)),
@@ -162,15 +169,18 @@ class _RegistrationState extends State<Registration> {
       onSaved: (value) {
         _lastName = value!;
       },
-      onFieldSubmitted: (value) {
+      /*onFieldSubmitted: (value) {
         FocusScope.of(context).requestFocus(focus);
-      },
+      },*/
+      textInputAction: TextInputAction.next,
+      onEditingComplete: () => FocusScope.of(context).nextFocus(),
+      // focus to next
       keyboardType: TextInputType.text,
       maxLines: 1,
       maxLengthEnforcement: MaxLengthEnforcement.none,
       decoration: InputDecoration(
         labelStyle: TextStyle(
-          // color: AppColor.color_B6B7B7,
+            // color: AppColor.color_B6B7B7,
             fontSize: 16,
             fontWeight: FontWeight.w500),
         counterText: "",
@@ -178,7 +188,7 @@ class _RegistrationState extends State<Registration> {
         filled: true,
         fillColor: AppColor.white,
         border: OutlineInputBorder(
-          // borderSide: BorderSide.none,
+            // borderSide: BorderSide.none,
             borderRadius: BorderRadius.circular(8)),
         enabledBorder: OutlineInputBorder(
             borderSide: BorderSide(color: AppColor.color_DDDDDD)),
@@ -213,9 +223,12 @@ class _RegistrationState extends State<Registration> {
       onSaved: (value) {
         _email = value!;
       },
-      onFieldSubmitted: (value) {
+      /*onFieldSubmitted: (value) {
         FocusScope.of(context).requestFocus(focus);
-      },
+      },*/
+      textInputAction: TextInputAction.next,
+      onEditingComplete: () => FocusScope.of(context).nextFocus(),
+      // focus to next
       keyboardType: TextInputType.emailAddress,
       maxLines: 1,
       maxLengthEnforcement: MaxLengthEnforcement.none,
@@ -262,7 +275,9 @@ class _RegistrationState extends State<Registration> {
       onSaved: (value) {
         _password = value!;
       },
-      focusNode: focus,
+      textInputAction: TextInputAction.next,
+      onEditingComplete: () => FocusScope.of(context).nextFocus(),
+      // focus to next
       keyboardType: TextInputType.text,
       maxLines: 1,
       obscureText: !_passwordVisible,
@@ -333,7 +348,9 @@ class _RegistrationState extends State<Registration> {
       onSaved: (value) {
         _confirmPassword = value!;
       },
-      focusNode: focus,
+      textInputAction: TextInputAction.next,
+      onEditingComplete: () => FocusScope.of(context).nextFocus(),
+      // focus to next
       keyboardType: TextInputType.text,
       maxLines: 1,
       obscureText: !_confirmPasswordVisible,
@@ -377,9 +394,72 @@ class _RegistrationState extends State<Registration> {
     );
   }
 
+  Widget _buildMobileNumber() {
+    return TextFormField(
+      key: mobileNumberKey,
+      validator: (value) {
+        if (!isButtonPressed) {
+          return null;
+        }
+        isError = true;
+        if (value == null || value.isEmpty) {
+          return 'Please enter mobile number';
+        } else if (value.length != 9) {
+          return 'Please enter valid mobile number';
+        }
+        isError = false;
+        return null;
+      },
+      onChanged: (value) {
+        isButtonPressed = false;
+        if (isError) {
+          _formKey.currentState?.validate();
+        }
+      },
+      onSaved: (value) {
+        _mobileNumber = value!;
+      },
+      textInputAction: TextInputAction.done,
+      onEditingComplete: () => FocusScope.of(context).unfocus(),
+      // focus to next
+      keyboardType: TextInputType.number,
+      maxLines: 1,
+      maxLengthEnforcement: MaxLengthEnforcement.none,
+      inputFormatters: [
+        LengthLimitingTextInputFormatter(9),
+      ],
+      decoration: InputDecoration(
+        labelStyle: TextStyle(
+            // color: AppColor.color_B6B7B7,
+            fontSize: 16,
+            fontWeight: FontWeight.w500),
+        counterText: "",
+        labelText: AppString.MobileNumber_,
+        prefixIcon: Padding(
+          padding: const EdgeInsets.only(left: 16, right: 4),
+          child: Image.asset(
+            'images/saudi_arabia.png',
+            height: 18,
+            width: 28,
+          ),
+        ),
+        prefixText: AppString.m966,
+        filled: true,
+        fillColor: AppColor.white,
+        border: OutlineInputBorder(
+          // borderSide: BorderSide.none,
+          borderRadius: BorderRadius.circular(8),
+        ),
+        enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: AppColor.color_DDDDDD)),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: commonAppBar(context, AppString.SignUp),
       body: Padding(
         padding: const EdgeInsets.only(left: 35, right: 35),
         child: Form(
@@ -396,6 +476,8 @@ class _RegistrationState extends State<Registration> {
               _buildPassword(),
               SizedBox(height: 24),
               _buildConfirmPassword(),
+              SizedBox(height: 24),
+              _buildMobileNumber(),
               SizedBox(height: 32),
               CommonElevatedButton(
                 text: AppString.SendVerificationCode,
@@ -445,11 +527,9 @@ class _RegistrationState extends State<Registration> {
         MyPref.addBoolToSF("customerLogin", true);
         MyPref.addStringToSF("customerToken", customerToken);
         MyPref.addStringToSF("customerId", customerId);
-      }
-      else {
-
-        var message = data.message??"";
-        if(message.isNotEmpty) {
+      } else {
+        var message = data.message ?? "";
+        if (message.isNotEmpty) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text(message)),
           );

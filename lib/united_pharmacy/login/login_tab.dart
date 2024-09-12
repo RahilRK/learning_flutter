@@ -35,9 +35,14 @@ class _LoginTabState extends State<LoginTab>
           children: [
             Align(
                 alignment: Alignment.centerRight,
-                child: Text(
-                  AppString.Skip,
-                  style: TextStyle(color: AppColor.white, fontSize: 14, fontWeight: FontWeight.normal),
+                child: InkWell(
+                  onTap: (){
+                    Navigator.pushReplacementNamed(context, '/DashboardTab');
+                  },
+                  child: Text(
+                    AppString.Skip,
+                    style: TextStyle(color: AppColor.white, fontSize: 14, fontWeight: FontWeight.normal),
+                  ),
                 )),
             Align(
               alignment: Alignment.center,

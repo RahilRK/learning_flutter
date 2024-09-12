@@ -12,6 +12,8 @@ import 'package:learning_flutter/theme/color.dart';
 import 'package:learning_flutter/theme/theme.dart';
 import 'package:learning_flutter/united_pharmacy/login/login_tab.dart';
 import 'package:learning_flutter/united_pharmacy/registration/registration.dart';
+import 'package:learning_flutter/united_pharmacy/route_generator_for_united_pharmacy.dart';
+import 'package:learning_flutter/united_pharmacy/splash_screen/SplashScreen.dart';
 
 void main() {
   runApp(const MaterialMyApp());
@@ -61,9 +63,10 @@ class MaterialMyApp extends StatelessWidget {
       // home: GetApiDemo(),
       // home: PostApiDemo(),
       // home: LoginTab(),
-      home: Registration(),
+      // home: SplashScreen(),
+      // home: Registration(),
       // home: FirstPage(),
-      // initialRoute: '/',
+      initialRoute: '/',
 
       /*todo 2nd way to navigate*/
       /*routes: {
@@ -71,7 +74,7 @@ class MaterialMyApp extends StatelessWidget {
       },*/
 
       /*todo 3rd way to navigate*/
-      // onGenerateRoute: RouteGeneratorForNavDrawer.generateRoute,
+      onGenerateRoute: RouteGeneratorForUnitedPharmacy.generateRoute,
     );
   }
 }
@@ -1570,10 +1573,10 @@ class ExampleDestination {
 
 const List<ExampleDestination> destinations = <ExampleDestination>[
   ExampleDestination(
-      'Messages', Icon(Icons.widgets_outlined),
-      Icon(Icons.widgets), Message()),
-  ExampleDestination('Profile', Icon(Icons.format_paint_outlined),
-      Icon(Icons.format_paint), Profile()),
+      'Messages', Icon(Icons.message_outlined),
+      Icon(Icons.message), Message()),
+  ExampleDestination('Profile', Icon(Icons.account_circle_outlined),
+      Icon(Icons.account_circle), Profile()),
   ExampleDestination('Favourite', Icon(Icons.bookmark_border_rounded),
       Icon(Icons.bookmark), Favourite()),
 ];

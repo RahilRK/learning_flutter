@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:learning_flutter/preference/MyPref.dart';
 import 'package:learning_flutter/theme/color.dart';
 import 'package:learning_flutter/theme/string.dart';
+import 'package:learning_flutter/united_pharmacy/api_helper.dart';
+import 'package:learning_flutter/united_pharmacy/model/LoginRequest.dart';
+import 'package:lottie/lottie.dart';
 
 import '../common/common_widget.dart';
 
@@ -20,12 +24,14 @@ class _MobileNumberTabState extends State<MobileNumberTab> {
   bool isError = false;
   bool isButtonPressed = false;
 
-  late String _email;
+  late String _mobileNumber;
   late String _password;
 
   late List<GlobalKey<FormFieldState>> fieldKeys;
-  late GlobalKey<FormFieldState> emailKey;
+  late GlobalKey<FormFieldState> mobileNumberKey;
   late GlobalKey<FormFieldState> passwordKey;
+
+  late BuildContext dialogContext;
 
   @override
   void initState() {
@@ -33,10 +39,10 @@ class _MobileNumberTabState extends State<MobileNumberTab> {
     super.initState();
     _passwordVisible = false;
 
-    emailKey = GlobalKey<FormFieldState>();
+    mobileNumberKey = GlobalKey<FormFieldState>();
     passwordKey = GlobalKey<FormFieldState>();
     fieldKeys = [
-      emailKey,
+      mobileNumberKey,
       passwordKey,
     ];
   }
@@ -47,14 +53,42 @@ class _MobileNumberTabState extends State<MobileNumberTab> {
 
   void save() {
     fieldKeys.forEach((element) => element.currentState!.save());
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Submitted Data')),
+    getEmailLogin();
+  }
+
+  void showProgress() {
+    showDialog(
+      context: context,
+      builder: (context) {
+        dialogContext = context;
+        return Dialog(
+          surfaceTintColor: Color(0x00ffffff),
+          backgroundColor: Colors.transparent,
+          insetPadding: EdgeInsets.zero,
+          child: Container(
+              color: Colors.transparent,
+              alignment: FractionalOffset.center,
+              // height: 0.0,
+              padding: const EdgeInsets.all(0.0),
+              // child: Container(height: 32, width: 32, child: CircularProgressIndicator())),
+              child: ClipOval(
+                child: Lottie.asset(
+                  "assets/animations/united_pharmacy_loader.json",
+                  // Can add other properties on how you would like the anim to display
+                  fit: BoxFit.cover,
+                  width: 124,
+                  height: 124,
+                ),
+              )),
+        );
+      },
+      barrierColor: Colors.black38,
     );
   }
 
-  Widget _buildEmail() {
+  Widget _buildMobileNumber() {
     return TextFormField(
-      key: emailKey,
+      key: mobileNumberKey,
       validator: (value) {
         if (!isButtonPressed) {
           return null;
@@ -75,7 +109,7 @@ class _MobileNumberTabState extends State<MobileNumberTab> {
         }
       },
       onSaved: (value) {
-        _email = value!;
+        _mobileNumber = value!;
       },
       onFieldSubmitted: (value) {
         FocusScope.of(context).requestFocus(focus);
@@ -194,7 +228,7 @@ class _MobileNumberTabState extends State<MobileNumberTab> {
           child: ListView(
             children: [
               SizedBox(height: 28),
-              _buildEmail(),
+              _buildMobileNumber(),
               SizedBox(height: 16),
               _buildPassword(),
               SizedBox(height: 16),
@@ -234,13 +268,18 @@ class _MobileNumberTabState extends State<MobileNumberTab> {
               SizedBox(height: 2),
               Align(
                   alignment: Alignment.center,
-                  child: Text(
-                    AppString.Create_an_Account,
-                    style: TextStyle(
-                      color: AppColor.color_3F9ACC,
-                      fontSize: 14,
-                      fontWeight: FontWeight.bold,
-                      decoration: TextDecoration.underline,
+                  child: InkWell(
+                    onTap: (){
+                      Navigator.pushNamed(context, '/Registration');
+                    },
+                    child: Text(
+                      AppString.Create_an_Account,
+                      style: TextStyle(
+                        color: AppColor.color_3F9ACC,
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
+                        decoration: TextDecoration.underline,
+                      ),
                     ),
                   )),
               SizedBox(height: 166),
@@ -249,5 +288,51 @@ class _MobileNumberTabState extends State<MobileNumberTab> {
         ),
       ),
     );
+  }
+
+  void getEmailLogin() {
+    showProgress();
+    var loginReq = LoginRequest(
+        websiteId: "1",
+        storeId: "1",
+        quoteId: "0",
+        mFactor: "2.625",
+        currency: "SAR",
+        username: _mobileNumber,
+        mobile: _mobileNumber,
+        password: _password,
+        os: "android");
+
+    emailLogin(loginReq).then((data) {
+      /*setState(() {
+        showProgress = false;
+      });*/
+      Navigator.pop(dialogContext);
+
+      var success = data.success ?? false;
+      if (success) {
+        var customerToken = data.customerToken ?? "";
+        var customerId = data.customerId ?? "";
+        MyPref.addBoolToSF("customerLogin", true);
+        MyPref.addStringToSF("customerToken", customerToken);
+        MyPref.addStringToSF("customerId", customerId);
+
+        Navigator.pushReplacementNamed(context, '/DashboardTab');
+      } else {
+        var message = data.message ?? "";
+        if (message.isNotEmpty) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text(message)),
+          );
+        }
+      }
+    }, onError: (e) {
+      /*setState(() {
+        showProgress = false;
+      });*/
+      Navigator.pop(dialogContext);
+
+      print(e);
+    });
   }
 }

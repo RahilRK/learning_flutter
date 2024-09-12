@@ -31,4 +31,10 @@ abstract class AppString {
   static const ConfirmPassword = 'Confirm Password*';
   static const MobileNumber_ = 'Mobile Number*';
   static const SendVerificationCode = 'Send Verification Code';
+
+  /*todo verification*/
+  static const VerifyVerificationCode = 'Verify Verification Code';
+  static const Sent_an_Verification_Code_to = 'We have sent an Verification Code to\nyour Mobile +966 123456789';
+  static const Verify = 'Verify';
+  static const ResendVerificationCode = 'Resend Verification Code';
 }

@@ -4,7 +4,7 @@ import 'package:learning_flutter/preference/MyPref.dart';
 import 'package:learning_flutter/theme/color.dart';
 import 'package:learning_flutter/theme/string.dart';
 import 'package:learning_flutter/united_pharmacy/api_helper.dart';
-import 'package:learning_flutter/united_pharmacy/model/LoginRequest.dart';
+import 'package:learning_flutter/united_pharmacy/model/request/LoginRequest.dart';
 import 'package:lottie/lottie.dart';
 
 import '../common/common_widget.dart';
@@ -303,10 +303,8 @@ class _MobileNumberTabState extends State<MobileNumberTab> {
         password: _password,
         os: "android");
 
-    emailLogin(loginReq).then((data) {
-      /*setState(() {
-        showProgress = false;
-      });*/
+    logIn(loginReq).then((data) {
+
       Navigator.pop(dialogContext);
 
       var success = data.success ?? false;
@@ -327,11 +325,8 @@ class _MobileNumberTabState extends State<MobileNumberTab> {
         }
       }
     }, onError: (e) {
-      /*setState(() {
-        showProgress = false;
-      });*/
-      Navigator.pop(dialogContext);
 
+      Navigator.pop(dialogContext);
       print(e);
     });
   }

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:learning_flutter/main.dart';
+import 'package:learning_flutter/united_pharmacy/model/request/RegistrationRequest.dart';
+import 'package:learning_flutter/united_pharmacy/verification/verification.dart';
 import 'package:learning_flutter/united_pharmacy/login/login_tab.dart';
 import 'package:learning_flutter/united_pharmacy/registration/registration.dart';
 import 'package:learning_flutter/united_pharmacy/splash_screen/SplashScreen.dart';
@@ -13,12 +15,22 @@ class RouteGeneratorForUnitedPharmacy {
     switch (settings.name) {
       case '/':
         return MaterialPageRoute(builder: (_) => SplashScreen());
+        // return MaterialPageRoute(builder: (_) => Registration());
       case '/LoginTab':
         return MaterialPageRoute(builder: (_) => LoginTab());
       case '/Registration':
         return MaterialPageRoute(builder: (_) => Registration());
       case '/DashboardTab':
         return MaterialPageRoute(builder: (_) => DashboardTab());
+      case '/Verification':
+        if (args is RegistrationRequest) {
+          return MaterialPageRoute(
+            builder: (_) => Verification(
+              registrationRequest: args,
+            ),
+          );
+        }
+        return _errorRoute();
       default:
         // If there is no such named route in the switch statement, e.g. /third
         return _errorRoute();

@@ -3,7 +3,9 @@ import 'package:flutter/services.dart';
 import 'package:learning_flutter/preference/MyPref.dart';
 import 'package:learning_flutter/united_pharmacy/api_helper.dart';
 import 'package:learning_flutter/united_pharmacy/common/common_widget.dart';
-import 'package:learning_flutter/united_pharmacy/model/LoginRequest.dart';
+import 'package:learning_flutter/united_pharmacy/model/request/LoginRequest.dart';
+import 'package:learning_flutter/united_pharmacy/model/request/RegistrationRequest.dart';
+import 'package:learning_flutter/united_pharmacy/model/request/VerificationRequest.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../theme/color.dart';
@@ -25,12 +27,12 @@ class _RegistrationState extends State<Registration> {
   bool isError = false;
   bool isButtonPressed = false;
 
-  late String _firstName;
-  late String _lastName;
-  late String _email;
-  late String _password;
-  late String _confirmPassword;
-  late String _mobileNumber;
+  late final TextEditingController _firstName = TextEditingController();
+  late final TextEditingController _lastName = TextEditingController();
+  late final TextEditingController _email = TextEditingController();
+  late final TextEditingController _password = TextEditingController();
+  late final TextEditingController _confirmPassword = TextEditingController();
+  late final TextEditingController _mobileNumber = TextEditingController();
 
   late List<GlobalKey<FormFieldState>> fieldKeys;
   late GlobalKey<FormFieldState> firstNameKey;
@@ -65,13 +67,41 @@ class _RegistrationState extends State<Registration> {
     ];
   }
 
+  @override
+  void dispose() {
+    // Clean up the controller when the widget is disposed.
+    _firstName.dispose();
+    _lastName.dispose();
+    _email.dispose();
+    _password.dispose();
+    _confirmPassword.dispose();
+    _mobileNumber.dispose();
+    super.dispose();
+  }
+
   bool validate() {
     return fieldKeys.every((element) => element.currentState!.validate());
   }
 
   void save() {
     fieldKeys.forEach((element) => element.currentState!.save());
-    getEmailLogin();
+
+    var registrationRequest = RegistrationRequest(
+        websiteId: "1",
+        storeId: "1",
+        quoteId: "0",
+        mFactor: "2.625",
+        currency: "SAR",
+        firstName: _firstName.text,
+        lastName: _lastName.text,
+        otp: "",
+        email: _email.text,
+        password: _password.text,
+        pictureURL: "",
+        mobile: _mobileNumber.text,
+        os: "android"
+    );
+    getVerification(registrationRequest);
   }
 
   void showProgress() {
@@ -98,6 +128,7 @@ class _RegistrationState extends State<Registration> {
 
   Widget _buildFirstName() {
     return TextFormField(
+      controller: _firstName,
       key: firstNameKey,
       validator: (value) {
         if (!isButtonPressed) {
@@ -115,9 +146,6 @@ class _RegistrationState extends State<Registration> {
         if (isError) {
           _formKey.currentState?.validate();
         }
-      },
-      onSaved: (value) {
-        _firstName = value!;
       },
       /*onFieldSubmitted: (value) {
         FocusScope.of(context).requestFocus(focus);
@@ -148,6 +176,7 @@ class _RegistrationState extends State<Registration> {
 
   Widget _buildLastName() {
     return TextFormField(
+      controller: _lastName,
       key: lastNameKey,
       validator: (value) {
         if (!isButtonPressed) {
@@ -165,9 +194,6 @@ class _RegistrationState extends State<Registration> {
         if (isError) {
           _formKey.currentState?.validate();
         }
-      },
-      onSaved: (value) {
-        _lastName = value!;
       },
       /*onFieldSubmitted: (value) {
         FocusScope.of(context).requestFocus(focus);
@@ -198,6 +224,7 @@ class _RegistrationState extends State<Registration> {
 
   Widget _buildEmail() {
     return TextFormField(
+      controller: _email,
       key: emailKey,
       validator: (value) {
         if (!isButtonPressed) {
@@ -219,9 +246,6 @@ class _RegistrationState extends State<Registration> {
         if (isError) {
           _formKey.currentState?.validate();
         }
-      },
-      onSaved: (value) {
-        _email = value!;
       },
       /*onFieldSubmitted: (value) {
         FocusScope.of(context).requestFocus(focus);
@@ -252,6 +276,7 @@ class _RegistrationState extends State<Registration> {
 
   Widget _buildPassword() {
     return TextFormField(
+      controller: _password,
       key: passwordKey,
       validator: (value) {
         if (!isButtonPressed) {
@@ -271,9 +296,6 @@ class _RegistrationState extends State<Registration> {
         if (isError) {
           _formKey.currentState?.validate();
         }
-      },
-      onSaved: (value) {
-        _password = value!;
       },
       textInputAction: TextInputAction.next,
       onEditingComplete: () => FocusScope.of(context).nextFocus(),
@@ -323,6 +345,7 @@ class _RegistrationState extends State<Registration> {
 
   Widget _buildConfirmPassword() {
     return TextFormField(
+      controller: _confirmPassword,
       key: confirmPasswordKey,
       validator: (value) {
         if (!isButtonPressed) {
@@ -333,7 +356,7 @@ class _RegistrationState extends State<Registration> {
           return 'Please enter confirm password';
         } else if (value.length < 4) {
           return 'Please enter valid password, password length is 4 to 16';
-        } else if (_confirmPassword != _password) {
+        } else if (_confirmPassword.text != _password.text) {
           return 'Password and confirm password doesn\u0027t match';
         }
         isError = false;
@@ -344,9 +367,6 @@ class _RegistrationState extends State<Registration> {
         if (isError) {
           _formKey.currentState?.validate();
         }
-      },
-      onSaved: (value) {
-        _confirmPassword = value!;
       },
       textInputAction: TextInputAction.next,
       onEditingComplete: () => FocusScope.of(context).nextFocus(),
@@ -396,6 +416,7 @@ class _RegistrationState extends State<Registration> {
 
   Widget _buildMobileNumber() {
     return TextFormField(
+      controller: _mobileNumber,
       key: mobileNumberKey,
       validator: (value) {
         if (!isButtonPressed) {
@@ -415,9 +436,6 @@ class _RegistrationState extends State<Registration> {
         if (isError) {
           _formKey.currentState?.validate();
         }
-      },
-      onSaved: (value) {
-        _mobileNumber = value!;
       },
       textInputAction: TextInputAction.done,
       onEditingComplete: () => FocusScope.of(context).unfocus(),
@@ -489,7 +507,7 @@ class _RegistrationState extends State<Registration> {
                     return;
                   }
 
-                  // save();
+                  save();
                 },
               ),
               SizedBox(height: 308),
@@ -500,33 +518,22 @@ class _RegistrationState extends State<Registration> {
     );
   }
 
-  // Visibility(visible: showProgress, child: Align(alignment: Alignment.center,child: CircularProgressIndicator()))
-
-  void getEmailLogin() {
+  void getVerification(RegistrationRequest registrationRequest) {
     showProgress();
-    var loginReq = LoginRequest(
+    var verificationRequest = VerificationRequest(
         websiteId: "1",
         storeId: "1",
         quoteId: "0",
-        mFactor: "2.625",
-        currency: "SAR",
-        username: _email,
-        password: _password,
+        mobilenumber: registrationRequest.mobile,
         os: "android");
 
-    emailLogin(loginReq).then((data) {
-      /*setState(() {
-        showProgress = false;
-      });*/
+    sendotp(verificationRequest).then((data) {
       Navigator.pop(dialogContext);
 
       var success = data.success ?? false;
       if (success) {
-        var customerToken = data.customerToken ?? "";
-        var customerId = data.customerId ?? "";
-        MyPref.addBoolToSF("customerLogin", true);
-        MyPref.addStringToSF("customerToken", customerToken);
-        MyPref.addStringToSF("customerId", customerId);
+        var otp = data.otp;
+        Navigator.pushNamed(context, '/Verification', arguments: registrationRequest);
       } else {
         var message = data.message ?? "";
         if (message.isNotEmpty) {
@@ -536,11 +543,7 @@ class _RegistrationState extends State<Registration> {
         }
       }
     }, onError: (e) {
-      /*setState(() {
-        showProgress = false;
-      });*/
       Navigator.pop(dialogContext);
-
       print(e);
     });
   }

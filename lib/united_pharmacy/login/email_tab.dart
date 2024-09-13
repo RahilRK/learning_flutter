@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:learning_flutter/preference/MyPref.dart';
 import 'package:learning_flutter/united_pharmacy/api_helper.dart';
 import 'package:learning_flutter/united_pharmacy/common/common_widget.dart';
-import 'package:learning_flutter/united_pharmacy/model/LoginRequest.dart';
+import 'package:learning_flutter/united_pharmacy/model/request/LoginRequest.dart';
 import 'package:lottie/lottie.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -354,7 +354,7 @@ class _EmailTabState extends State<EmailTab> {
         password: _password,
         os: "android");
 
-    emailLogin(loginReq).then((data) {
+    logIn(loginReq).then((data) {
       /*setState(() {
         showProgress = false;
       });*/

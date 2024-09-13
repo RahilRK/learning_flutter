@@ -31,6 +31,10 @@ class _VerificationState extends State<Verification> {
     // TODO: implement initState
     mRegistrationRequest = widget.registrationRequest;
     super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) =>
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            content: Text(
+                "We have sent an verification code on your mobile number"))));
   }
 
   void save() {
@@ -128,7 +132,7 @@ class _VerificationState extends State<Verification> {
                 alignment: Alignment.center,
                 child: InkWell(
                   onTap: () {
-                    save();
+                    getVerification(mRegistrationRequest);
                   },
                   child: Text(
                     AppString.ResendVerificationCode,
@@ -155,15 +159,48 @@ class _VerificationState extends State<Verification> {
 
       var success = data.success ?? false;
       if (success) {
-
         var customerToken = data.customerToken ?? "";
         var customerId = data.customerId ?? "";
         MyPref.addBoolToSF("customerLogin", true);
         MyPref.addStringToSF("customerToken", customerToken);
         MyPref.addStringToSF("customerId", customerId);
 
-        Navigator.pushReplacementNamed(context, '/DashboardTab');
+        Navigator.pushNamedAndRemoveUntil(
+            context, '/DashboardTab', (Route<dynamic> route) => false);
+      } else {
+        var message = data.message ?? "";
+        if (message.isNotEmpty) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text(message)),
+          );
+        }
+      }
+    }, onError: (e) {
+      Navigator.pop(dialogContext);
+      print(e);
+    });
+  }
 
+  void getVerification(RegistrationRequest registrationRequest) {
+    showProgress();
+    var verificationRequest = VerificationRequest(
+        websiteId: "1",
+        storeId: "1",
+        quoteId: "0",
+        mobilenumber: registrationRequest.mobile,
+        os: "android");
+
+    sendotp(verificationRequest).then((data) {
+      Navigator.pop(dialogContext);
+
+      var success = data.success ?? false;
+      if (success) {
+        var otp = data.otp;
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+              content: Text(
+                  'We have sent an verification code on your mobile number')),
+        );
       } else {
         var message = data.message ?? "";
         if (message.isNotEmpty) {

@@ -6,6 +6,7 @@ import 'package:learning_flutter/united_pharmacy/common/common_widget.dart';
 import 'package:learning_flutter/united_pharmacy/model/request/LoginRequest.dart';
 import 'package:learning_flutter/united_pharmacy/model/request/RegistrationRequest.dart';
 import 'package:learning_flutter/united_pharmacy/model/request/VerificationRequest.dart';
+import 'package:lottie/lottie.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../theme/color.dart';
@@ -113,13 +114,21 @@ class _RegistrationState extends State<Registration> {
           surfaceTintColor: Color(0x00ffffff),
           backgroundColor: Colors.transparent,
           insetPadding: EdgeInsets.zero,
-          child: new Container(
+          child: Container(
               color: Colors.transparent,
               alignment: FractionalOffset.center,
               // height: 0.0,
               padding: const EdgeInsets.all(0.0),
-              child: Container(
-                  height: 32, width: 32, child: CircularProgressIndicator())),
+              // child: Container(height: 32, width: 32, child: CircularProgressIndicator())),
+              child: ClipOval(
+                child: Lottie.asset(
+                  "assets/animations/united_pharmacy_loader.json",
+                  // Can add other properties on how you would like the anim to display
+                  fit: BoxFit.cover,
+                  width: 124,
+                  height: 124,
+                ),
+              )),
         );
       },
       barrierColor: Colors.black38,
@@ -533,7 +542,8 @@ class _RegistrationState extends State<Registration> {
       var success = data.success ?? false;
       if (success) {
         var otp = data.otp;
-        Navigator.pushNamed(context, '/Verification', arguments: registrationRequest);
+        var mRegistrationRequest = registrationRequest.copyWith(otp: otp);
+        Navigator.pushNamed(context, '/Verification', arguments: mRegistrationRequest);
       } else {
         var message = data.message ?? "";
         if (message.isNotEmpty) {

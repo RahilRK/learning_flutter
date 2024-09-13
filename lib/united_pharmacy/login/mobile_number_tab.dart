@@ -315,7 +315,7 @@ class _MobileNumberTabState extends State<MobileNumberTab> {
         MyPref.addStringToSF("customerToken", customerToken);
         MyPref.addStringToSF("customerId", customerId);
 
-        Navigator.pushReplacementNamed(context, '/DashboardTab');
+        Navigator.pushNamedAndRemoveUntil(context, '/DashboardTab', (Route<dynamic> route) => false);
       } else {
         var message = data.message ?? "";
         if (message.isNotEmpty) {

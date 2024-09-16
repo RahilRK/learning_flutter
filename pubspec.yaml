@@ -37,6 +37,8 @@ dependencies:
   cupertino_icons: ^1.0.2
   lottie: ^3.1.2
   flutter_verification_code: ^1.1.7
+  text_marquee: ^0.0.2
+  carousel_slider: ^5.0.0
 
 dev_dependencies:
   flutter_test:
@@ -75,6 +77,13 @@ flutter:
     - images/facebook_icon.png
     - assets/animations/united_pharmacy_loader.json
     - assets/animations/united_pharmacy_splash_animation.json
+    - images/home_applogo.png
+    - images/cart.png
+    - images/heart.png
+    - images/translation.png
+    - images/angle_small_down.png
+    - images/search.png
+    - images/location_marker.png
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 

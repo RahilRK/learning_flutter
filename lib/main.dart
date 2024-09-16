@@ -10,6 +10,8 @@ import 'package:learning_flutter/route_generator_for_nav_drawer.dart';
 import 'package:learning_flutter/textStyle/appTextStyle.dart';
 import 'package:learning_flutter/theme/color.dart';
 import 'package:learning_flutter/theme/theme.dart';
+import 'package:learning_flutter/united_pharmacy/dashboard/component/BannerSlider.dart';
+import 'package:learning_flutter/united_pharmacy/dashboard/component/Category.dart';
 import 'package:learning_flutter/united_pharmacy/login/login_tab.dart';
 import 'package:learning_flutter/united_pharmacy/registration/registration.dart';
 import 'package:learning_flutter/united_pharmacy/route_generator_for_united_pharmacy.dart';
@@ -66,7 +68,9 @@ class MaterialMyApp extends StatelessWidget {
       // home: SplashScreen(),
       // home: Registration(),
       // home: FirstPage(),
-      initialRoute: '/',
+      // home: CategoryList(),
+      home: BannerSlider(),
+      // initialRoute: '/',
 
       /*todo 2nd way to navigate*/
       /*routes: {
@@ -74,7 +78,7 @@ class MaterialMyApp extends StatelessWidget {
       },*/
 
       /*todo 3rd way to navigate*/
-      onGenerateRoute: RouteGeneratorForUnitedPharmacy.generateRoute,
+      // onGenerateRoute: RouteGeneratorForUnitedPharmacy.generateRoute,
     );
   }
 }

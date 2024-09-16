@@ -37,4 +37,13 @@ abstract class AppString {
   static const Sent_an_Verification_Code_to = 'We have sent an Verification Code to\nyour Mobile +966 ';
   static const Verify = 'Verify';
   static const ResendVerificationCode = 'Resend Verification Code';
+
+  /*todo Dashboard*/
+  static const Search_for_products = 'Search for products';
+  static const Deliver_to = 'Deliver to : Jeddah';
+  static const Products_availability = 'Products availability and promotions may vary';
+  static const Change = 'Change';
+  static const Shop_by_category = 'Shop by category';
+  static const ViewAll = 'View All';
+  static const Dont_miss = 'Don\u0027t miss our FREE DELIVERY on all orders using above 100 SAR';
 }

@@ -14,14 +14,12 @@ class RouteGeneratorForUnitedPharmacy {
 
     switch (settings.name) {
       case '/':
-        return MaterialPageRoute(builder: (_) => SplashScreen());
-        // return MaterialPageRoute(builder: (_) => Registration());
+        // return MaterialPageRoute(builder: (_) => SplashScreen());
+      return MaterialPageRoute(builder: (_) => DashboardTab());
       case '/LoginTab':
         return MaterialPageRoute(builder: (_) => LoginTab());
       case '/Registration':
         return MaterialPageRoute(builder: (_) => Registration());
-      case '/DashboardTab':
-        return MaterialPageRoute(builder: (_) => DashboardTab());
       case '/Verification':
         if (args is RegistrationRequest) {
           return MaterialPageRoute(
@@ -31,6 +29,9 @@ class RouteGeneratorForUnitedPharmacy {
           );
         }
         return _errorRoute();
+      case '/DashboardTab':
+        return MaterialPageRoute(builder: (_) => DashboardTab());
+
       default:
         // If there is no such named route in the switch statement, e.g. /third
         return _errorRoute();

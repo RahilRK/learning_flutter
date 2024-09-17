@@ -69,8 +69,8 @@ class MaterialMyApp extends StatelessWidget {
       // home: Registration(),
       // home: FirstPage(),
       // home: CategoryList(),
-      home: BannerSlider(),
-      // initialRoute: '/',
+      // home: BannerSlider(),
+      initialRoute: '/',
 
       /*todo 2nd way to navigate*/
       /*routes: {
@@ -78,7 +78,7 @@ class MaterialMyApp extends StatelessWidget {
       },*/
 
       /*todo 3rd way to navigate*/
-      // onGenerateRoute: RouteGeneratorForUnitedPharmacy.generateRoute,
+      onGenerateRoute: RouteGeneratorForUnitedPharmacy.generateRoute,
     );
   }
 }

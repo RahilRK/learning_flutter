@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:learning_flutter/theme/color.dart';
 import 'package:learning_flutter/theme/string.dart';
+import 'package:learning_flutter/united_pharmacy/dashboard/component/BannerSlider.dart';
 import 'package:text_marquee/text_marquee.dart';
 
 import 'component/Category.dart';
@@ -228,6 +229,14 @@ class _DashboardTabState extends State<DashboardTab> {
             height: 8,
           ),
           CategoryList(),
+          SizedBox(
+            height: 8,
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: Container(
+                child: BannerSlider()),
+          ),
         ],
       ),
     );

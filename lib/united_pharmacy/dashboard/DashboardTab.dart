@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:learning_flutter/theme/color.dart';
 import 'package:learning_flutter/theme/string.dart';
-import 'package:learning_flutter/united_pharmacy/dashboard/component/BannerSlider.dart';
+import 'package:learning_flutter/united_pharmacy/dashboard/component/banner_slider.dart';
+import 'package:learning_flutter/united_pharmacy/dashboard/component/discount_banner_slider.dart';
+import 'package:learning_flutter/united_pharmacy/dashboard/component/discount_list.dart';
+import 'package:learning_flutter/united_pharmacy/dashboard/component/our_service_list.dart';
 import 'package:text_marquee/text_marquee.dart';
 
-import 'component/Category.dart';
+import 'component/category.dart';
 
 class DashboardTab extends StatefulWidget {
   const DashboardTab({super.key});
@@ -230,12 +233,54 @@ class _DashboardTabState extends State<DashboardTab> {
           ),
           CategoryList(),
           SizedBox(
-            height: 8,
+            height: 0,
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Container(
                 child: BannerSlider()),
+          ),
+          SizedBox(
+            height: 16,
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: DiscountList(),
+          ),
+          SizedBox(
+            height: 16,
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: DiscountBannerSlider(),
+          ),
+          SizedBox(
+            height: 16,
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 16, right: 16),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  AppString.OurServices,
+                  style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold,
+                      color: AppColor.black),
+                ),
+              ],
+            ),
+          ),
+          SizedBox(
+            height: 8,
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: OurServiceList(),
+          ),
+          SizedBox(
+            height: 16,
           ),
         ],
       ),

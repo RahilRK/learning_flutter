@@ -46,4 +46,5 @@ abstract class AppString {
   static const Shop_by_category = 'Shop by category';
   static const ViewAll = 'View All';
   static const Dont_miss = 'Don\u0027t miss our FREE DELIVERY on all orders using above 100 SAR';
+  static const OurServices = 'Our Services';
 }

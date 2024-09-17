@@ -10,12 +10,14 @@ import 'package:learning_flutter/route_generator_for_nav_drawer.dart';
 import 'package:learning_flutter/textStyle/appTextStyle.dart';
 import 'package:learning_flutter/theme/color.dart';
 import 'package:learning_flutter/theme/theme.dart';
-import 'package:learning_flutter/united_pharmacy/dashboard/component/BannerSlider.dart';
-import 'package:learning_flutter/united_pharmacy/dashboard/component/Category.dart';
+import 'package:learning_flutter/united_pharmacy/dashboard/component/banner_slider.dart';
+import 'package:learning_flutter/united_pharmacy/dashboard/component/category.dart';
 import 'package:learning_flutter/united_pharmacy/login/login_tab.dart';
 import 'package:learning_flutter/united_pharmacy/registration/registration.dart';
 import 'package:learning_flutter/united_pharmacy/route_generator_for_united_pharmacy.dart';
 import 'package:learning_flutter/united_pharmacy/splash_screen/SplashScreen.dart';
+
+import 'united_pharmacy/dashboard/component/discount_list.dart';
 
 void main() {
   runApp(const MaterialMyApp());
@@ -70,6 +72,7 @@ class MaterialMyApp extends StatelessWidget {
       // home: FirstPage(),
       // home: CategoryList(),
       // home: BannerSlider(),
+      // home: DiscountBanner(),
       initialRoute: '/',
 
       /*todo 2nd way to navigate*/

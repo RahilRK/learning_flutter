@@ -114,7 +114,7 @@ class _BannerSliderState extends State<BannerSlider> {
                   options: CarouselOptions(
                       autoPlay: true,
                       aspectRatio: 16/7.5,
-                      enlargeCenterPage: true,
+                      enlargeCenterPage: false,
                       viewportFraction: 1,
                       onPageChanged: (index, reason) {
                         setState(() {
@@ -127,7 +127,7 @@ class _BannerSliderState extends State<BannerSlider> {
         Positioned(
           bottom: 0,
           child: Container(
-            width: 45,
+            width: 40,
             decoration: BoxDecoration(
               color: AppColor.white,
               borderRadius: BorderRadius.circular(20),

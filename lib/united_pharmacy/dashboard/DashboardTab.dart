@@ -4,7 +4,9 @@ import 'package:learning_flutter/theme/string.dart';
 import 'package:learning_flutter/united_pharmacy/dashboard/component/banner_slider.dart';
 import 'package:learning_flutter/united_pharmacy/dashboard/component/discount_banner_slider.dart';
 import 'package:learning_flutter/united_pharmacy/dashboard/component/discount_list.dart';
+import 'package:learning_flutter/united_pharmacy/dashboard/component/explore_offers_banner_slider.dart';
 import 'package:learning_flutter/united_pharmacy/dashboard/component/our_service_list.dart';
+import 'package:learning_flutter/united_pharmacy/dashboard/component/shop_by_brand_list.dart';
 import 'package:text_marquee/text_marquee.dart';
 
 import 'component/category.dart';
@@ -89,6 +91,7 @@ class _DashboardTabState extends State<DashboardTab> {
       ),
       body: ListView(
         children: [
+          // SearchView
           Padding(
             padding: const EdgeInsets.only(left: 16.0, right: 16),
             child: TextField(
@@ -231,10 +234,12 @@ class _DashboardTabState extends State<DashboardTab> {
           SizedBox(
             height: 8,
           ),
+          // CategoryList
           CategoryList(),
           SizedBox(
             height: 0,
           ),
+          // BannerSlider
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Container(
@@ -243,6 +248,7 @@ class _DashboardTabState extends State<DashboardTab> {
           SizedBox(
             height: 16,
           ),
+          // DiscountList
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: DiscountList(),
@@ -250,6 +256,7 @@ class _DashboardTabState extends State<DashboardTab> {
           SizedBox(
             height: 16,
           ),
+          // DiscountBannerSlider
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: DiscountBannerSlider(),
@@ -275,12 +282,81 @@ class _DashboardTabState extends State<DashboardTab> {
           SizedBox(
             height: 8,
           ),
+          // OurServiceList
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: OurServiceList(),
           ),
           SizedBox(
             height: 16,
+          ),
+          // ExploreOffersBannerSlider
+          Padding(
+            padding: const EdgeInsets.only(left: 16, right: 16),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  AppString.ExploreOffers,
+                  style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold,
+                      color: AppColor.black),
+                ),
+                Text(
+                  AppString.ViewAll,
+                  style: TextStyle(
+                      fontSize: 13,
+                      fontWeight: FontWeight.w500,
+                      color: AppColor.color_3F9ACC,
+                      decoration: TextDecoration.underline),
+                ),
+              ],
+            ),
+          ),
+          SizedBox(
+            height: 8,
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: ExploreOffersBannerSlider(),
+          ),
+          SizedBox(
+            height: 16,
+          ),
+          // Shop by Brand List
+          Padding(
+            padding: const EdgeInsets.only(left: 16, right: 16),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  AppString.Shop_by_Brand,
+                  style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold,
+                      color: AppColor.black),
+                ),
+                Text(
+                  AppString.ViewAll,
+                  style: TextStyle(
+                      fontSize: 13,
+                      fontWeight: FontWeight.w500,
+                      color: AppColor.color_3F9ACC,
+                      decoration: TextDecoration.underline),
+                ),
+              ],
+            ),
+          ),
+          SizedBox(
+            height: 8,
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: ShopByBrandList(),
+          ),
+          SizedBox(
+            height: 8,
           ),
         ],
       ),

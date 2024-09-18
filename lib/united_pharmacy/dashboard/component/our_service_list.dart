@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:learning_flutter/theme/color.dart';
 import 'package:learning_flutter/united_pharmacy/model/response/home/HomePageFirstResponse.dart';
+import 'package:scroll_to_index/scroll_to_index.dart';
 
 class OurServiceList extends StatefulWidget {
   const OurServiceList({super.key});
@@ -63,10 +64,9 @@ class _OurServiceListState extends State<OurServiceList> {
       id: "5182",
       name: "Buy 2 Pieces And Get 15% Extra Discount",
     ),
-
     Banners(
       url:
-      "https://unitedpharmacy.sa/media/mobikul/carouselimages/File-1725620682.jpg",
+          "https://unitedpharmacy.sa/media/mobikul/carouselimages/File-1725620682.jpg",
       title: "Buy 3 Pieces To Get Extra Discount 10%",
       bannerType: "category",
       dominantColor: "#81c0b6",
@@ -79,7 +79,7 @@ class _OurServiceListState extends State<OurServiceList> {
     ),
     Banners(
       url:
-      "https://unitedpharmacy.sa/media/mobikul/carouselimages/File-1725620745.jpg",
+          "https://unitedpharmacy.sa/media/mobikul/carouselimages/File-1725620745.jpg",
       title: "Buy 3 Pieces To Get Extra Discount 10%",
       bannerType: "category",
       dominantColor: "#81c0b6",
@@ -92,7 +92,7 @@ class _OurServiceListState extends State<OurServiceList> {
     ),
     Banners(
       url:
-      "https://unitedpharmacy.sa/media/mobikul/carouselimages/File-1725620781.jpg",
+          "https://unitedpharmacy.sa/media/mobikul/carouselimages/File-1725620781.jpg",
       title: "Buy 3 Pieces To Get Extra Discount 10%",
       bannerType: "category",
       dominantColor: "#81c0b6",
@@ -105,7 +105,7 @@ class _OurServiceListState extends State<OurServiceList> {
     ),
     Banners(
       url:
-      "https://unitedpharmacy.sa/media/mobikul/carouselimages/File-1725620829.jpg",
+          "https://unitedpharmacy.sa/media/mobikul/carouselimages/File-1725620829.jpg",
       title: "Buy 3 Pieces To Get Extra Discount 10%",
       bannerType: "category",
       dominantColor: "#81c0b6",
@@ -116,10 +116,9 @@ class _OurServiceListState extends State<OurServiceList> {
       id: "5182",
       name: "Buy 2 Pieces And Get 15% Extra Discount",
     ),
-
     Banners(
       url:
-      "https://unitedpharmacy.sa/media/mobikul/carouselimages/File-1725620682.jpg",
+          "https://unitedpharmacy.sa/media/mobikul/carouselimages/File-1725620682.jpg",
       title: "Buy 3 Pieces To Get Extra Discount 10%",
       bannerType: "category",
       dominantColor: "#81c0b6",
@@ -132,7 +131,7 @@ class _OurServiceListState extends State<OurServiceList> {
     ),
     Banners(
       url:
-      "https://unitedpharmacy.sa/media/mobikul/carouselimages/File-1725620745.jpg",
+          "https://unitedpharmacy.sa/media/mobikul/carouselimages/File-1725620745.jpg",
       title: "Buy 3 Pieces To Get Extra Discount 10%",
       bannerType: "category",
       dominantColor: "#81c0b6",
@@ -142,49 +141,115 @@ class _OurServiceListState extends State<OurServiceList> {
       subTitle: "Extra Discount 10%",
       id: "5182",
       name: "Buy 2 Pieces And Get 10% Extra Discount",
-    ),
-    Banners(
-      url:
-      "https://unitedpharmacy.sa/media/mobikul/carouselimages/File-1725620781.jpg",
-      title: "Buy 3 Pieces To Get Extra Discount 10%",
-      bannerType: "category",
-      dominantColor: "#81c0b6",
-      startDate: "2024-07-12 14:15:00",
-      endDate: "2024-12-31 14:15:00",
-      imgTitle: "Buy 3 Pieces",
-      subTitle: "Extra Discount 15%",
-      id: "5182",
-      name: "Buy 3 Pieces And Get 15% Extra Discount",
-    ),
-    Banners(
-      url:
-      "https://unitedpharmacy.sa/media/mobikul/carouselimages/File-1725620829.jpg",
-      title: "Buy 3 Pieces To Get Extra Discount 10%",
-      bannerType: "category",
-      dominantColor: "#81c0b6",
-      startDate: "2024-07-12 14:15:00",
-      endDate: "2024-12-31 14:15:00",
-      imgTitle: "Buy 2 Pieces",
-      subTitle: "Extra Discount 15%",
-      id: "5182",
-      name: "Buy 2 Pieces And Get 15% Extra Discount",
     ),
   ];
 
+  final AutoScrollController controller = AutoScrollController();
+  int _currentFocusedIndex = 0;
+
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 150,
-      child: ListView.builder(
-        itemCount: mList.length, // Number of items in your list
-        scrollDirection: Axis.horizontal,
-        itemBuilder: (BuildContext context, int index) {
-          var model = mList[index];
+    return Stack(
+      alignment: Alignment.center,
+      children: [
+        SizedBox(
+          height: 150,
+          child: ListView.builder(
+            controller: controller,
+            itemCount: mList.length, // Number of items in your list
+            scrollDirection: Axis.horizontal,
+            itemBuilder: (BuildContext context, int index) {
+              var model = mList[index];
 
-          return DiscountBannerItem(
-            model: model,
-          );
-        },
+              /*return DiscountBannerItem(
+                model: model,
+              );*/
+
+              return mItem(model, index);
+            },
+          ),
+        ),
+        Positioned(
+            left: 0,
+            child: InkWell(
+                onTap: () {
+                  if (_currentFocusedIndex > 0) {
+                    _currentFocusedIndex--;
+                    if (_currentFocusedIndex < 0) {
+                      _currentFocusedIndex = mList.length - 1;
+                    }
+
+                    controller.scrollToIndex(_currentFocusedIndex,
+                        preferPosition: AutoScrollPosition.begin);
+
+                    setState(() {});
+                    print('_currentFocusedIndex: $_currentFocusedIndex');
+                  } else {
+                    print('Done');
+                  }
+                },
+                child: Image.asset(
+                  'images/slider_back_button.png',
+                  height: 42,
+                  width: 42,
+                ))),
+        Positioned(
+            right: 0,
+            child: InkWell(
+              onTap: () {
+                if (_currentFocusedIndex < mList.length - 1) {
+                  _currentFocusedIndex++;
+                  if (_currentFocusedIndex > mList.length) {
+                    _currentFocusedIndex = 0;
+                  }
+                  controller.scrollToIndex(_currentFocusedIndex,
+                      preferPosition: AutoScrollPosition.begin);
+                  setState(() {});
+                  print('_currentFocusedIndex: $_currentFocusedIndex');
+                } else {
+                  print('Done');
+                }
+              },
+              child: Image.asset(
+                'images/slider_forward_button.png',
+                height: 42,
+                width: 42,
+              ),
+            )),
+      ],
+    );
+  }
+
+  Widget mItem(Banners model, int index) {
+    return AutoScrollTag(
+      key: ValueKey(index),
+      controller: controller,
+      index: index,
+      child: Padding(
+        padding: const EdgeInsets.all(6.0),
+        child: Stack(
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(8.0),
+              child: Image.network(model.url ?? "no image",
+                  fit: BoxFit.cover, height: 150, width: 100),
+            ),
+            Positioned(
+              bottom: 0,
+              right: 0,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  "${index.toString()}",
+                  style: TextStyle(
+                      color: AppColor.white,
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold),
+                ),
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
@@ -201,12 +266,8 @@ class DiscountBannerItem extends StatelessWidget {
       padding: const EdgeInsets.all(6.0),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(8.0),
-        child: Image.network(
-            model.url ?? "no image",
-            fit: BoxFit.cover,
-            height: 150,
-            width: 108
-        ),
+        child: Image.network(model.url ?? "no image",
+            fit: BoxFit.cover, height: 150, width: 100),
       ),
     );
   }

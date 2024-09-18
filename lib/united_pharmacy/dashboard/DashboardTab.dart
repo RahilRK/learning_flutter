@@ -2,9 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:learning_flutter/theme/color.dart';
 import 'package:learning_flutter/theme/string.dart';
 import 'package:learning_flutter/united_pharmacy/dashboard/component/banner_slider.dart';
+import 'package:learning_flutter/united_pharmacy/dashboard/component/best_deals.dart';
+import 'package:learning_flutter/united_pharmacy/dashboard/component/best_selling_products_list.dart';
 import 'package:learning_flutter/united_pharmacy/dashboard/component/discount_banner_slider.dart';
+import 'package:learning_flutter/united_pharmacy/dashboard/component/discount_banner_slider_two.dart';
+import 'package:learning_flutter/united_pharmacy/dashboard/component/discount_free_list.dart';
 import 'package:learning_flutter/united_pharmacy/dashboard/component/discount_list.dart';
+import 'package:learning_flutter/united_pharmacy/dashboard/component/exclusive_offers.dart';
 import 'package:learning_flutter/united_pharmacy/dashboard/component/explore_offers_banner_slider.dart';
+import 'package:learning_flutter/united_pharmacy/dashboard/component/explore_offers_banner_slider_two.dart';
 import 'package:learning_flutter/united_pharmacy/dashboard/component/our_service_list.dart';
 import 'package:learning_flutter/united_pharmacy/dashboard/component/shop_by_brand_list.dart';
 import 'package:text_marquee/text_marquee.dart';
@@ -234,11 +240,13 @@ class _DashboardTabState extends State<DashboardTab> {
           SizedBox(
             height: 8,
           ),
+
           // CategoryList
           CategoryList(),
           SizedBox(
             height: 0,
           ),
+
           // BannerSlider
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -248,6 +256,7 @@ class _DashboardTabState extends State<DashboardTab> {
           SizedBox(
             height: 16,
           ),
+
           // DiscountList
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -256,6 +265,7 @@ class _DashboardTabState extends State<DashboardTab> {
           SizedBox(
             height: 16,
           ),
+
           // DiscountBannerSlider
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -282,6 +292,7 @@ class _DashboardTabState extends State<DashboardTab> {
           SizedBox(
             height: 8,
           ),
+
           // OurServiceList
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -290,6 +301,26 @@ class _DashboardTabState extends State<DashboardTab> {
           SizedBox(
             height: 16,
           ),
+
+
+          // BestSellingProductsList
+          /*Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: BestSellingProductsList(),
+          ),
+          SizedBox(
+            height: 16,
+          ),*/
+
+          // DiscountFreeList
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: DiscountFreeList(),
+          ),
+          SizedBox(
+            height: 16,
+          ),
+
           // ExploreOffersBannerSlider
           Padding(
             padding: const EdgeInsets.only(left: 16, right: 16),
@@ -324,6 +355,7 @@ class _DashboardTabState extends State<DashboardTab> {
           SizedBox(
             height: 16,
           ),
+
           // Shop by Brand List
           Padding(
             padding: const EdgeInsets.only(left: 16, right: 16),
@@ -355,8 +387,107 @@ class _DashboardTabState extends State<DashboardTab> {
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: ShopByBrandList(),
           ),
+
+          // BestDeals
+          SizedBox(
+            height: 16,
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 16, right: 16),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  AppString.Best_Deals,
+                  style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold,
+                      color: AppColor.black),
+                ),
+              ],
+            ),
+          ),
           SizedBox(
             height: 8,
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: BestDeals(),
+          ),
+
+          // DiscountBannerSliderTwo
+          SizedBox(
+            height: 16,
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: DiscountBannerSliderTwo(),
+          ),
+
+          // Exclusive Offers
+          SizedBox(
+            height: 16,
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 16, right: 16),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  AppString.ExclusiveOffers,
+                  style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold,
+                      color: AppColor.black),
+                ),
+              ],
+            ),
+          ),
+          SizedBox(
+            height: 8,
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: ExclusiveOffers(),
+          ),
+
+          // ExploreOffersBannerSliderTwo
+          SizedBox(
+            height: 16,
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 16, right: 16),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  AppString.ExploreOffers,
+                  style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold,
+                      color: AppColor.black),
+                ),
+                Text(
+                  AppString.ViewAll,
+                  style: TextStyle(
+                      fontSize: 13,
+                      fontWeight: FontWeight.w500,
+                      color: AppColor.color_3F9ACC,
+                      decoration: TextDecoration.underline),
+                ),
+              ],
+            ),
+          ),
+          SizedBox(
+            height: 8,
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: ExploreOffersBannerSliderTwo(),
+          ),
+
+          SizedBox(
+            height: 16,
           ),
         ],
       ),

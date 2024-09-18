@@ -49,4 +49,6 @@ abstract class AppString {
   static const OurServices = 'Our Services';
   static const ExploreOffers = 'Explore Offers';
   static const Shop_by_Brand = 'Shop by Brand';
+  static const Best_Deals = 'Best Deals';
+  static const ExclusiveOffers = 'Exclusive Offers';
 }

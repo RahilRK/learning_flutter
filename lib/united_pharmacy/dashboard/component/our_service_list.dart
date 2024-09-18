@@ -153,8 +153,12 @@ class _OurServiceListState extends State<OurServiceList> {
       alignment: Alignment.center,
       children: [
         SizedBox(
-          height: 150,
-          child: ListView.builder(
+          height: 140,
+          child: ListView.separated(
+            separatorBuilder: (BuildContext context, int index) {
+              return SizedBox(width: 8);
+            },
+            padding: EdgeInsets.zero,
             controller: controller,
             itemCount: mList.length, // Number of items in your list
             scrollDirection: Axis.horizontal,
@@ -225,31 +229,10 @@ class _OurServiceListState extends State<OurServiceList> {
       key: ValueKey(index),
       controller: controller,
       index: index,
-      child: Padding(
-        padding: const EdgeInsets.all(6.0),
-        child: Stack(
-          children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(8.0),
-              child: Image.network(model.url ?? "no image",
-                  fit: BoxFit.cover, height: 150, width: 100),
-            ),
-            Positioned(
-              bottom: 0,
-              right: 0,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  "${index.toString()}",
-                  style: TextStyle(
-                      color: AppColor.white,
-                      fontSize: 14,
-                      fontWeight: FontWeight.bold),
-                ),
-              ),
-            )
-          ],
-        ),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(8.0),
+        child: Image.network(model.url ?? "no image",
+            fit: BoxFit.cover, height: 140, width: 110),
       ),
     );
   }

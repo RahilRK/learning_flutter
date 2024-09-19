@@ -1,6 +1,5 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:learning_flutter/theme/color.dart';
 import 'package:learning_flutter/united_pharmacy/model/response/home/HomePageFirstResponse.dart';
 
 class ExploreOffersBannerSlider extends StatefulWidget {
@@ -79,7 +78,7 @@ class _ExploreOffersBannerSliderState extends State<ExploreOffersBannerSlider> {
 
   final List<Widget> imageSliders = imgList
       .map((item) => ClipRRect(
-          borderRadius: BorderRadius.all(Radius.circular(16.0)),
+          borderRadius: const BorderRadius.all(Radius.circular(16.0)),
           child: Image.network(item, fit: BoxFit.cover, width: 1000.0)))
       .toList();
 

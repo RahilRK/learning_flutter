@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
@@ -49,14 +48,14 @@ class _GetApiDemoState extends State<GetApiDemo> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Api Demo'),
+        title: const Text('Api Demo'),
       ),
       body: FutureBuilder(
           future: getData(),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               return ListView.separated(
-                physics: BouncingScrollPhysics(),
+                physics: const BouncingScrollPhysics(),
                 // itemCount: mList.length,
                 itemCount: 20,
                 itemBuilder: (context, index) {
@@ -83,7 +82,7 @@ class _GetApiDemoState extends State<GetApiDemo> {
                 },
               );
             } else {
-              return Center(
+              return const Center(
                 child: CircularProgressIndicator(),
               );
             }

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:learning_flutter/theme/color.dart';
 import 'package:learning_flutter/united_pharmacy/model/response/home/HomePageFirstResponse.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
 
@@ -156,7 +155,7 @@ class _OurServiceListState extends State<OurServiceList> {
           height: 140,
           child: ListView.separated(
             separatorBuilder: (BuildContext context, int index) {
-              return SizedBox(width: 8);
+              return const SizedBox(width: 8);
             },
             padding: EdgeInsets.zero,
             controller: controller,

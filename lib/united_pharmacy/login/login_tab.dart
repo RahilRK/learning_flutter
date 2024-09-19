@@ -25,6 +25,7 @@ class _LoginTabState extends State<LoginTab>
     super.initState();
   }
 
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -39,7 +40,7 @@ class _LoginTabState extends State<LoginTab>
                   onTap: (){
                     Navigator.pushReplacementNamed(context, '/DashboardTab');
                   },
-                  child: Text(
+                  child: const Text(
                     AppString.Skip,
                     style: TextStyle(color: AppColor.white, fontSize: 14, fontWeight: FontWeight.normal),
                   ),
@@ -66,7 +67,7 @@ class _LoginTabState extends State<LoginTab>
             labelColor: AppColor.color_247EAD,
             indicatorColor: AppColor.color_247EAD,
             unselectedLabelColor: AppColor.color_707070,
-            tabs: [
+            tabs: const [
               Tab(
                 /*text: 'Mobile Number',
               icon: Icon(
@@ -92,7 +93,7 @@ class _LoginTabState extends State<LoginTab>
           Expanded(
               child: TabBarView(
             controller: tabController,
-            children: [
+            children: const [
               MobileNumberTab(),
               EmailTab(),
             ],

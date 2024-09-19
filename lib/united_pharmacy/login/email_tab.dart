@@ -5,7 +5,6 @@ import 'package:learning_flutter/united_pharmacy/api_helper.dart';
 import 'package:learning_flutter/united_pharmacy/common/common_widget.dart';
 import 'package:learning_flutter/united_pharmacy/model/request/LoginRequest.dart';
 import 'package:lottie/lottie.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../theme/color.dart';
 import '../../theme/string.dart';
@@ -69,7 +68,9 @@ class _EmailTabState extends State<EmailTab> {
   }
 
   void save() {
-    fieldKeys.forEach((element) => element.currentState!.save());
+    for (var element in fieldKeys) {
+      element.currentState!.save();
+    }
     getEmailLogin();
   }
 
@@ -79,7 +80,7 @@ class _EmailTabState extends State<EmailTab> {
       builder: (context) {
         dialogContext = context;
         return Dialog(
-          surfaceTintColor: Color(0x00ffffff),
+          surfaceTintColor: const Color(0x00ffffff),
           backgroundColor: Colors.transparent,
           insetPadding: EdgeInsets.zero,
           child: Container(
@@ -137,7 +138,7 @@ class _EmailTabState extends State<EmailTab> {
       maxLines: 1,
       maxLengthEnforcement: MaxLengthEnforcement.none,
       decoration: InputDecoration(
-        labelStyle: TextStyle(
+        labelStyle: const TextStyle(
             // color: AppColor.color_B6B7B7,
             fontSize: 16,
             fontWeight: FontWeight.w500),
@@ -148,7 +149,7 @@ class _EmailTabState extends State<EmailTab> {
         border: OutlineInputBorder(
             // borderSide: BorderSide.none,
             borderRadius: BorderRadius.circular(8)),
-        enabledBorder: OutlineInputBorder(
+        enabledBorder: const OutlineInputBorder(
             borderSide: BorderSide(color: AppColor.color_DDDDDD)),
       ),
     );
@@ -189,7 +190,7 @@ class _EmailTabState extends State<EmailTab> {
         LengthLimitingTextInputFormatter(16),
       ],
       decoration: InputDecoration(
-        labelStyle: TextStyle(
+        labelStyle: const TextStyle(
             // color: AppColor.color_B6B7B7,
             fontSize: 16,
             fontWeight: FontWeight.w500),
@@ -217,7 +218,7 @@ class _EmailTabState extends State<EmailTab> {
         border: OutlineInputBorder(
             // borderSide: BorderSide.none,
             borderRadius: BorderRadius.circular(8)),
-        enabledBorder: OutlineInputBorder(
+        enabledBorder: const OutlineInputBorder(
             borderSide: BorderSide(color: AppColor.color_DDDDDD)),
       ),
     );
@@ -232,12 +233,12 @@ class _EmailTabState extends State<EmailTab> {
           key: _formKey,
           child: ListView(
             children: [
-              SizedBox(height: 28),
+              const SizedBox(height: 28),
               _buildEmail(),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               _buildPassword(),
-              SizedBox(height: 16),
-              Align(
+              const SizedBox(height: 16),
+              const Align(
                   alignment: Alignment.centerRight,
                   child: Text(
                     AppString.ForgotPassword,
@@ -246,7 +247,7 @@ class _EmailTabState extends State<EmailTab> {
                         fontSize: 14,
                         fontWeight: FontWeight.w500),
                   )),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               CommonElevatedButton(
                 text: AppString.Login,
                 foregroundColor: AppColor.white,
@@ -260,21 +261,21 @@ class _EmailTabState extends State<EmailTab> {
                   save();
                 },
               ),
-              SizedBox(height: 8),
-              Wrap(
+              const SizedBox(height: 8),
+              const Wrap(
                 children: [
-                  Container(
+                  SizedBox(
                     width: double.infinity,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         SizedBox(
+                          width: 14,
                           child: Divider(
                             height: 1,
                             thickness: 1,
                             color: AppColor.color_B6B7B7,
                           ),
-                          width: 14,
                         ),
                         SizedBox(width: 6),
                         Text(
@@ -287,26 +288,26 @@ class _EmailTabState extends State<EmailTab> {
                         ),
                         SizedBox(width: 6),
                         SizedBox(
+                          width: 14,
                           child: Divider(
                             height: 1,
                             thickness: 1,
                             color: AppColor.color_B6B7B7,
                           ),
-                          width: 14,
                         ),
                       ],
                     ),
                   )
                 ],
               ),
-              SizedBox(height: 8),
+              const SizedBox(height: 8),
               CommonOutlinedButtonWithIcon(
                 text: AppString.Continue_with_Google,
                 iconPath: 'images/google_icon.png',
                 onButtonClick: () {},
               ),
-              SizedBox(height: 44),
-              Align(
+              const SizedBox(height: 44),
+              const Align(
                   alignment: Alignment.center,
                   child: Text(
                     AppString.Dont_have_an_Account,
@@ -315,14 +316,14 @@ class _EmailTabState extends State<EmailTab> {
                         fontSize: 12,
                         fontWeight: FontWeight.w500),
                   )),
-              SizedBox(height: 2),
+              const SizedBox(height: 2),
               Align(
                   alignment: Alignment.center,
                   child: InkWell(
                     onTap: () {
                       Navigator.pushNamed(context, '/Registration');
                     },
-                    child: Text(
+                    child: const Text(
                       AppString.Create_an_Account,
                       style: TextStyle(
                         color: AppColor.color_3F9ACC,
@@ -332,7 +333,7 @@ class _EmailTabState extends State<EmailTab> {
                       ),
                     ),
                   )),
-              SizedBox(height: 49),
+              const SizedBox(height: 49),
             ],
           ),
         ),

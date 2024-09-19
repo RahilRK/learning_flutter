@@ -32,7 +32,7 @@ class _VerificationState extends State<Verification> {
     mRegistrationRequest = widget.registrationRequest;
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) =>
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
             content: Text(
                 "We have sent an verification code on your mobile number"))));
   }
@@ -40,7 +40,7 @@ class _VerificationState extends State<Verification> {
   void save() {
     if (_onEditing) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Please enter OTP')),
+        const SnackBar(content: Text('Please enter OTP')),
       );
     } else {
       getRegistration();
@@ -53,7 +53,7 @@ class _VerificationState extends State<Verification> {
       builder: (context) {
         dialogContext = context;
         return Dialog(
-          surfaceTintColor: Color(0x00ffffff),
+          surfaceTintColor: const Color(0x00ffffff),
           backgroundColor: Colors.transparent,
           insetPadding: EdgeInsets.zero,
           child: Container(
@@ -87,18 +87,18 @@ class _VerificationState extends State<Verification> {
           children: [
             Text(
               "${AppString.Sent_an_Verification_Code_to}${mRegistrationRequest.mobile}",
-              style: TextStyle(
+              style: const TextStyle(
                   fontSize: 16,
                   color: AppColor.black,
                   fontWeight: FontWeight.normal),
               textAlign: TextAlign.center,
             ),
-            SizedBox(height: 27),
+            const SizedBox(height: 27),
             Align(
               alignment: Alignment.center,
               child: VerificationCode(
                 textStyle:
-                    TextStyle(fontSize: 16, color: AppColor.color_B6B7B7),
+                    const TextStyle(fontSize: 16, color: AppColor.color_B6B7B7),
                 keyboardType: TextInputType.number,
                 underlineColor: AppColor.color_3F9ACC,
                 length: 6,
@@ -118,7 +118,7 @@ class _VerificationState extends State<Verification> {
                 },
               ),
             ),
-            SizedBox(height: 32),
+            const SizedBox(height: 32),
             CommonElevatedButton(
               text: AppString.Verify,
               foregroundColor: AppColor.white,
@@ -127,14 +127,14 @@ class _VerificationState extends State<Verification> {
                 save();
               },
             ),
-            SizedBox(height: 32),
+            const SizedBox(height: 32),
             Align(
                 alignment: Alignment.center,
                 child: InkWell(
                   onTap: () {
                     getVerification(mRegistrationRequest);
                   },
-                  child: Text(
+                  child: const Text(
                     AppString.ResendVerificationCode,
                     style: TextStyle(
                       color: AppColor.color_3F9ACC,
@@ -197,7 +197,7 @@ class _VerificationState extends State<Verification> {
       if (success) {
         var otp = data.otp;
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
+          const SnackBar(
               content: Text(
                   'We have sent an verification code on your mobile number')),
         );

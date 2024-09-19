@@ -385,7 +385,8 @@ class ProductList {
       // List<dynamic>? labelCollection,
       String? templateBaseurl, 
       bool? isOfferApplicable, 
-      num? shippingType, 
+      String? offerLabel,
+      num? shippingType,
       String? shippingTypeImg, 
       dynamic configurableData, 
       String? typeId, 
@@ -414,6 +415,7 @@ class ProductList {
     // _labelCollection = labelCollection;
     _templateBaseurl = templateBaseurl;
     _isOfferApplicable = isOfferApplicable;
+    _offerLabel = offerLabel;
     _shippingType = shippingType;
     _shippingTypeImg = shippingTypeImg;
     _configurableData = configurableData;
@@ -451,6 +453,7 @@ class ProductList {
     }*/
     _templateBaseurl = json['template_baseurl'];
     _isOfferApplicable = json['isOfferApplicable'];
+    _offerLabel = json['offerlabel'];
     _shippingType = json['shipping_type'];
     _shippingTypeImg = json['shipping_type_img'];
     _configurableData = json['configurableData'];
@@ -481,6 +484,7 @@ class ProductList {
   // List<dynamic>? _labelCollection;
   String? _templateBaseurl;
   bool? _isOfferApplicable;
+  String? _offerLabel;
   num? _shippingType;
   String? _shippingTypeImg;
   dynamic _configurableData;
@@ -510,6 +514,7 @@ class ProductList {
 ProductList copyWith({  List<dynamic>? labelCollection,
   String? templateBaseurl,
   bool? isOfferApplicable,
+  String? offerLabel,
   num? shippingType,
   String? shippingTypeImg,
   dynamic configurableData,
@@ -570,6 +575,7 @@ ProductList copyWith({  List<dynamic>? labelCollection,
   // List<dynamic>? get labelCollection => _labelCollection;
   String? get templateBaseurl => _templateBaseurl;
   bool? get isOfferApplicable => _isOfferApplicable;
+  String? get offerLabel => _offerLabel;
   num? get shippingType => _shippingType;
   String? get shippingTypeImg => _shippingTypeImg;
   dynamic get configurableData => _configurableData;
@@ -604,6 +610,7 @@ ProductList copyWith({  List<dynamic>? labelCollection,
     }*/
     map['template_baseurl'] = _templateBaseurl;
     map['isOfferApplicable'] = _isOfferApplicable;
+    map['offerlabel'] = _offerLabel;
     map['shipping_type'] = _shippingType;
     map['shipping_type_img'] = _shippingTypeImg;
     map['configurableData'] = _configurableData;

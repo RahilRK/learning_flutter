@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:learning_flutter/api/model/postRequest/LoginReq.dart';
@@ -52,7 +51,7 @@ class _PostApiDemoState extends State<PostApiDemo> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Api Demo'),
+        title: const Text('Api Demo'),
       ),
     );
   }

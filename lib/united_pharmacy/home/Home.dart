@@ -1,100 +1,100 @@
 import 'package:flutter/material.dart';
 import 'package:learning_flutter/theme/color.dart';
 import 'package:learning_flutter/theme/string.dart';
-import 'package:learning_flutter/united_pharmacy/dashboard/component/banner_slider.dart';
-import 'package:learning_flutter/united_pharmacy/dashboard/component/best_deals.dart';
-import 'package:learning_flutter/united_pharmacy/dashboard/component/best_selling_products_list.dart';
-import 'package:learning_flutter/united_pharmacy/dashboard/component/discount_banner_slider.dart';
-import 'package:learning_flutter/united_pharmacy/dashboard/component/discount_banner_slider_two.dart';
-import 'package:learning_flutter/united_pharmacy/dashboard/component/discount_free_list.dart';
-import 'package:learning_flutter/united_pharmacy/dashboard/component/discount_list.dart';
-import 'package:learning_flutter/united_pharmacy/dashboard/component/exclusive_offers.dart';
-import 'package:learning_flutter/united_pharmacy/dashboard/component/explore_offers_banner_slider.dart';
-import 'package:learning_flutter/united_pharmacy/dashboard/component/explore_offers_banner_slider_two.dart';
-import 'package:learning_flutter/united_pharmacy/dashboard/component/our_service_list.dart';
-import 'package:learning_flutter/united_pharmacy/dashboard/component/shop_by_brand_list.dart';
+import 'package:learning_flutter/united_pharmacy/home/component/banner_slider.dart';
+import 'package:learning_flutter/united_pharmacy/home/component/best_deals.dart';
+import 'package:learning_flutter/united_pharmacy/home/component/best_selling_products_list.dart';
+import 'package:learning_flutter/united_pharmacy/home/component/discount_banner_slider.dart';
+import 'package:learning_flutter/united_pharmacy/home/component/discount_banner_slider_two.dart';
+import 'package:learning_flutter/united_pharmacy/home/component/discount_free_list.dart';
+import 'package:learning_flutter/united_pharmacy/home/component/discount_list.dart';
+import 'package:learning_flutter/united_pharmacy/home/component/exclusive_offers.dart';
+import 'package:learning_flutter/united_pharmacy/home/component/explore_offers_banner_slider.dart';
+import 'package:learning_flutter/united_pharmacy/home/component/explore_offers_banner_slider_two.dart';
+import 'package:learning_flutter/united_pharmacy/home/component/our_service_list.dart';
+import 'package:learning_flutter/united_pharmacy/home/component/shop_by_brand_list.dart';
 import 'package:text_marquee/text_marquee.dart';
 
 import 'component/category.dart';
 
-class DashboardTab extends StatefulWidget {
-  const DashboardTab({super.key});
+class Home extends StatefulWidget {
+  const Home({super.key});
 
   @override
-  State<DashboardTab> createState() => _DashboardTabState();
+  State<Home> createState() => _HomeState();
 }
 
-class _DashboardTabState extends State<DashboardTab> {
+class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: Padding(
-          padding: const EdgeInsets.only(left: 16.0, top: 8, bottom: 8),
-          child: Image.asset(
-            'images/home_applogo.png',
-            fit: BoxFit.fill,
-          ),
-        ),
-        leadingWidth: 140,
-        backgroundColor: AppColor.white,
-        elevation: 0,
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(
-                left: 16.0, right: 8, top: 16, bottom: 16),
-            child: Row(
-              children: [
-                Image.asset(
-                  'images/translation.png',
-                  fit: BoxFit.fill,
-                  // height: 24,
-                  // width: 24,
-                ),
-                SizedBox(width: 4),
-                Text(
-                  'En',
-                  style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                      color: AppColor.color_3F9ACC),
-                ),
-                SizedBox(width: 4),
-                Padding(
-                  padding: const EdgeInsets.only(top: 8, bottom: 8),
-                  child: Image.asset(
-                    'images/angle_small_down.png',
-                    fit: BoxFit.fill,
-                    // height: 24,
-                    // width: 24,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(
-                left: 16.0, right: 8, top: 16, bottom: 16),
-            child: Image.asset(
-              'images/heart.png',
-              fit: BoxFit.fill,
-              // height: 24,
-              // width: 24,
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(
-              16.0,
-            ),
-            child: Image.asset(
-              'images/cart.png',
-              fit: BoxFit.fill,
-              // height: 24,
-              // width: 24,
-            ),
-          ),
-        ],
-      ),
+      // appBar: AppBar(
+      //   leading: Padding(
+      //     padding: const EdgeInsets.only(left: 16.0, top: 8, bottom: 8),
+      //     child: Image.asset(
+      //       'images/home_applogo.png',
+      //       fit: BoxFit.fill,
+      //     ),
+      //   ),
+      //   leadingWidth: 140,
+      //   backgroundColor: AppColor.white,
+      //   elevation: 0,
+      //   actions: [
+      //     Padding(
+      //       padding: const EdgeInsets.only(
+      //           left: 16.0, right: 8, top: 16, bottom: 16),
+      //       child: Row(
+      //         children: [
+      //           Image.asset(
+      //             'images/translation.png',
+      //             fit: BoxFit.fill,
+      //             // height: 24,
+      //             // width: 24,
+      //           ),
+      //           const SizedBox(width: 4),
+      //           const Text(
+      //             'En',
+      //             style: TextStyle(
+      //                 fontSize: 16,
+      //                 fontWeight: FontWeight.bold,
+      //                 color: AppColor.color_3F9ACC),
+      //           ),
+      //           const SizedBox(width: 4),
+      //           Padding(
+      //             padding: const EdgeInsets.only(top: 8, bottom: 8),
+      //             child: Image.asset(
+      //               'images/angle_small_down.png',
+      //               fit: BoxFit.fill,
+      //               // height: 24,
+      //               // width: 24,
+      //             ),
+      //           ),
+      //         ],
+      //       ),
+      //     ),
+      //     Padding(
+      //       padding: const EdgeInsets.only(
+      //           left: 16.0, right: 8, top: 16, bottom: 16),
+      //       child: Image.asset(
+      //         'images/heart.png',
+      //         fit: BoxFit.fill,
+      //         // height: 24,
+      //         // width: 24,
+      //       ),
+      //     ),
+      //     Padding(
+      //       padding: const EdgeInsets.all(
+      //         16.0,
+      //       ),
+      //       child: Image.asset(
+      //         'images/cart.png',
+      //         fit: BoxFit.fill,
+      //         // height: 24,
+      //         // width: 24,
+      //       ),
+      //     ),
+      //   ],
+      // ),
       body: ListView(
         children: [
           // SearchView
@@ -103,16 +103,16 @@ class _DashboardTabState extends State<DashboardTab> {
             child: TextField(
               onChanged: (value) {},
               decoration: InputDecoration(
-                contentPadding: EdgeInsets.fromLTRB(16, 16, 16, 16),
+                contentPadding: const EdgeInsets.fromLTRB(16, 16, 16, 16),
                 border: OutlineInputBorder(
                   borderSide: BorderSide.none,
                   borderRadius: BorderRadius.circular(32),
                 ),
-                enabledBorder: OutlineInputBorder(
+                enabledBorder: const OutlineInputBorder(
                     borderSide: BorderSide(color: Colors.transparent)),
-                focusedBorder: OutlineInputBorder(
+                focusedBorder: const OutlineInputBorder(
                     borderSide: BorderSide(color: Colors.transparent)),
-                labelStyle: TextStyle(
+                labelStyle: const TextStyle(
                     // color: AppColor.color_B6B7B7,
                     fontSize: 16,
                     fontWeight: FontWeight.w500),
@@ -133,7 +133,7 @@ class _DashboardTabState extends State<DashboardTab> {
               ),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 6,
           ),
           Container(
@@ -152,10 +152,10 @@ class _DashboardTabState extends State<DashboardTab> {
                         height: 24,
                         width: 16,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 10,
                       ),
-                      Column(
+                      const Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
@@ -174,7 +174,7 @@ class _DashboardTabState extends State<DashboardTab> {
                       ),
                     ],
                   )),
-                  Text(
+                  const Text(
                     AppString.Change,
                     style: TextStyle(
                         fontSize: 13,
@@ -186,7 +186,7 @@ class _DashboardTabState extends State<DashboardTab> {
               ),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 6,
           ),
           Padding(
@@ -196,26 +196,26 @@ class _DashboardTabState extends State<DashboardTab> {
                 color: AppColor.color_F22C55,
                 borderRadius: BorderRadius.circular(4),
               ),
-              child: Padding(
+              child: const Padding(
                 padding:
-                    const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                    EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                 child: TextMarquee(
                   AppString.Dont_miss,
                   style: TextStyle(
                       fontSize: 12,
-                      fontWeight: FontWeight.w500,
+                      fontWeight: FontWeight.normal,
                       color: AppColor.white),
                   rtl: false,
-                  delay: Duration(seconds: 1),
+                  delay: Duration(seconds: 2),
                 ),
               ),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 12,
           ),
-          Padding(
-            padding: const EdgeInsets.only(left: 16, right: 16),
+          const Padding(
+            padding: EdgeInsets.only(left: 16, right: 16),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -237,13 +237,13 @@ class _DashboardTabState extends State<DashboardTab> {
               ],
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 8,
           ),
 
           // CategoryList
-          CategoryList(),
-          SizedBox(
+          const CategoryList(),
+          const SizedBox(
             height: 0,
           ),
 
@@ -251,31 +251,31 @@ class _DashboardTabState extends State<DashboardTab> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Container(
-                child: BannerSlider()),
+                child: const BannerSlider()),
           ),
-          SizedBox(
+          const SizedBox(
             height: 16,
           ),
 
           // DiscountList
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16),
             child: DiscountList(),
           ),
-          SizedBox(
+          const SizedBox(
             height: 16,
           ),
 
           // DiscountBannerSlider
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16),
             child: DiscountBannerSlider(),
           ),
-          SizedBox(
+          const SizedBox(
             height: 16,
           ),
-          Padding(
-            padding: const EdgeInsets.only(left: 16, right: 16),
+          const Padding(
+            padding: EdgeInsets.only(left: 16, right: 16),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -289,41 +289,67 @@ class _DashboardTabState extends State<DashboardTab> {
               ],
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 8,
           ),
 
           // OurServiceList
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16),
             child: OurServiceList(),
           ),
-          SizedBox(
+          const SizedBox(
             height: 16,
           ),
 
 
           // BestSellingProductsList
-          /*Padding(
+          const Padding(
+            padding: EdgeInsets.only(left: 16, right: 16),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  AppString.BestsellingProducts,
+                  style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold,
+                      color: AppColor.black),
+                ),
+                Text(
+                  AppString.ViewAll,
+                  style: TextStyle(
+                      fontSize: 13,
+                      fontWeight: FontWeight.w500,
+                      color: AppColor.color_3F9ACC,
+                      decoration: TextDecoration.underline),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(
+            height: 8,
+          ),
+          Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: BestSellingProductsList(),
           ),
           SizedBox(
             height: 16,
-          ),*/
+          ),
 
           // DiscountFreeList
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16),
             child: DiscountFreeList(),
           ),
-          SizedBox(
+          const SizedBox(
             height: 16,
           ),
 
           // ExploreOffersBannerSlider
-          Padding(
-            padding: const EdgeInsets.only(left: 16, right: 16),
+          const Padding(
+            padding: EdgeInsets.only(left: 16, right: 16),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -345,20 +371,20 @@ class _DashboardTabState extends State<DashboardTab> {
               ],
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 8,
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16),
             child: ExploreOffersBannerSlider(),
           ),
-          SizedBox(
+          const SizedBox(
             height: 16,
           ),
 
           // Shop by Brand List
-          Padding(
-            padding: const EdgeInsets.only(left: 16, right: 16),
+          const Padding(
+            padding: EdgeInsets.only(left: 16, right: 16),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -380,20 +406,20 @@ class _DashboardTabState extends State<DashboardTab> {
               ],
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 8,
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16),
             child: ShopByBrandList(),
           ),
 
           // BestDeals
-          SizedBox(
+          const SizedBox(
             height: 16,
           ),
-          Padding(
-            padding: const EdgeInsets.only(left: 16, right: 16),
+          const Padding(
+            padding: EdgeInsets.only(left: 16, right: 16),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -407,29 +433,29 @@ class _DashboardTabState extends State<DashboardTab> {
               ],
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 8,
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16),
             child: BestDeals(),
           ),
 
           // DiscountBannerSliderTwo
-          SizedBox(
+          const SizedBox(
             height: 16,
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16),
             child: DiscountBannerSliderTwo(),
           ),
 
           // Exclusive Offers
-          SizedBox(
+          const SizedBox(
             height: 16,
           ),
-          Padding(
-            padding: const EdgeInsets.only(left: 16, right: 16),
+          const Padding(
+            padding: EdgeInsets.only(left: 16, right: 16),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -443,20 +469,20 @@ class _DashboardTabState extends State<DashboardTab> {
               ],
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 8,
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16),
             child: ExclusiveOffers(),
           ),
 
           // ExploreOffersBannerSliderTwo
-          SizedBox(
+          const SizedBox(
             height: 16,
           ),
-          Padding(
-            padding: const EdgeInsets.only(left: 16, right: 16),
+          const Padding(
+            padding: EdgeInsets.only(left: 16, right: 16),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -478,15 +504,15 @@ class _DashboardTabState extends State<DashboardTab> {
               ],
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 8,
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16),
             child: ExploreOffersBannerSliderTwo(),
           ),
 
-          SizedBox(
+          const SizedBox(
             height: 16,
           ),
         ],

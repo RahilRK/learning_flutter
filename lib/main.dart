@@ -1,23 +1,10 @@
-import 'dart:ffi';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:learning_flutter/api/model/getRequest/getReqApiDemo.dart';
-import 'package:learning_flutter/route_generator.dart';
-import 'package:learning_flutter/route_generator_for_bottom_nav.dart';
-import 'package:learning_flutter/route_generator_for_nav_drawer.dart';
-import 'package:learning_flutter/textStyle/appTextStyle.dart';
 import 'package:learning_flutter/theme/color.dart';
 import 'package:learning_flutter/theme/theme.dart';
-import 'package:learning_flutter/united_pharmacy/dashboard/component/banner_slider.dart';
-import 'package:learning_flutter/united_pharmacy/dashboard/component/category.dart';
-import 'package:learning_flutter/united_pharmacy/login/login_tab.dart';
-import 'package:learning_flutter/united_pharmacy/registration/registration.dart';
 import 'package:learning_flutter/united_pharmacy/route_generator_for_united_pharmacy.dart';
-import 'package:learning_flutter/united_pharmacy/splash_screen/SplashScreen.dart';
-
-import 'united_pharmacy/dashboard/component/discount_list.dart';
 
 void main() {
   runApp(const MaterialMyApp());
@@ -70,9 +57,6 @@ class MaterialMyApp extends StatelessWidget {
       // home: SplashScreen(),
       // home: Registration(),
       // home: FirstPage(),
-      // home: CategoryList(),
-      // home: BannerSlider(),
-      // home: DiscountBanner(),
       initialRoute: '/',
 
       /*todo 2nd way to navigate*/
@@ -91,7 +75,7 @@ class CupertinoMyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CupertinoApp(
+    return const CupertinoApp(
       theme: CupertinoThemeData(brightness: Brightness.light),
       home: CupertinoDemoApp(),
       // home: CupertinoTabScaffoldEg(),
@@ -114,7 +98,7 @@ class _DarkModeMyAppState extends State<DarkModeMyApp> {
     return MaterialApp(
       theme: lightTheme,
       darkTheme: darkTheme,
-      home: DarkModeScreen(),
+      home: const DarkModeScreen(),
     );
   }
 }
@@ -130,7 +114,7 @@ class _DarkModeScreenState extends State<DarkModeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Dark Mode Screen'), elevation: 16,),
+      appBar: AppBar(title: const Text('Dark Mode Screen'), elevation: 16,),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -140,7 +124,7 @@ class _DarkModeScreenState extends State<DarkModeScreen> {
               padding: const EdgeInsets.all(8.0),
               child: ElevatedButton(
                 onPressed: () {},
-                child: Text('Login'),
+                child: const Text('Login'),
               ),
             ),
             // child: Text("Text Button"))
@@ -358,27 +342,27 @@ class _DemoScreenState extends State<DemoScreen> {
           Flexible(
             flex: 2,
             child: Container(
-              child: Text("First"),
               color: Colors.blue,
-              padding: EdgeInsets.all(30),
+              padding: const EdgeInsets.all(30),
               alignment: Alignment.center,
+              child: const Text("First"),
             ),
           ),
           Flexible(
               flex: 4,
               child: Container(
-                child: Text("Second"),
                 color: Colors.green,
-                padding: EdgeInsets.all(30),
+                padding: const EdgeInsets.all(30),
                 alignment: Alignment.center,
+                child: const Text("Second"),
               )),
           Flexible(
               flex: 6,
               child: Container(
-                child: Text("Third"),
                 color: Colors.orange,
-                padding: EdgeInsets.all(30),
+                padding: const EdgeInsets.all(30),
                 alignment: Alignment.center,
+                child: const Text("Third"),
               )),
 
           /*todo Container eg*/
@@ -407,14 +391,14 @@ class _DemoScreenState extends State<DemoScreen> {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: TextButton.icon(
-                icon: Icon(Icons.location_on_outlined),
-                label: Text("Get location"),
+                icon: const Icon(Icons.location_on_outlined),
+                label: const Text("Get location"),
                 style: TextButton.styleFrom(
                     foregroundColor: Colors.black,
                     backgroundColor: Colors.red,
                     elevation: 16,
                     shadowColor: Colors.black,
-                    side: BorderSide(color: Colors.black),
+                    side: const BorderSide(color: Colors.black),
                     shape: BeveledRectangleBorder(
                         borderRadius: BorderRadius.circular(5.0))),
                 onPressed: () {
@@ -428,14 +412,14 @@ class _DemoScreenState extends State<DemoScreen> {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: ElevatedButton.icon(
-                icon: Icon(Icons.location_on_outlined),
-                label: Text("Get location"),
+                icon: const Icon(Icons.location_on_outlined),
+                label: const Text("Get location"),
                 style: ElevatedButton.styleFrom(
                     foregroundColor: Colors.black,
                     backgroundColor: Colors.red,
                     elevation: 16,
                     shadowColor: Colors.black,
-                    side: BorderSide(color: Colors.black),
+                    side: const BorderSide(color: Colors.black),
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8))),
                 onPressed: () {
@@ -448,8 +432,8 @@ class _DemoScreenState extends State<DemoScreen> {
           // child: Text("Text Button"))
 
           /*todo TextField eg*/
-          Padding(
-            padding: const EdgeInsets.all(16.0),
+          const Padding(
+            padding: EdgeInsets.all(16.0),
             child: TextField(
               keyboardType: TextInputType.number,
               maxLines: 1,
@@ -519,18 +503,18 @@ class _DemoScreenState extends State<DemoScreen> {
                 Container(
                   height: 250,
                   width: 250,
-                  child: Text("Third"),
                   color: Colors.orange,
-                  padding: EdgeInsets.all(30),
+                  padding: const EdgeInsets.all(30),
                   alignment: Alignment.center,
+                  child: const Text("Third"),
                 ),
                 Container(
                   height: 200,
                   width: 200,
-                  child: Text("Second"),
                   color: Colors.green,
-                  padding: EdgeInsets.all(30),
+                  padding: const EdgeInsets.all(30),
                   alignment: Alignment.center,
+                  child: const Text("Second"),
                 ),
                 Positioned(
                   top: 0,
@@ -538,10 +522,10 @@ class _DemoScreenState extends State<DemoScreen> {
                   child: Container(
                     height: 150,
                     width: 150,
-                    child: Text("First"),
                     color: Colors.blue,
-                    padding: EdgeInsets.all(30),
+                    padding: const EdgeInsets.all(30),
                     alignment: Alignment.center,
+                    child: const Text("First"),
                   ),
                 ),
               ],
@@ -558,18 +542,18 @@ class _DemoScreenState extends State<DemoScreen> {
                 Container(
                   height: 250,
                   width: 250,
-                  child: Text("Third"),
                   color: Colors.orange,
-                  padding: EdgeInsets.all(30),
+                  padding: const EdgeInsets.all(30),
                   alignment: Alignment.center,
+                  child: const Text("Third"),
                 ),
                 Container(
                   height: 200,
                   width: 200,
-                  child: Text("Second"),
                   color: Colors.green,
-                  padding: EdgeInsets.all(30),
+                  padding: const EdgeInsets.all(30),
                   alignment: Alignment.center,
+                  child: const Text("Second"),
                 ),
                 Positioned(
                   top: 0,
@@ -577,10 +561,10 @@ class _DemoScreenState extends State<DemoScreen> {
                   child: Container(
                     height: 150,
                     width: 150,
-                    child: Text("First"),
                     color: Colors.blue,
-                    padding: EdgeInsets.all(30),
+                    padding: const EdgeInsets.all(30),
                     alignment: Alignment.center,
+                    child: const Text("First"),
                   ),
                 ),
               ],
@@ -613,10 +597,10 @@ class _DemoScreenState extends State<DemoScreen> {
                       _checkedRadioValue = value!;
                     });
                   }),
-              SizedBox(
+              const SizedBox(
                 width: 10,
               ),
-              Text("Red")
+              const Text("Red")
             ],
           ),
           Row(
@@ -629,10 +613,10 @@ class _DemoScreenState extends State<DemoScreen> {
                       _checkedRadioValue = value!;
                     });
                   }),
-              SizedBox(
+              const SizedBox(
                 width: 10,
               ),
-              Text("Blue")
+              const Text("Blue")
             ],
           ),
           Row(
@@ -645,10 +629,10 @@ class _DemoScreenState extends State<DemoScreen> {
                       _checkedRadioValue = value!;
                     });
                   }),
-              SizedBox(
+              const SizedBox(
                 width: 10,
               ),
-              Text("Green")
+              const Text("Green")
             ],
           ),
 
@@ -662,10 +646,10 @@ class _DemoScreenState extends State<DemoScreen> {
                       _checkedBox1Value = value!;
                     });
                   }),
-              SizedBox(
+              const SizedBox(
                 width: 10,
               ),
-              Text("Audi")
+              const Text("Audi")
             ],
           ),
           Row(
@@ -677,10 +661,10 @@ class _DemoScreenState extends State<DemoScreen> {
                       _checkedBox2Value = value!;
                     });
                   }),
-              SizedBox(
+              const SizedBox(
                 width: 10,
               ),
-              Text("Mercedes")
+              const Text("Mercedes")
             ],
           ),
           Row(
@@ -692,21 +676,21 @@ class _DemoScreenState extends State<DemoScreen> {
                       _checkedBox3Value = value!;
                     });
                   }),
-              SizedBox(
+              const SizedBox(
                 width: 10,
               ),
-              Text("BMW")
+              const Text("BMW")
             ],
           ),
 
           /*todo card eg*/
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Container(
+            child: SizedBox(
                 height: 300,
                 width: 300,
                 child: Card(
-                  margin: EdgeInsets.all(8),
+                  margin: const EdgeInsets.all(8),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(16)),
                   color: Colors.red,
@@ -725,20 +709,20 @@ class _DemoScreenState extends State<DemoScreen> {
           ),
 
           /*todo SegmentedButton widget with Single selection eg*/
-          Padding(
+          const Padding(
             padding: EdgeInsets.all(8.0),
             child: SingleChoice(),
           ),
 
           /*todo SegmentedButton widget with Multiple selection eg*/
-          Padding(
+          const Padding(
             padding: EdgeInsets.all(8.0),
             child: MultipleChoice(),
           ),
 
           /*todo Alert dialogue eg*/
-          Padding(
-            padding: const EdgeInsets.all(8.0),
+          const Padding(
+            padding: EdgeInsets.all(8.0),
             child: AlertDialogueEg(),
           ),
 
@@ -747,10 +731,10 @@ class _DemoScreenState extends State<DemoScreen> {
             padding: const EdgeInsets.all(8.0),
             child: Card(
               child: ListTile(
-                leading: Icon(Icons.abc_outlined),
-                title: Text("This is title"),
-                subtitle: Text("This is subtitle"),
-                trailing: Icon(Icons.check),
+                leading: const Icon(Icons.abc_outlined),
+                title: const Text("This is title"),
+                subtitle: const Text("This is subtitle"),
+                trailing: const Icon(Icons.check),
                 onTap: () {
                   print("onTap");
                 },
@@ -759,37 +743,37 @@ class _DemoScreenState extends State<DemoScreen> {
           ),
 
           /*todo BottomSheet eg*/
-          Padding(
-            padding: const EdgeInsets.all(8.0),
+          const Padding(
+            padding: EdgeInsets.all(8.0),
             child: BottomSheetEg(),
           ),
 
           /*todo Date Picker eg*/
-          Padding(
-            padding: const EdgeInsets.all(8.0),
+          const Padding(
+            padding: EdgeInsets.all(8.0),
             child: DatePickerEg(),
           ),
 
           /*todo Time Picker eg*/
-          Padding(
-            padding: const EdgeInsets.all(8.0),
+          const Padding(
+            padding: EdgeInsets.all(8.0),
             child: TimePickerEg(),
           ),
 
           /*todo Chip eg*/
-          Padding(
-            padding: const EdgeInsets.all(8.0),
+          const Padding(
+            padding: EdgeInsets.all(8.0),
             child: ChipEg(),
           ),
 
           /*todo ListView eg*/
-          ListEg(),
+          const ListEg(),
 
           /*todo Horizontal ListView eg*/
-          HorizontalListEg(),
+          const HorizontalListEg(),
 
-          Padding(
-            padding: const EdgeInsets.all(8.0),
+          const Padding(
+            padding: EdgeInsets.all(8.0),
             child: DropdownMenuEg(),
           ),
         ],
@@ -944,28 +928,28 @@ class BottomSheetEg extends StatelessWidget {
               return Wrap(
                 children: [
                   ListTile(
-                    leading: Icon(Icons.abc_outlined),
-                    title: Text("This is title 1"),
-                    subtitle: Text("This is subtitle 1"),
-                    trailing: Icon(Icons.close),
+                    leading: const Icon(Icons.abc_outlined),
+                    title: const Text("This is title 1"),
+                    subtitle: const Text("This is subtitle 1"),
+                    trailing: const Icon(Icons.close),
                     onTap: () {
                       Navigator.pop(context);
                     },
                   ),
                   ListTile(
-                    leading: Icon(Icons.abc_outlined),
-                    title: Text("This is title 2"),
-                    subtitle: Text("This is subtitle 2"),
-                    trailing: Icon(Icons.close),
+                    leading: const Icon(Icons.abc_outlined),
+                    title: const Text("This is title 2"),
+                    subtitle: const Text("This is subtitle 2"),
+                    trailing: const Icon(Icons.close),
                     onTap: () {
                       Navigator.pop(context);
                     },
                   ),
                   ListTile(
-                    leading: Icon(Icons.abc_outlined),
-                    title: Text("This is title 3"),
-                    subtitle: Text("This is subtitle 3"),
-                    trailing: Icon(Icons.close),
+                    leading: const Icon(Icons.abc_outlined),
+                    title: const Text("This is title 3"),
+                    subtitle: const Text("This is subtitle 3"),
+                    trailing: const Icon(Icons.close),
                     onTap: () {
                       Navigator.pop(context);
                     },
@@ -1029,17 +1013,17 @@ class _DashboardState extends State<Dashboard> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Dashboard'),
+        title: const Text('Dashboard'),
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
+            const Text(
               'Dashboard',
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
             ),
-            Divider(
+            const Divider(
               height: 16,
               color: Colors.transparent,
             ),
@@ -1072,11 +1056,11 @@ class _SettingsState extends State<Settings> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
+            const Text(
               'Settings',
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
             ),
-            Divider(
+            const Divider(
               height: 16,
               color: Colors.transparent,
             ),
@@ -1111,11 +1095,11 @@ class _MessageState extends State<Message> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
+            const Text(
               'Message',
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
             ),
-            Divider(
+            const Divider(
               height: 16,
               color: Colors.transparent,
             ),
@@ -1148,11 +1132,11 @@ class _ProfileState extends State<Profile> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
+            const Text(
               'Profile',
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
             ),
-            Divider(
+            const Divider(
               height: 16,
               color: Colors.transparent,
             ),
@@ -1181,7 +1165,7 @@ class Favourite extends StatefulWidget {
 class _FavouriteState extends State<Favourite> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -1204,9 +1188,9 @@ class NormalScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('NormalScreen'),
+        title: const Text('NormalScreen'),
       ),
-      body: Center(
+      body: const Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -1230,7 +1214,7 @@ class DetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('DetailScreen'),
+        title: const Text('DetailScreen'),
       ),
       body: Center(
         child: Column(
@@ -1238,7 +1222,7 @@ class DetailScreen extends StatelessWidget {
           children: [
             Text(
               'Data: $data',
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
+              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
             ),
           ],
         ),
@@ -1359,13 +1343,13 @@ class _ChipEgState extends State<ChipEg> {
       children: [
         Wrap(runSpacing: 8, spacing: 8, children: [
           InputChip(
-            label: Text("filter label"),
+            label: const Text("filter label"),
             labelStyle:
-                TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
+                const TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
             backgroundColor: Colors.blue,
             avatar: CircleAvatar(
-              child: Text('AZ'),
               backgroundColor: Colors.white.withOpacity(0.8),
+              child: const Text('AZ'),
             ),
             onPressed: () => print("input chip pressed"),
             onDeleted: () => print("input chip deleted"),
@@ -1410,36 +1394,36 @@ class _ListEgState extends State<ListEg> {
           shrinkWrap: true,
           children: [
             ListTile(
-              leading: Icon(Icons.label),
-              title: Text(
+              leading: const Icon(Icons.label),
+              title: const Text(
                 "Title 1",
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
-              subtitle: Text("Subtitle 1"),
-              trailing: Text("Trailing"),
+              subtitle: const Text("Subtitle 1"),
+              trailing: const Text("Trailing"),
               onTap: () {
                 print("onTap");
               },
             ),
             ListTile(
-              leading: Icon(Icons.label),
-              title: Text(
+              leading: const Icon(Icons.label),
+              title: const Text(
                 "Title 2",
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
-              subtitle: Text("Subtitle 2"),
-              trailing: Icon(Icons.remove_circle),
+              subtitle: const Text("Subtitle 2"),
+              trailing: const Icon(Icons.remove_circle),
               onTap: () {
                 print("onTap");
               },
             ),
             ListTile(
-              leading: Icon(Icons.label),
-              title: Text(
+              leading: const Icon(Icons.label),
+              title: const Text(
                 "Title 3",
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
-              subtitle: Text("Subtitle 3"),
+              subtitle: const Text("Subtitle 3"),
               onTap: () {
                 print("onTap");
               },
@@ -1461,7 +1445,7 @@ class HorizontalListEg extends StatefulWidget {
 class _HorizontalListEgState extends State<HorizontalListEg> {
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 154,
       child: ListView(
         scrollDirection: Axis.horizontal,
@@ -1500,10 +1484,10 @@ class _PopupOptionMenuEgState extends State<PopupOptionMenuEg> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Title"),
+        title: const Text("Title"),
         actions: [
           PopupMenuButton(
-            icon: Icon(Icons.more_vert),
+            icon: const Icon(Icons.more_vert),
             itemBuilder: (BuildContext context) => <PopupMenuEntry>[
               const PopupMenuItem(
                 child: ListTile(
@@ -1547,12 +1531,12 @@ class _DropdownMenuEgState extends State<DropdownMenuEg> {
     String dropdownValue = "Menu B";
     return Row(
       children: [
-        Text("Select menu:"),
+        const Text("Select menu:"),
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: DropdownButton(
               value: dropdownValue,
-              items: <DropdownMenuItem>[
+              items: const <DropdownMenuItem>[
                 DropdownMenuItem(value: "Menu A", child: Text("Menu A")),
                 DropdownMenuItem(value: "Menu B", child: Text("Menu B")),
                 DropdownMenuItem(value: "Menu C", child: Text("Menu C")),
@@ -1691,7 +1675,7 @@ class CupertinoDemoApp extends StatefulWidget {
 class _CupertinoDemoAppState extends State<CupertinoDemoApp> {
   bool checkBoxValue = false;
   double dragValue = 0.0;
-  ChooseGender? _character = ChooseGender.Male;
+  final ChooseGender _character = ChooseGender.Male;
   String text = '';
   Sky _selectedSegment = Sky.Midnight;
   late TextEditingController controller;
@@ -1716,7 +1700,7 @@ class _CupertinoDemoAppState extends State<CupertinoDemoApp> {
       child: CupertinoPageScaffold(
           navigationBar: CupertinoNavigationBar(
             leading: CupertinoButton(
-              child: Text(
+              child: const Text(
                 'Back',
                 style: TextStyle(fontSize: 13),
               ),
@@ -1725,9 +1709,9 @@ class _CupertinoDemoAppState extends State<CupertinoDemoApp> {
                 Navigator.of(context).pop();
               },
             ),
-            middle: Text("CupertinoDemoApp"),
+            middle: const Text("CupertinoDemoApp"),
             trailing: CupertinoButton(
-              child: Text(
+              child: const Text(
                 'Save',
                 style: TextStyle(fontSize: 13),
               ),
@@ -1875,15 +1859,15 @@ class _CupertinoDemoAppState extends State<CupertinoDemoApp> {
                   },
                   children: {
                     Sky.Midnight: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 20),
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
                       child: Text(Sky.Midnight.name),
                     ),
                     Sky.Viridian: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 20),
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
                       child: Text(Sky.Viridian.name),
                     ),
                     Sky.Cerulean: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 20),
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
                       child: Text(Sky.Cerulean.name),
                     ),
                   },
@@ -1933,7 +1917,7 @@ class _CupertinoDemoAppState extends State<CupertinoDemoApp> {
               Form(
                 autovalidateMode: AutovalidateMode.always,
                 child: CupertinoTextFormFieldRow(
-                  prefix: Text("Enter name"),
+                  prefix: const Text("Enter name"),
                   placeholder: "Name",
                   validator: (text) {
                     print("text: $text");
@@ -1968,7 +1952,7 @@ class CupertinoActionSheetEg extends StatefulWidget {
 }
 
 class _CupertinoActionSheetEgState extends State<CupertinoActionSheetEg> {
-  int _selectedFruit = 0;
+  final int _selectedFruit = 0;
   Duration duration = const Duration(hours: 04, minutes: 30);
   DateTime date = DateTime(2016, 10, 26);
 
@@ -1977,7 +1961,7 @@ class _CupertinoActionSheetEgState extends State<CupertinoActionSheetEg> {
         context: context,
         builder: (context) => Container(
               height: 254,
-              padding: EdgeInsets.only(top: 6),
+              padding: const EdgeInsets.only(top: 6),
               color: CupertinoColors.systemBackground.resolveFrom(context),
               child: SafeArea(
                 top: false,
@@ -1990,27 +1974,27 @@ class _CupertinoActionSheetEgState extends State<CupertinoActionSheetEg> {
     showCupertinoModalPopup(
         context: context,
         builder: (context) => CupertinoActionSheet(
-              title: Text("Title"),
-              message: Text("Message"),
+              title: const Text("Title"),
+              message: const Text("Message"),
               actions: [
                 CupertinoActionSheetAction(
                     isDefaultAction: true,
                     onPressed: () {
                       Navigator.pop(context);
                     },
-                    child: Text("Please wait")),
+                    child: const Text("Please wait")),
                 CupertinoActionSheetAction(
                     isDefaultAction: false,
                     onPressed: () {
                       Navigator.pop(context);
                     },
-                    child: Text("Cancel")),
+                    child: const Text("Cancel")),
                 CupertinoActionSheetAction(
                     isDestructiveAction: true,
                     onPressed: () {
                       Navigator.pop(context);
                     },
-                    child: Text("Delete")),
+                    child: const Text("Delete")),
               ],
             ));
   }
@@ -2019,22 +2003,22 @@ class _CupertinoActionSheetEgState extends State<CupertinoActionSheetEg> {
     showCupertinoDialog(
         context: context,
         builder: (context) => CupertinoAlertDialog(
-              title: Text("Title"),
-              content: Text("Content"),
+              title: const Text("Title"),
+              content: const Text("Content"),
               actions: [
                 CupertinoDialogAction(
                   isDefaultAction: true,
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  child: Text("No"),
+                  child: const Text("No"),
                 ),
                 CupertinoDialogAction(
                   isDestructiveAction: true,
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  child: Text("Yes"),
+                  child: const Text("Yes"),
                 ),
               ],
             ));
@@ -2138,7 +2122,7 @@ class CupertinoListTileEg extends StatelessWidget {
             additionalInfo: const Text('Not available'),
           ),
           CupertinoListTile(
-            title: Text("Title"),
+            title: const Text("Title"),
             leading: Container(
               height: double.infinity,
               width: double.infinity,
@@ -2164,10 +2148,10 @@ class _CupertinoFormSectionEgState extends State<CupertinoFormSectionEg> {
   @override
   Widget build(BuildContext context) {
     return CupertinoFormSection(
-      header: Text('Connectivity'),
+      header: const Text('Connectivity'),
       children: [
         CupertinoFormRow(
-          prefix: Text("Select"),
+          prefix: const Text("Select"),
           child: CupertinoSwitch(
             value: airplaneMode,
             onChanged: (bool value) {
@@ -2230,19 +2214,19 @@ class CupertinoTabScaffoldEg extends StatelessWidget {
           if (index == 0) {
             return CupertinoTabView(
               builder: (context) {
-                return HomeTab();
+                return const HomeTab();
               },
             );
           } else if (index == 1) {
             return CupertinoTabView(
               builder: (context) {
-                return SearchTab();
+                return const SearchTab();
               },
             );
           } else if (index == 2) {
             return CupertinoTabView(
               builder: (context) {
-                return ProfileTab();
+                return const ProfileTab();
               },
             );
           }
@@ -2268,7 +2252,7 @@ class HomeTab extends StatefulWidget {
 class _HomeTabState extends State<HomeTab> {
   @override
   Widget build(BuildContext context) {
-    return CupertinoPageScaffold(
+    return const CupertinoPageScaffold(
       navigationBar: CupertinoNavigationBar(
         middle: Text("Home"),
       ),
@@ -2287,7 +2271,7 @@ class SearchTab extends StatefulWidget {
 class _SearchTabState extends State<SearchTab> {
   @override
   Widget build(BuildContext context) {
-    return CupertinoPageScaffold(
+    return const CupertinoPageScaffold(
       navigationBar: CupertinoNavigationBar(
         middle: Text("Search"),
       ),
@@ -2306,7 +2290,7 @@ class ProfileTab extends StatefulWidget {
 class _ProfileTabState extends State<ProfileTab> {
   @override
   Widget build(BuildContext context) {
-    return CupertinoPageScaffold(
+    return const CupertinoPageScaffold(
       navigationBar: CupertinoNavigationBar(
         middle: Text("Profile"),
       ),
@@ -2351,7 +2335,7 @@ class _MyFormEgState extends State<MyFormEg> {
                   onFieldSubmitted: (value) {
                     FocusScope.of(context).requestFocus(focus);
                   },
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     labelText: "Name",
                     hintText: "Name",
                     // hintStyle: TextStyle(color: Colors.red),
@@ -2359,7 +2343,7 @@ class _MyFormEgState extends State<MyFormEg> {
                     border: OutlineInputBorder(),
                   ),
                 ),
-                Divider(
+                const Divider(
                   height: 16,
                   color: Colors.transparent,
                 ),
@@ -2376,7 +2360,7 @@ class _MyFormEgState extends State<MyFormEg> {
                   keyboardType: TextInputType.number,
                   maxLines: 1,
                   maxLength: 10,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     labelText: "Mobile number",
                     hintText: "Mobile number",
                     // hintStyle: TextStyle(color: Colors.red),
@@ -2409,17 +2393,17 @@ class FirstPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('First page'),
+        title: const Text('First page'),
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
+            const Text(
               'First page',
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
             ),
-            Divider(
+            const Divider(
               height: 16,
               color: Colors.transparent,
             ),
@@ -2454,7 +2438,7 @@ class SecondPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Second page'),
+        title: const Text('Second page'),
       ),
       body: Center(
         child: Column(
@@ -2462,7 +2446,7 @@ class SecondPage extends StatelessWidget {
           children: [
             Text(
               'Data: $data',
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
+              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
             ),
           ],
         ),

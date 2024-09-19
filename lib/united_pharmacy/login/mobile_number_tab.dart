@@ -52,7 +52,9 @@ class _MobileNumberTabState extends State<MobileNumberTab> {
   }
 
   void save() {
-    fieldKeys.forEach((element) => element.currentState!.save());
+    for (var element in fieldKeys) {
+      element.currentState!.save();
+    }
     getEmailLogin();
   }
 
@@ -62,7 +64,7 @@ class _MobileNumberTabState extends State<MobileNumberTab> {
       builder: (context) {
         dialogContext = context;
         return Dialog(
-          surfaceTintColor: Color(0x00ffffff),
+          surfaceTintColor: const Color(0x00ffffff),
           backgroundColor: Colors.transparent,
           insetPadding: EdgeInsets.zero,
           child: Container(
@@ -121,7 +123,7 @@ class _MobileNumberTabState extends State<MobileNumberTab> {
         LengthLimitingTextInputFormatter(9),
       ],
       decoration: InputDecoration(
-        labelStyle: TextStyle(
+        labelStyle: const TextStyle(
             // color: AppColor.color_B6B7B7,
             fontSize: 16,
             fontWeight: FontWeight.w500),
@@ -142,7 +144,7 @@ class _MobileNumberTabState extends State<MobileNumberTab> {
           // borderSide: BorderSide.none,
           borderRadius: BorderRadius.circular(8),
         ),
-        enabledBorder: OutlineInputBorder(
+        enabledBorder: const OutlineInputBorder(
             borderSide: BorderSide(color: AppColor.color_DDDDDD)),
       ),
     );
@@ -183,7 +185,7 @@ class _MobileNumberTabState extends State<MobileNumberTab> {
         LengthLimitingTextInputFormatter(16),
       ],
       decoration: InputDecoration(
-        labelStyle: TextStyle(
+        labelStyle: const TextStyle(
             // color: AppColor.color_B6B7B7,
             fontSize: 16,
             fontWeight: FontWeight.w500),
@@ -211,7 +213,7 @@ class _MobileNumberTabState extends State<MobileNumberTab> {
         border: OutlineInputBorder(
             // borderSide: BorderSide.none,
             borderRadius: BorderRadius.circular(8)),
-        enabledBorder: OutlineInputBorder(
+        enabledBorder: const OutlineInputBorder(
             borderSide: BorderSide(color: AppColor.color_DDDDDD)),
       ),
     );
@@ -227,12 +229,12 @@ class _MobileNumberTabState extends State<MobileNumberTab> {
           // autovalidateMode: focus.hasFocus? AutovalidateMode.always:AutovalidateMode.disabled,
           child: ListView(
             children: [
-              SizedBox(height: 28),
+              const SizedBox(height: 28),
               _buildMobileNumber(),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               _buildPassword(),
-              SizedBox(height: 16),
-              Align(
+              const SizedBox(height: 16),
+              const Align(
                   alignment: Alignment.centerRight,
                   child: Text(
                     AppString.ForgotPassword,
@@ -241,7 +243,7 @@ class _MobileNumberTabState extends State<MobileNumberTab> {
                         fontSize: 14,
                         fontWeight: FontWeight.w500),
                   )),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               CommonElevatedButton(
                 text: AppString.Login,
                 foregroundColor: AppColor.white,
@@ -255,8 +257,8 @@ class _MobileNumberTabState extends State<MobileNumberTab> {
                   save();
                 },
               ),
-              SizedBox(height: 111),
-              Align(
+              const SizedBox(height: 111),
+              const Align(
                   alignment: Alignment.center,
                   child: Text(
                     AppString.Dont_have_an_Account,
@@ -265,14 +267,14 @@ class _MobileNumberTabState extends State<MobileNumberTab> {
                         fontSize: 12,
                         fontWeight: FontWeight.w500),
                   )),
-              SizedBox(height: 2),
+              const SizedBox(height: 2),
               Align(
                   alignment: Alignment.center,
                   child: InkWell(
                     onTap: (){
                       Navigator.pushNamed(context, '/Registration');
                     },
-                    child: Text(
+                    child: const Text(
                       AppString.Create_an_Account,
                       style: TextStyle(
                         color: AppColor.color_3F9ACC,
@@ -282,7 +284,7 @@ class _MobileNumberTabState extends State<MobileNumberTab> {
                       ),
                     ),
                   )),
-              SizedBox(height: 166),
+              const SizedBox(height: 166),
             ],
           ),
         ),

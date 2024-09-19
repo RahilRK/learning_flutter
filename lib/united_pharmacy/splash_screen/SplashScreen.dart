@@ -1,8 +1,5 @@
-import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:learning_flutter/theme/color.dart';
-import 'package:learning_flutter/united_pharmacy/login/login_tab.dart';
 import 'package:lottie/lottie.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -22,7 +19,7 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
     // TODO: implement initState
     super.initState();
     _controller = AnimationController(
-      duration: Duration(seconds: (0)),
+      duration: const Duration(seconds: (0)),
       vsync: this,
     );
   }

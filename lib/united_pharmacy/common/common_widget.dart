@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:learning_flutter/theme/color.dart';
 
-import '../../theme/string.dart';
 
 class CommonElevatedButton extends StatelessWidget {
   const CommonElevatedButton({
@@ -25,7 +24,7 @@ class CommonElevatedButton extends StatelessWidget {
       child: ElevatedButton(
           onPressed: onButtonClick,
           style: ElevatedButton.styleFrom(
-            textStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             foregroundColor: foregroundColor,
             backgroundColor: backgroundColor,
             shape: RoundedRectangleBorder(
@@ -54,6 +53,7 @@ class CommonOutlinedButtonWithIcon extends StatelessWidget {
     return Wrap(
       children: [
         InkWell(
+          onTap: onButtonClick,
           child: Container(
             width: double.infinity,
             height: 44,
@@ -79,7 +79,7 @@ class CommonOutlinedButtonWithIcon extends StatelessWidget {
                     alignment: Alignment.center,
                     child: Text(
                       text,
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: AppColor.black,
                         fontSize: 16,
                         fontWeight: FontWeight.w500,
@@ -91,7 +91,6 @@ class CommonOutlinedButtonWithIcon extends StatelessWidget {
               ),
             ),
           ),
-          onTap: onButtonClick,
         )
       ],
     );
@@ -105,7 +104,7 @@ class CommonToolbar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AppBar(leading: Icon(Icons.arrow_back_ios), title: Text(toolbarText),);
+    return AppBar(leading: const Icon(Icons.arrow_back_ios), title: Text(toolbarText),);
   }
 }
 
@@ -115,13 +114,13 @@ AppBar commonAppBar(BuildContext context, String title) {
         onTap: () {
           Navigator.pop(context);
         },
-        child: Icon(
+        child: const Icon(
           Icons.arrow_back_ios,
           color: AppColor.black,
         )),
     title: Text(
       title,
-      style: TextStyle(
+      style: const TextStyle(
           color: AppColor.black, fontSize: 16, fontWeight: FontWeight.bold),
     ),
     backgroundColor: AppColor.white,

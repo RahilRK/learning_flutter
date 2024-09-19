@@ -8,9 +8,9 @@ class RouteGeneratorForNavDrawer {
 
     switch (settings.name) {
       case '/':
-        return MaterialPageRoute(builder: (_) => NavDrawer());
+        return MaterialPageRoute(builder: (_) => const NavDrawer());
       case '/NormalScreen':
-        return MaterialPageRoute(builder: (_) => NormalScreen());
+        return MaterialPageRoute(builder: (_) => const NormalScreen());
       case '/DetailScreen':
         // Validation of correct data type
         if (args is String) {
@@ -33,9 +33,9 @@ class RouteGeneratorForNavDrawer {
     return MaterialPageRoute(builder: (_) {
       return Scaffold(
         appBar: AppBar(
-          title: Text('Error'),
+          title: const Text('Error'),
         ),
-        body: Center(
+        body: const Center(
           child: Text('ERROR'),
         ),
       );

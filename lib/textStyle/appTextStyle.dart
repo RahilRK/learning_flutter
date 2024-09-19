@@ -1,8 +1,7 @@
-import 'dart:ui';
 import 'package:flutter/material.dart';
 
 TextStyle boldItalicStyle() {
-  return TextStyle(
+  return const TextStyle(
       fontSize: 30,
       color: Colors.black,
       fontWeight: FontWeight.bold,
@@ -11,7 +10,7 @@ TextStyle boldItalicStyle() {
 }
 
 TextStyle customFontStyle() {
-  return TextStyle(
+  return const TextStyle(
       fontSize: 24,
       color: Colors.black,
       fontWeight: FontWeight.bold,

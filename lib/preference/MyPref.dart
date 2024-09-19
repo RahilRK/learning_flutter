@@ -20,7 +20,7 @@ abstract class MyPref {
   static getStringValuesSF(String key) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     //Return String
-    String stringValue = await prefs.getString(key)??"";
+    String stringValue = prefs.getString(key)??"";
     return stringValue;
   }
 

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class ProductCard extends StatelessWidget {
+  const ProductCard({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -13,7 +15,7 @@ class ProductCard extends StatelessWidget {
             ),
             child: Container(
               width: 180,
-              padding: EdgeInsets.all(10),
+              padding: const EdgeInsets.all(10),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -22,13 +24,13 @@ class ProductCard extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Container(
-                        padding: EdgeInsets.symmetric(
+                        padding: const EdgeInsets.symmetric(
                             horizontal: 5, vertical: 2),
                         decoration: BoxDecoration(
                           color: Colors.amber,
                           borderRadius: BorderRadius.circular(5),
                         ),
-                        child: Text(
+                        child: const Text(
                           'FREE SHIPPING',
                           style: TextStyle(
                               color: Colors.blue,
@@ -36,28 +38,28 @@ class ProductCard extends StatelessWidget {
                               fontSize: 10),
                         ),
                       ),
-                      Icon(
+                      const Icon(
                         Icons.favorite_border,
                         color: Colors.grey,
                       )
                     ],
                   ),
-                  SizedBox(height: 5),
+                  const SizedBox(height: 5),
                   // Product Image
                   Image.network(
                     'https://via.placeholder.com/100', // Replace with the product image URL
                     height: 100,
                     fit: BoxFit.cover,
                   ),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   // Online Exclusive Tag
                   Container(
-                    padding: EdgeInsets.symmetric(horizontal: 5, vertical: 2),
+                    padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 2),
                     decoration: BoxDecoration(
                       color: Colors.pink,
                       borderRadius: BorderRadius.circular(5),
                     ),
-                    child: Text(
+                    child: const Text(
                       'ONLINE EXCLUSIVE 20% OFF',
                       style: TextStyle(
                           color: Colors.white,
@@ -65,9 +67,9 @@ class ProductCard extends StatelessWidget {
                           fontSize: 10),
                     ),
                   ),
-                  SizedBox(height: 5),
+                  const SizedBox(height: 5),
                   // Rating
-                  Row(
+                  const Row(
                     children: [
                       Icon(
                         Icons.star,
@@ -82,10 +84,10 @@ class ProductCard extends StatelessWidget {
                       ),
                     ],
                   ),
-                  SizedBox(height: 5),
+                  const SizedBox(height: 5),
                   // Pricing
                   RichText(
-                    text: TextSpan(
+                    text: const TextSpan(
                       children: [
                         TextSpan(
                           text: '999.99 SAR  ',
@@ -106,20 +108,20 @@ class ProductCard extends StatelessWidget {
                       ],
                     ),
                   ),
-                  SizedBox(height: 5),
+                  const SizedBox(height: 5),
                   // Product Description
-                  Text(
+                  const Text(
                     'Aloedent Toothpaste Sensitive Aloevera 50',
                     style: TextStyle(fontSize: 12),
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                   ),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   // Add to Cart Button
                   Align(
                     alignment: Alignment.centerRight,
                     child: IconButton(
-                      icon: Icon(Icons.shopping_cart),
+                      icon: const Icon(Icons.shopping_cart),
                       color: Colors.blue,
                       onPressed: () {},
                     ),

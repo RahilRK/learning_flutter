@@ -93,7 +93,7 @@ class _DiscountBannerSliderState extends State<DiscountBannerSlider> {
 
   final List<Widget> imageSliders = imgList
       .map((item) => ClipRRect(
-          borderRadius: BorderRadius.all(Radius.circular(16.0)),
+          borderRadius: const BorderRadius.all(Radius.circular(16.0)),
           child: Stack(
             children: <Widget>[
               Image.network(item, fit: BoxFit.cover, width: 1000.0),
@@ -133,7 +133,7 @@ class _DiscountBannerSliderState extends State<DiscountBannerSlider> {
             decoration: BoxDecoration(
               color: AppColor.white,
               borderRadius: BorderRadius.circular(20),
-              boxShadow: [
+              boxShadow: const [
                 BoxShadow(
                   offset: Offset(0, 0),
                   blurRadius: 2,
@@ -150,7 +150,7 @@ class _DiscountBannerSliderState extends State<DiscountBannerSlider> {
                   child: Container(
                     width: 4,
                     height: 4,
-                    margin: EdgeInsets.symmetric(vertical: 1, horizontal: 1.0),
+                    margin: const EdgeInsets.symmetric(vertical: 1, horizontal: 1.0),
                     decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         color: _current == entry.key

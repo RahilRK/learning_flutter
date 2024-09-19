@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:learning_flutter/theme/color.dart';
 import 'package:learning_flutter/united_pharmacy/model/response/home/HomePageFirstResponse.dart';
 
 class DiscountFreeList extends StatefulWidget {
@@ -43,10 +42,10 @@ class _DiscountFreeListState extends State<DiscountFreeList> {
   Widget build(BuildContext context) {
     return ListView.separated(
       separatorBuilder: (BuildContext context, int index) {
-        return SizedBox(height: 8);
+        return const SizedBox(height: 8);
       },
       shrinkWrap: true,
-      physics: ClampingScrollPhysics(),
+      physics: const ClampingScrollPhysics(),
       itemCount: mList.length, // Number of items in your list
       itemBuilder: (BuildContext context, int index) {
         var model = mList[index];

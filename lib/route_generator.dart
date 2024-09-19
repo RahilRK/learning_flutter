@@ -8,7 +8,7 @@ class RouteGenerator {
 
     switch (settings.name) {
       case '/':
-        return MaterialPageRoute(builder: (_) => FirstPage());
+        return MaterialPageRoute(builder: (_) => const FirstPage());
       case '/secondPage':
       // Validation of correct data type
         if (args is String) {
@@ -31,9 +31,9 @@ class RouteGenerator {
     return MaterialPageRoute(builder: (_) {
       return Scaffold(
         appBar: AppBar(
-          title: Text('Error'),
+          title: const Text('Error'),
         ),
-        body: Center(
+        body: const Center(
           child: Text('ERROR'),
         ),
       );

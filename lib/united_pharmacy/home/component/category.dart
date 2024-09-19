@@ -100,12 +100,12 @@ class CategoryItem extends StatelessWidget {
             width: 64,
           ),
         ),
-        SizedBox(height: 4,),
+        const SizedBox(height: 4,),
         Text(
           model.categoryName ?? "no name",
           maxLines: 1,
           textAlign: TextAlign.center,
-          style: TextStyle(
+          style: const TextStyle(
               color: AppColor.color_0A195C,
               fontSize: 10,
               fontWeight: FontWeight.bold),

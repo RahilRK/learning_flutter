@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:learning_flutter/theme/color.dart';
 import 'package:learning_flutter/united_pharmacy/model/response/home/HomePageFirstResponse.dart';
 
-class BannerSlider extends StatefulWidget {
-  const BannerSlider({super.key});
+class DiscountBannerSliderTwo extends StatefulWidget {
+  const DiscountBannerSliderTwo({super.key});
 
   @override
-  State<BannerSlider> createState() => _BannerSliderState();
+  State<DiscountBannerSliderTwo> createState() => _DiscountBannerSliderTwoState();
 }
 
 /*final List<String> imgList = [
@@ -20,58 +20,15 @@ class BannerSlider extends StatefulWidget {
 ];*/
 
 final List<String> imgList = [
-  'https://unitedpharmacy.sa/media/mobikul/bannerimages/File-1726062424.jpg',
-  'https://unitedpharmacy.sa/media/mobikul/bannerimages/File-1726062479.jpg',
-  'https://unitedpharmacy.sa/media/mobikul/bannerimages/File-1723542177.jpg',
-  'https://unitedpharmacy.sa/media/mobikul/bannerimages/File-1726058701.jpg',
-  'https://unitedpharmacy.sa/media/mobikul/bannerimages/File-1725888725.jpg',
+  'https://unitedpharmacy.sa/media/mobikul/carouselimages/File-1726561917.jpg',
+  'https://unitedpharmacy.sa/media/mobikul/carouselimages/File-1726562068.jpg',
 ];
 
-class _BannerSliderState extends State<BannerSlider> {
+class _DiscountBannerSliderTwoState extends State<DiscountBannerSliderTwo> {
   List<BannerImages> bannerImages = <BannerImages>[
     BannerImages(
         url:
             "https://unitedpharmacy.sa/media/mobikul/bannerimages/File-1726062424.jpg",
-        mainid: "774",
-        dominantColor: "#48a59d",
-        bannerType: "category",
-        startDate: "2024-09-11 00:00:00",
-        endDate: "2024-09-17 00:00:00",
-        id: "5042",
-        name: "United Offers"),
-    BannerImages(
-        url:
-            "https://unitedpharmacy.sa/media/mobikul/bannerimages/File-1726062479.jpg",
-        mainid: "774",
-        dominantColor: "#48a59d",
-        bannerType: "category",
-        startDate: "2024-09-11 00:00:00",
-        endDate: "2024-09-17 00:00:00",
-        id: "5042",
-        name: "United Offers"),
-    BannerImages(
-        url:
-            "https://unitedpharmacy.sa/media/mobikul/bannerimages/File-1723542177.jpg",
-        mainid: "774",
-        dominantColor: "#48a59d",
-        bannerType: "category",
-        startDate: "2024-09-11 00:00:00",
-        endDate: "2024-09-17 00:00:00",
-        id: "5042",
-        name: "United Offers"),
-    BannerImages(
-        url:
-            "https://unitedpharmacy.sa/media/mobikul/bannerimages/File-1726058701.jpg",
-        mainid: "774",
-        dominantColor: "#48a59d",
-        bannerType: "category",
-        startDate: "2024-09-11 00:00:00",
-        endDate: "2024-09-17 00:00:00",
-        id: "5042",
-        name: "United Offers"),
-    BannerImages(
-        url:
-            "https://unitedpharmacy.sa/media/mobikul/bannerimages/File-1725888725.jpg",
         mainid: "774",
         dominantColor: "#48a59d",
         bannerType: "category",
@@ -91,10 +48,10 @@ class _BannerSliderState extends State<BannerSlider> {
 
   final List<Widget> imageSliders = imgList
       .map((item) => ClipRRect(
-          borderRadius: BorderRadius.all(Radius.circular(16.0)),
+          borderRadius: const BorderRadius.all(Radius.circular(16.0)),
           child: Stack(
             children: <Widget>[
-              Image.network(item, fit: BoxFit.fitHeight, width: 1000.0),
+              Image.network(item, fit: BoxFit.cover, width: 1000.0),
             ],
           )))
       .toList();
@@ -127,11 +84,11 @@ class _BannerSliderState extends State<BannerSlider> {
         Positioned(
           bottom: 0,
           child: Container(
-            width: 40,
+            width: 16,
             decoration: BoxDecoration(
               color: AppColor.white,
               borderRadius: BorderRadius.circular(20),
-              boxShadow: [
+              boxShadow: const [
                 BoxShadow(
                   offset: Offset(0, 0),
                   blurRadius: 2,
@@ -148,7 +105,7 @@ class _BannerSliderState extends State<BannerSlider> {
                   child: Container(
                     width: 4,
                     height: 4,
-                    margin: EdgeInsets.symmetric(vertical: 1, horizontal: 1.0),
+                    margin: const EdgeInsets.symmetric(vertical: 1, horizontal: 1.0),
                     decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         color: _current == entry.key

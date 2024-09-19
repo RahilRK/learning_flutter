@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:learning_flutter/preference/MyPref.dart';
 import 'package:learning_flutter/united_pharmacy/api_helper.dart';
 import 'package:learning_flutter/united_pharmacy/common/common_widget.dart';
-import 'package:learning_flutter/united_pharmacy/model/request/LoginRequest.dart';
 import 'package:learning_flutter/united_pharmacy/model/request/RegistrationRequest.dart';
 import 'package:learning_flutter/united_pharmacy/model/request/VerificationRequest.dart';
 import 'package:lottie/lottie.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../theme/color.dart';
 import '../../theme/string.dart';
@@ -85,7 +82,9 @@ class _RegistrationState extends State<Registration> {
   }
 
   void save() {
-    fieldKeys.forEach((element) => element.currentState!.save());
+    for (var element in fieldKeys) {
+      element.currentState!.save();
+    }
 
     var registrationRequest = RegistrationRequest(
         websiteId: "1",
@@ -111,7 +110,7 @@ class _RegistrationState extends State<Registration> {
       builder: (context) {
         dialogContext = context;
         return Dialog(
-          surfaceTintColor: Color(0x00ffffff),
+          surfaceTintColor: const Color(0x00ffffff),
           backgroundColor: Colors.transparent,
           insetPadding: EdgeInsets.zero,
           child: Container(
@@ -166,7 +165,7 @@ class _RegistrationState extends State<Registration> {
       maxLines: 1,
       maxLengthEnforcement: MaxLengthEnforcement.none,
       decoration: InputDecoration(
-        labelStyle: TextStyle(
+        labelStyle: const TextStyle(
             // color: AppColor.color_B6B7B7,
             fontSize: 16,
             fontWeight: FontWeight.w500),
@@ -177,7 +176,7 @@ class _RegistrationState extends State<Registration> {
         border: OutlineInputBorder(
             // borderSide: BorderSide.none,
             borderRadius: BorderRadius.circular(8)),
-        enabledBorder: OutlineInputBorder(
+        enabledBorder: const OutlineInputBorder(
             borderSide: BorderSide(color: AppColor.color_DDDDDD)),
       ),
     );
@@ -214,7 +213,7 @@ class _RegistrationState extends State<Registration> {
       maxLines: 1,
       maxLengthEnforcement: MaxLengthEnforcement.none,
       decoration: InputDecoration(
-        labelStyle: TextStyle(
+        labelStyle: const TextStyle(
             // color: AppColor.color_B6B7B7,
             fontSize: 16,
             fontWeight: FontWeight.w500),
@@ -225,7 +224,7 @@ class _RegistrationState extends State<Registration> {
         border: OutlineInputBorder(
             // borderSide: BorderSide.none,
             borderRadius: BorderRadius.circular(8)),
-        enabledBorder: OutlineInputBorder(
+        enabledBorder: const OutlineInputBorder(
             borderSide: BorderSide(color: AppColor.color_DDDDDD)),
       ),
     );
@@ -266,7 +265,7 @@ class _RegistrationState extends State<Registration> {
       maxLines: 1,
       maxLengthEnforcement: MaxLengthEnforcement.none,
       decoration: InputDecoration(
-        labelStyle: TextStyle(
+        labelStyle: const TextStyle(
             // color: AppColor.color_B6B7B7,
             fontSize: 16,
             fontWeight: FontWeight.w500),
@@ -277,7 +276,7 @@ class _RegistrationState extends State<Registration> {
         border: OutlineInputBorder(
             // borderSide: BorderSide.none,
             borderRadius: BorderRadius.circular(8)),
-        enabledBorder: OutlineInputBorder(
+        enabledBorder: const OutlineInputBorder(
             borderSide: BorderSide(color: AppColor.color_DDDDDD)),
       ),
     );
@@ -318,7 +317,7 @@ class _RegistrationState extends State<Registration> {
         LengthLimitingTextInputFormatter(16),
       ],
       decoration: InputDecoration(
-        labelStyle: TextStyle(
+        labelStyle: const TextStyle(
             // color: AppColor.color_B6B7B7,
             fontSize: 16,
             fontWeight: FontWeight.w500),
@@ -346,7 +345,7 @@ class _RegistrationState extends State<Registration> {
         border: OutlineInputBorder(
             // borderSide: BorderSide.none,
             borderRadius: BorderRadius.circular(8)),
-        enabledBorder: OutlineInputBorder(
+        enabledBorder: const OutlineInputBorder(
             borderSide: BorderSide(color: AppColor.color_DDDDDD)),
       ),
     );
@@ -389,7 +388,7 @@ class _RegistrationState extends State<Registration> {
         LengthLimitingTextInputFormatter(16),
       ],
       decoration: InputDecoration(
-        labelStyle: TextStyle(
+        labelStyle: const TextStyle(
             // color: AppColor.color_B6B7B7,
             fontSize: 16,
             fontWeight: FontWeight.w500),
@@ -417,7 +416,7 @@ class _RegistrationState extends State<Registration> {
         border: OutlineInputBorder(
             // borderSide: BorderSide.none,
             borderRadius: BorderRadius.circular(8)),
-        enabledBorder: OutlineInputBorder(
+        enabledBorder: const OutlineInputBorder(
             borderSide: BorderSide(color: AppColor.color_DDDDDD)),
       ),
     );
@@ -456,7 +455,7 @@ class _RegistrationState extends State<Registration> {
         LengthLimitingTextInputFormatter(9),
       ],
       decoration: InputDecoration(
-        labelStyle: TextStyle(
+        labelStyle: const TextStyle(
             // color: AppColor.color_B6B7B7,
             fontSize: 16,
             fontWeight: FontWeight.w500),
@@ -477,7 +476,7 @@ class _RegistrationState extends State<Registration> {
           // borderSide: BorderSide.none,
           borderRadius: BorderRadius.circular(8),
         ),
-        enabledBorder: OutlineInputBorder(
+        enabledBorder: const OutlineInputBorder(
             borderSide: BorderSide(color: AppColor.color_DDDDDD)),
       ),
     );
@@ -493,19 +492,19 @@ class _RegistrationState extends State<Registration> {
           key: _formKey,
           child: ListView(
             children: [
-              SizedBox(height: 24),
+              const SizedBox(height: 24),
               _buildFirstName(),
-              SizedBox(height: 24),
+              const SizedBox(height: 24),
               _buildLastName(),
-              SizedBox(height: 24),
+              const SizedBox(height: 24),
               _buildEmail(),
-              SizedBox(height: 24),
+              const SizedBox(height: 24),
               _buildPassword(),
-              SizedBox(height: 24),
+              const SizedBox(height: 24),
               _buildConfirmPassword(),
-              SizedBox(height: 24),
+              const SizedBox(height: 24),
               _buildMobileNumber(),
-              SizedBox(height: 32),
+              const SizedBox(height: 32),
               CommonElevatedButton(
                 text: AppString.SendVerificationCode,
                 foregroundColor: AppColor.white,
@@ -519,7 +518,7 @@ class _RegistrationState extends State<Registration> {
                   save();
                 },
               ),
-              SizedBox(height: 308),
+              const SizedBox(height: 308),
             ],
           ),
         ),

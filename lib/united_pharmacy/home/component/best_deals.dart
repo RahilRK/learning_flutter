@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:learning_flutter/theme/color.dart';
 import 'package:learning_flutter/united_pharmacy/model/response/home/HomePageFirstResponse.dart';
 
 class BestDeals extends StatefulWidget {

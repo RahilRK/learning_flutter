@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 
 abstract class AppString {
 
@@ -38,7 +37,7 @@ abstract class AppString {
   static const Verify = 'Verify';
   static const ResendVerificationCode = 'Resend Verification Code';
 
-  /*todo Dashboard*/
+  /*todo home*/
   static const Search_for_products = 'Search for products';
   static const Deliver_to = 'Deliver to : Jeddah';
   static const Products_availability = 'Products availability and promotions may vary';
@@ -51,4 +50,12 @@ abstract class AppString {
   static const Shop_by_Brand = 'Shop by Brand';
   static const Best_Deals = 'Best Deals';
   static const ExclusiveOffers = 'Exclusive Offers';
+  static const BestsellingProducts = 'Bestselling Products';
+
+  /*todo dashboard tab*/
+  static const Home = 'Home';
+  static const Categories = 'Categories';
+  static const Offers = 'Offers';
+  static const Notifications = 'Notifications';
+  static const Profile = 'Profile';
 }

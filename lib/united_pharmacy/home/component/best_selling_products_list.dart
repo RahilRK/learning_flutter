@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:learning_flutter/theme/color.dart';
 import 'package:learning_flutter/united_pharmacy/model/response/home/HomePageSecondResponse.dart';
 
+import '../../../theme/string.dart';
+
 class BestSellingProductsList extends StatefulWidget {
   const BestSellingProductsList({super.key});
 
@@ -250,22 +252,58 @@ class _BestSellingProductsListState extends State<BestSellingProductsList> {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 280,
-      child: ListView.separated(
-        separatorBuilder: (BuildContext context, int index) {
-          return const SizedBox(width: 8);
-        },
-        itemCount: mList.length, // Number of items in your list
-        scrollDirection: Axis.horizontal,
-        itemBuilder: (BuildContext context, int index) {
-          var model = mList[index];
+    return Column(
+      children: [
+        const Padding(
+          padding: EdgeInsets.only(left: 16, right: 16),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                AppString.BestsellingProducts,
+                style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.bold,
+                    color: AppColor.black),
+              ),
+              Text(
+                AppString.ViewAll,
+                style: TextStyle(
+                    fontSize: 13,
+                    fontWeight: FontWeight.w500,
+                    color: AppColor.color_3F9ACC,
+                    decoration: TextDecoration.underline),
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(
+          height: 8,
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: SizedBox(
+            height: 280,
+            child: ListView.separated(
+              separatorBuilder: (BuildContext context, int index) {
+                return const SizedBox(width: 8);
+              },
+              itemCount: mList.length, // Number of items in your list
+              scrollDirection: Axis.horizontal,
+              itemBuilder: (BuildContext context, int index) {
+                var model = mList[index];
 
-          return DiscountBannerItem(
-            model: model,
-          );
-        },
-      ),
+                return DiscountBannerItem(
+                  model: model,
+                );
+              },
+            ),
+          ),
+        ),
+        SizedBox(
+          height: 16,
+        ),
+      ],
     );
   }
 }

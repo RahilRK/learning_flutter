@@ -5,6 +5,7 @@ import 'package:learning_flutter/united_pharmacy/model/request/VerificationReque
 import 'package:learning_flutter/united_pharmacy/model/response/RegistrationResponse.dart';
 import 'package:learning_flutter/united_pharmacy/model/response/VerificationResponse.dart';
 import 'package:learning_flutter/united_pharmacy/model/response/home/HomePageFirstResponse.dart';
+import 'package:learning_flutter/united_pharmacy/model/response/home/HomePageSecondResponse.dart';
 
 import 'model/request/LoginRequest.dart';
 import 'package:http/http.dart' as http;
@@ -12,7 +13,8 @@ import 'dart:convert' as convert;
 
 import 'model/response/LoginResponse.dart';
 
-var baseUrl = 'https://staging.unitedpharmacy.sa/en';
+// var baseUrl = 'https://staging.unitedpharmacy.sa/en';
+var baseUrl = 'https://unitedpharmacy.sa/en';
 
 Future<LoginResponse> logIn(LoginRequest loginReq) async {
   // This example uses the Google Books API to search for books about http.
@@ -87,9 +89,32 @@ Future<HomePageFirstResponse> homepagedatafirst(HomePageDataFirstRequest request
   // Await the http get response, then decode the json-formatted response.
   var response = await http.get(uri);
   if (response.statusCode == 200) {
-    print('response: ${response.body}');
+    print('homepagedatafirst response: ${response.body}');
     var jsonResponse = convert.jsonDecode(response.body);
     homePageFirstResponse = HomePageFirstResponse.fromJson(jsonResponse);
+    return homePageFirstResponse;
+  } else {
+    print('Request failed with status: ${response.statusCode}.');
+    return homePageFirstResponse;
+  }
+}
+
+Future<HomePageSecondResponse> homepagedatasecond(HomePageDataFirstRequest request) async {
+  // This example uses the Google Books API to search for books about http.
+  // https://developers.google.com/books/docs/overview
+  var createAccount = '$baseUrl/mobile/catalog/homepagedatasecond';
+
+  Map<String, String> queryParams = request.toJson();
+
+  var uri = Uri.parse(createAccount).replace(queryParameters: queryParams);
+  var homePageFirstResponse= HomePageSecondResponse();
+
+  // Await the http get response, then decode the json-formatted response.
+  var response = await http.get(uri);
+  if (response.statusCode == 200) {
+    print('homepagedatasecond response: ${response.body}');
+    var jsonResponse = convert.jsonDecode(response.body);
+    homePageFirstResponse = HomePageSecondResponse.fromJson(jsonResponse);
     return homePageFirstResponse;
   } else {
     print('Request failed with status: ${response.statusCode}.');

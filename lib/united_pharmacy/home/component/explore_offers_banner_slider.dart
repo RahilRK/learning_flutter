@@ -2,6 +2,9 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:learning_flutter/united_pharmacy/model/response/home/HomePageFirstResponse.dart';
 
+import '../../../theme/color.dart';
+import '../../../theme/string.dart';
+
 class ExploreOffersBannerSlider extends StatefulWidget {
   const ExploreOffersBannerSlider({super.key});
 
@@ -84,28 +87,64 @@ class _ExploreOffersBannerSliderState extends State<ExploreOffersBannerSlider> {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      alignment: Alignment.center,
+    return Column(
       children: [
-        Column(
+        const Padding(
+          padding: EdgeInsets.only(left: 16, right: 16),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Align(
-                alignment: Alignment.topCenter,
-                child: CarouselSlider(
-                  items: imageSliders,
-                  carouselController: _controller,
-                  options: CarouselOptions(
-                      aspectRatio: 16/5.5,
-                      enlargeCenterPage: true,
-                      viewportFraction: 1,
-                      onPageChanged: (index, reason) {
-                        setState(() {
-                          _current = index;
-                        });
-                      }),
-                ),
+              Text(
+                AppString.ExploreOffers,
+                style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.bold,
+                    color: AppColor.black),
               ),
-            ]),
+              Text(
+                AppString.ViewAll,
+                style: TextStyle(
+                    fontSize: 13,
+                    fontWeight: FontWeight.w500,
+                    color: AppColor.color_3F9ACC,
+                    decoration: TextDecoration.underline),
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(
+          height: 8,
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: Stack(
+            alignment: Alignment.center,
+            children: [
+              Column(
+                  children: [
+                    Align(
+                      alignment: Alignment.topCenter,
+                      child: CarouselSlider(
+                        items: imageSliders,
+                        carouselController: _controller,
+                        options: CarouselOptions(
+                            aspectRatio: 16/5.5,
+                            enlargeCenterPage: true,
+                            viewportFraction: 1,
+                            onPageChanged: (index, reason) {
+                              setState(() {
+                                _current = index;
+                              });
+                            }),
+                      ),
+                    ),
+                  ]),
+            ],
+          ),
+        ),
+        const SizedBox(
+          height: 16,
+        ),
       ],
     );
   }

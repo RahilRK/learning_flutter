@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:learning_flutter/theme/color.dart';
 import 'package:learning_flutter/united_pharmacy/model/response/home/HomePageFirstResponse.dart';
 
+import '../../../theme/string.dart';
+
 class CategoryList extends StatefulWidget {
   const CategoryList({super.key, required this.list});
   final List<FeaturedCategories> list;
@@ -23,17 +25,52 @@ class _CategoryListState extends State<CategoryList> {
 
   @override
   Widget build(BuildContext context) {
-    return GridView.count(
-      padding: EdgeInsets.zero,
-      shrinkWrap: true,
-      crossAxisCount: 4,
-      crossAxisSpacing: 0,
-      mainAxisSpacing: 0,
-      children: List.generate(mList.length, (index) {
-        return Center(
-          child: CategoryItem(model: mList[index]),
-        );
-      }),
+    return Visibility(
+      visible: mList.isNotEmpty,
+      child: Column(
+        children: [
+          const Padding(
+            padding: EdgeInsets.only(left: 16, right: 16),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  AppString.Shop_by_category,
+                  style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold,
+                      color: AppColor.black),
+                ),
+                Text(
+                  AppString.ViewAll,
+                  style: TextStyle(
+                      fontSize: 13,
+                      fontWeight: FontWeight.w500,
+                      color: AppColor.color_3F9ACC,
+                      decoration: TextDecoration.underline),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(
+            height: 8,
+          ),
+
+
+          GridView.count(
+            padding: EdgeInsets.zero,
+            shrinkWrap: true,
+            crossAxisCount: 4,
+            crossAxisSpacing: 0,
+            mainAxisSpacing: 0,
+            children: List.generate(mList.length, (index) {
+              return Center(
+                child: CategoryItem(model: mList[index]),
+              );
+            }),
+          ),
+        ],
+      ),
     );
   }
 }

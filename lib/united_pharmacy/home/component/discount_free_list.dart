@@ -40,20 +40,30 @@ class _DiscountFreeListState extends State<DiscountFreeList> {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.separated(
-      separatorBuilder: (BuildContext context, int index) {
-        return const SizedBox(height: 8);
-      },
-      shrinkWrap: true,
-      physics: const ClampingScrollPhysics(),
-      itemCount: mList.length, // Number of items in your list
-      itemBuilder: (BuildContext context, int index) {
-        var model = mList[index];
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: ListView.separated(
+            separatorBuilder: (BuildContext context, int index) {
+              return const SizedBox(height: 8);
+            },
+            shrinkWrap: true,
+            physics: const ClampingScrollPhysics(),
+            itemCount: mList.length, // Number of items in your list
+            itemBuilder: (BuildContext context, int index) {
+              var model = mList[index];
 
-        return DiscountBannerItem(
-          model: model,
-        );
-      },
+              return DiscountBannerItem(
+                model: model,
+              );
+            },
+          ),
+        ),
+        const SizedBox(
+          height: 16,
+        ),
+      ],
     );
   }
 }

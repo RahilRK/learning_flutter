@@ -277,14 +277,12 @@ class Carousel {
       String? id, 
       String? label, 
       String? type, 
-      num? categoryId, 
       List<ProductList>? productList,
       List<Banners>? banners,
   }){
     _id = id;
     _label = label;
     _type = type;
-    _categoryId = categoryId;
     _productList = productList;
     _banners = banners;
 }
@@ -293,7 +291,6 @@ class Carousel {
     _id = json['id'];
     _label = json['label'];
     _type = json['type'];
-    _categoryId = json['category_id'];
     if (json['productList'] != null) {
       _productList = [];
       json['productList'].forEach((v) {
@@ -310,26 +307,22 @@ class Carousel {
   String? _id;
   String? _label;
   String? _type;
-  num? _categoryId;
   List<ProductList>? _productList;
   List<Banners>? _banners;
 Carousel copyWith({  String? id,
   String? label,
   String? type,
-  num? categoryId,
   List<ProductList>? productList,
   List<Banners>? banners,
 }) => Carousel(  id: id ?? _id,
   label: label ?? _label,
   type: type ?? _type,
-  categoryId: categoryId ?? _categoryId,
   productList: productList ?? _productList,
   banners: banners ?? _banners,
 );
   String? get id => _id;
   String? get label => _label;
   String? get type => _type;
-  num? get categoryId => _categoryId;
   List<ProductList>? get productList => _productList;
   List<Banners>? get banners => _banners;
 
@@ -338,7 +331,6 @@ Carousel copyWith({  String? id,
     map['id'] = _id;
     map['label'] = _label;
     map['type'] = _type;
-    map['category_id'] = _categoryId;
     if (_productList != null) {
       map['productList'] = _productList?.map((v) => v.toJson()).toList();
     }

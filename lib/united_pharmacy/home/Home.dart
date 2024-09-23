@@ -4,7 +4,7 @@ import 'package:learning_flutter/theme/string.dart';
 import 'package:learning_flutter/united_pharmacy/api_helper.dart';
 import 'package:learning_flutter/united_pharmacy/home/component/banner_slider.dart';
 import 'package:learning_flutter/united_pharmacy/home/component/best_deals.dart';
-import 'package:learning_flutter/united_pharmacy/home/component/best_selling_products_list.dart';
+import 'package:learning_flutter/united_pharmacy/home/component/products_list.dart';
 import 'package:learning_flutter/united_pharmacy/home/component/discount_banner_slider.dart';
 import 'package:learning_flutter/united_pharmacy/home/component/discount_banner_slider_two.dart';
 import 'package:learning_flutter/united_pharmacy/home/component/discount_free_list.dart';
@@ -1016,8 +1016,8 @@ Widget loadPartTwoHomeUI(HomePageSecondResponse response) {
       // OurServiceList
       OurServiceList(list: response.carousel?[7].banners??[],),
 
-      // BestSellingProductsList
-      BestSellingProductsList(list: response.carousel?[3].productList??[]),
+      // BestSelling ProductsList
+      ProductsList(title: response.carousel?[3].label??"", list: response.carousel?[3].productList??[]),
 
       // ExploreOffersBannerSlider
       ExploreOffersBannerSlider(list: response.carousel?[8].banners??[]),
@@ -1031,8 +1031,20 @@ Widget loadPartTwoHomeUI(HomePageSecondResponse response) {
       // DiscountBannerSliderTwo
       DiscountBannerSliderTwo(list: response.carousel?[6].banners??[]),
 
+      //Baby & Mom Care ProductsList
+      ProductsList(title: response.carousel?[2].label??"", list: response.carousel?[2].productList??[]),
+
+      //Hair Care ProductsList
+      ProductsList(title: response.carousel?[0].label??"", list: response.carousel?[0].productList??[]),
+
+      //Beauty & Skin Care ProductsList
+      ProductsList(title: response.carousel?[1].label??"", list: response.carousel?[1].productList??[]),
+
       // DiscountFreeList
       DiscountFreeList(list: response.carousel?[5].banners??[]),
+
+      //Baby & Mom Care ProductsList
+      ProductsList(title: response.carousel?[2].label??"", list: response.carousel?[2].productList??[]),
 
       // Exclusive Offers
       ExclusiveOffers(list: response.carousel?[9].banners??[]),

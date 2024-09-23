@@ -4,37 +4,40 @@ import 'package:learning_flutter/united_pharmacy/model/response/home/HomePageSec
 
 import '../../../theme/string.dart';
 
-class BestSellingProductsList extends StatefulWidget {
-  const BestSellingProductsList({super.key, required this.list});
+class ProductsList extends StatefulWidget {
+  const ProductsList({super.key, required this.title, required this.list});
+  final String title;
   final List<ProductList> list;
 
   @override
-  State<BestSellingProductsList> createState() =>
-      _BestSellingProductsListState();
+  State<ProductsList> createState() =>
+      _ProductsListState();
 }
 
-class _BestSellingProductsListState extends State<BestSellingProductsList> {
+class _ProductsListState extends State<ProductsList> {
+  String mTitle = "";
   List<ProductList> mList = <ProductList>[];
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    mTitle = widget.title;
     mList = widget.list;
-    print('BestSellingProductsList: ${mList.length}');
+    print('ProductsList: title: $mTitle, mList: ${mList.length}');
   }
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const Padding(
+        Padding(
           padding: EdgeInsets.only(left: 16, right: 16),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                AppString.BestsellingProducts,
+                mTitle,
                 style: TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.bold,
@@ -151,27 +154,30 @@ class DiscountBannerItem extends StatelessWidget {
                   ),
                 ),
                 // Online Exclusive Tag
-                Align(
-                  alignment: Alignment.bottomCenter,
-                  child: Container(
-                    width: double.infinity,
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 5, vertical: 2),
-                    decoration: BoxDecoration(
-                      color: AppColor.color_F22C55,
-                      borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(5),
-                          topRight: Radius.circular(5)),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(4.0),
-                      child: Text(
-                        model.offerLabel ?? "Save 45%",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.normal,
-                            fontSize: 10),
+                Visibility(
+                  visible: model.isOfferApplicable??false,
+                  child: Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Container(
+                      width: double.infinity,
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 5, vertical: 2),
+                      decoration: BoxDecoration(
+                        color: AppColor.color_F22C55,
+                        borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(5),
+                            topRight: Radius.circular(5)),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(4.0),
+                        child: Text(
+                          model.offerLabel ?? "Save 45%",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.normal,
+                              fontSize: 10),
+                        ),
                       ),
                     ),
                   ),
@@ -241,16 +247,19 @@ class DiscountBannerItem extends StatelessWidget {
                 model.formattedPrice??"",
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
-                  color: AppColor.color_F22C55,
+                  color: model.price != model.finalPrice ? AppColor.color_F22C55: AppColor.black,
                   fontSize: 12,
                 ),
               ),
-              Text(
-                model.formattedFinalPrice??"",
-                style: TextStyle(
-                  color: AppColor.black,
-                  fontSize: 10,
-                  decoration: TextDecoration.lineThrough,
+              Visibility(
+                visible:model.price != model.finalPrice,
+                child: Text(
+                  model.formattedFinalPrice??"",
+                  style: TextStyle(
+                    color: AppColor.black,
+                    fontSize: 10,
+                    decoration: TextDecoration.lineThrough,
+                  ),
                 ),
               ),
             ],

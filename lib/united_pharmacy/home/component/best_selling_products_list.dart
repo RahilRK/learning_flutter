@@ -5,7 +5,8 @@ import 'package:learning_flutter/united_pharmacy/model/response/home/HomePageSec
 import '../../../theme/string.dart';
 
 class BestSellingProductsList extends StatefulWidget {
-  const BestSellingProductsList({super.key});
+  const BestSellingProductsList({super.key, required this.list});
+  final List<ProductList> list;
 
   @override
   State<BestSellingProductsList> createState() =>
@@ -13,242 +14,15 @@ class BestSellingProductsList extends StatefulWidget {
 }
 
 class _BestSellingProductsListState extends State<BestSellingProductsList> {
-  List<ProductList> mList = <ProductList>[
-    ProductList(
-        templateBaseurl: "",
-        isOfferApplicable: false,
-        shippingType: 2,
-        shippingTypeImg:
-            "https://unitedpharmacy.sa/media/shipping_types/image/default/express_3_1.webp",
-        configurableData: {},
-        typeId: "simple",
-        entityId: "1004",
-        isAvailable: true,
-        price: 389.85,
-        finalPrice: 389.85,
-        formattedPrice: "SAR 389.85",
-        formattedFinalPrice: "SAR 389.85",
-        name: "Foltene Hair Ampoule For Men",
-        hasRequiredOptions: false,
-        thumbNail:
-            "https://unitedpharmacy.sa/media/catalog/product/cache/5014d7217d112efc83310fc026a13fef/0/2/02-qv-cream-500gm-cr-sy-022.jpg",
-        dominantColor: "",
-        isNew: false,
-        isInRange: false,
-        isInWishlist: false,
-        wishlistItemId: 0,
-        productUrl:
-            "https://unitedpharmacy.sa/en/foltene-hair-ampoule-for-men.html",
-        brand: "Default",
-        sku: "AP-CI-051",
-        categories: [
-          "فولتين",
-          "فولتين للعناية بالشعر",
-          "تساقط الشعر",
-          "معالجة الشعر",
-          " العناية بالشعر",
-          "احصل علي خصم اضافي 15%"
-        ],
-        rating: 5,
-        tierPrice: "",
-        formattedTierPrice: "",
-        availability: "In stock"),
-    ProductList(
-        templateBaseurl: "",
-        isOfferApplicable: false,
-        shippingType: 2,
-        shippingTypeImg:
-            "https://unitedpharmacy.sa/media/shipping_types/image/default/express_3_1.webp",
-        configurableData: {},
-        typeId: "simple",
-        entityId: "1004",
-        isAvailable: true,
-        price: 389.85,
-        finalPrice: 389.85,
-        formattedPrice: "SAR 389.85",
-        formattedFinalPrice: "SAR 389.85",
-        name: "Foltene Hair Ampoule For Men",
-        hasRequiredOptions: false,
-        thumbNail:
-            "https://unitedpharmacy.sa/media/catalog/product/cache/5014d7217d112efc83310fc026a13fef/s/c/screenshot_97.png",
-        dominantColor: "",
-        isNew: false,
-        isInRange: false,
-        isInWishlist: false,
-        wishlistItemId: 0,
-        productUrl:
-            "https://unitedpharmacy.sa/en/foltene-hair-ampoule-for-men.html",
-        brand: "Default",
-        sku: "AP-CI-051",
-        categories: [
-          "فولتين",
-          "فولتين للعناية بالشعر",
-          "تساقط الشعر",
-          "معالجة الشعر",
-          " العناية بالشعر",
-          "احصل علي خصم اضافي 15%"
-        ],
-        rating: 5,
-        tierPrice: "",
-        formattedTierPrice: "",
-        availability: "In stock"),
-    ProductList(
-        templateBaseurl: "",
-        isOfferApplicable: false,
-        shippingType: 2,
-        shippingTypeImg:
-            "https://unitedpharmacy.sa/media/shipping_types/image/default/express_3_1.webp",
-        configurableData: {},
-        typeId: "simple",
-        entityId: "1004",
-        isAvailable: true,
-        price: 389.85,
-        finalPrice: 389.85,
-        formattedPrice: "SAR 389.85",
-        formattedFinalPrice: "SAR 389.85",
-        name: "Foltene Hair Ampoule For Men",
-        hasRequiredOptions: false,
-        thumbNail:
-            "https://unitedpharmacy.sa/media/catalog/product/cache/5014d7217d112efc83310fc026a13fef/c/r/cr-ng-512.png",
-        dominantColor: "",
-        isNew: false,
-        isInRange: false,
-        isInWishlist: false,
-        wishlistItemId: 0,
-        productUrl:
-            "https://unitedpharmacy.sa/en/foltene-hair-ampoule-for-men.html",
-        brand: "Default",
-        sku: "AP-CI-051",
-        categories: [
-          "فولتين",
-          "فولتين للعناية بالشعر",
-          "تساقط الشعر",
-          "معالجة الشعر",
-          " العناية بالشعر",
-          "احصل علي خصم اضافي 15%"
-        ],
-        rating: 5,
-        tierPrice: "",
-        formattedTierPrice: "",
-        availability: "In stock"),
-    ProductList(
-        templateBaseurl: "",
-        isOfferApplicable: false,
-        shippingType: 2,
-        shippingTypeImg:
-            "https://unitedpharmacy.sa/media/shipping_types/image/default/express_3_1.webp",
-        configurableData: {},
-        typeId: "simple",
-        entityId: "1004",
-        isAvailable: true,
-        price: 389.85,
-        finalPrice: 389.85,
-        formattedPrice: "SAR 389.85",
-        formattedFinalPrice: "SAR 389.85",
-        name: "Foltene Hair Ampoule For Men",
-        hasRequiredOptions: false,
-        thumbNail:
-            "https://unitedpharmacy.sa/media/catalog/product/cache/5014d7217d112efc83310fc026a13fef/0/2/02-qv-cream-500gm-cr-sy-022.jpg",
-        dominantColor: "",
-        isNew: false,
-        isInRange: false,
-        isInWishlist: false,
-        wishlistItemId: 0,
-        productUrl:
-            "https://unitedpharmacy.sa/en/foltene-hair-ampoule-for-men.html",
-        brand: "Default",
-        sku: "AP-CI-051",
-        categories: [
-          "فولتين",
-          "فولتين للعناية بالشعر",
-          "تساقط الشعر",
-          "معالجة الشعر",
-          " العناية بالشعر",
-          "احصل علي خصم اضافي 15%"
-        ],
-        rating: 5,
-        tierPrice: "",
-        formattedTierPrice: "",
-        availability: "In stock"),
-    ProductList(
-        templateBaseurl: "",
-        isOfferApplicable: false,
-        shippingType: 2,
-        shippingTypeImg:
-            "https://unitedpharmacy.sa/media/shipping_types/image/default/express_3_1.webp",
-        configurableData: {},
-        typeId: "simple",
-        entityId: "1004",
-        isAvailable: true,
-        price: 389.85,
-        finalPrice: 389.85,
-        formattedPrice: "SAR 389.85",
-        formattedFinalPrice: "SAR 389.85",
-        name: "Foltene Hair Ampoule For Men",
-        hasRequiredOptions: false,
-        thumbNail:
-            "https://unitedpharmacy.sa/media/catalog/product/cache/5014d7217d112efc83310fc026a13fef/s/c/screenshot_97.png",
-        dominantColor: "",
-        isNew: false,
-        isInRange: false,
-        isInWishlist: false,
-        wishlistItemId: 0,
-        productUrl:
-            "https://unitedpharmacy.sa/en/foltene-hair-ampoule-for-men.html",
-        brand: "Default",
-        sku: "AP-CI-051",
-        categories: [
-          "فولتين",
-          "فولتين للعناية بالشعر",
-          "تساقط الشعر",
-          "معالجة الشعر",
-          " العناية بالشعر",
-          "احصل علي خصم اضافي 15%"
-        ],
-        rating: 5,
-        tierPrice: "",
-        formattedTierPrice: "",
-        availability: "In stock"),
-    ProductList(
-        templateBaseurl: "",
-        isOfferApplicable: false,
-        shippingType: 2,
-        shippingTypeImg:
-            "https://unitedpharmacy.sa/media/shipping_types/image/default/express_3_1.webp",
-        configurableData: {},
-        typeId: "simple",
-        entityId: "1004",
-        isAvailable: true,
-        price: 389.85,
-        finalPrice: 389.85,
-        formattedPrice: "SAR 389.85",
-        formattedFinalPrice: "SAR 389.85",
-        name: "Foltene Hair Ampoule For Men",
-        hasRequiredOptions: false,
-        thumbNail:
-            "https://unitedpharmacy.sa/media/catalog/product/cache/5014d7217d112efc83310fc026a13fef/c/r/cr-ng-512.png",
-        dominantColor: "",
-        isNew: false,
-        isInRange: false,
-        isInWishlist: false,
-        wishlistItemId: 0,
-        productUrl:
-            "https://unitedpharmacy.sa/en/foltene-hair-ampoule-for-men.html",
-        brand: "Default",
-        sku: "AP-CI-051",
-        categories: [
-          "فولتين",
-          "فولتين للعناية بالشعر",
-          "تساقط الشعر",
-          "معالجة الشعر",
-          " العناية بالشعر",
-          "احصل علي خصم اضافي 15%"
-        ],
-        rating: 5,
-        tierPrice: "",
-        formattedTierPrice: "",
-        availability: "In stock"),
-  ];
+  List<ProductList> mList = <ProductList>[];
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    mList = widget.list;
+    print('BestSellingProductsList: ${mList.length}');
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -422,7 +196,8 @@ class DiscountBannerItem extends StatelessWidget {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Text(
-                        model.rating.toString()??"5",
+                        // model.rating.toString()??"5",
+                        "0",
                         style: TextStyle(
                           fontSize: 12,
                           color: AppColor.white

@@ -28,8 +28,19 @@ class Home extends StatefulWidget {
   State<Home> createState() => _HomeState();
 }
 
+var homePageDataFirstRequest = HomePageDataFirstRequest(
+    currency: "SAR",
+    websiteId: "1",
+    width: "1080.000000",
+    isHomeBrands: "1",
+    eTag: "",
+    city: "Jeddah",
+    storeId: "1",
+    quoteId: "0",
+    os: "android");
+
 class _HomeState extends State<Home> {
-  var homePageDataFirstRequest = HomePageDataFirstRequest(
+  /*var homePageDataFirstRequest = HomePageDataFirstRequest(
       currency: "SAR",
       websiteId: "1",
       width: "1080.000000",
@@ -38,7 +49,7 @@ class _HomeState extends State<Home> {
       city: "Jeddah",
       storeId: "1",
       quoteId: "0",
-      os: "android");
+      os: "android");*/
   late final ScrollController _scrollListener;
   var reachedAtBottomIsCalled = false;
   List<Widget> mWidgetList = <Widget>[];
@@ -60,9 +71,9 @@ class _HomeState extends State<Home> {
             reachedAtBottomIsCalled = true;
 
             print('Reached the bottom of the list');
-            setState(() {
+            /*setState(() {
               mWidgetList.add(apiCallHomePartTwo());
-            });
+            });*/
             print('mWidgetList size: ${mWidgetList.length}');
           }
         }
@@ -519,15 +530,20 @@ class _HomeState extends State<Home> {
         ],
       ),*/
       body: FutureBuilder(
-          future: homepagedatafirst(homePageDataFirstRequest),
+          // future: homepagedatafirst(homePageDataFirstRequest),
+          future: homepagedatasecond(homePageDataFirstRequest),
           builder: (context, snapshot) {
 
             if (snapshot.hasData) {
 
               if(mWidgetList.isEmpty) {
-                var response = snapshot.data ?? HomePageFirstResponse();
+                /*var response = snapshot.data ?? HomePageFirstResponse();
                 // return loadPartOneHomeUI(response, _scrollListener);
-                mWidgetList.add(loadPartOneHomeUI(response));
+                mWidgetList.add(loadPartOneHomeUI(response));*/
+
+                var response = snapshot.data ?? HomePageSecondResponse();
+                // return loadPartOneHomeUI(response, _scrollListener);
+                mWidgetList.add(loadPartTwoHomeUI(response));
               }
 
               /*return PrimaryScrollController(
@@ -713,10 +729,10 @@ Widget loadPartOneHomeUI(HomePageFirstResponse response) {
       BannerSlider(list: response.bannerImages ?? [],),
 
       // DiscountList
-      DiscountList(list: response.carousel?[0].banners ?? [],),
+      DiscountList(list: response.carousel?[1].banners ?? [],),
 
       // DiscountBannerSlider
-      DiscountBannerSlider(list: response.carousel?[1].banners ?? [],),
+      DiscountBannerSlider(list: response.carousel?[2].banners ?? [],),
 
       // OurServiceList
       /*const Padding(
@@ -998,150 +1014,31 @@ Widget loadPartTwoHomeUI(HomePageSecondResponse response) {
     physics: const ClampingScrollPhysics(),
     children: [
       // OurServiceList
-      OurServiceList(),
+      OurServiceList(list: response.carousel?[7].banners??[],),
 
       // BestSellingProductsList
-      BestSellingProductsList(),
-
-      // DiscountFreeList
-      DiscountFreeList(),
+      BestSellingProductsList(list: response.carousel?[3].productList??[]),
 
       // ExploreOffersBannerSlider
-      ExploreOffersBannerSlider(),
+      ExploreOffersBannerSlider(list: response.carousel?[8].banners??[]),
 
       // Shop by Brand List
-      const Padding(
-        padding: EdgeInsets.only(left: 16, right: 16),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              AppString.Shop_by_Brand,
-              style: TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.bold,
-                  color: AppColor.black),
-            ),
-            Text(
-              AppString.ViewAll,
-              style: TextStyle(
-                  fontSize: 13,
-                  fontWeight: FontWeight.w500,
-                  color: AppColor.color_3F9ACC,
-                  decoration: TextDecoration.underline),
-            ),
-          ],
-        ),
-      ),
-      const SizedBox(
-        height: 8,
-      ),
-      const Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16),
-        child: ShopByBrandList(),
-      ),
+      ShopByBrandList(list: response.shopByBrands??[]),
 
       // BestDeals
-      const SizedBox(
-        height: 16,
-      ),
-      const Padding(
-        padding: EdgeInsets.only(left: 16, right: 16),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              AppString.Best_Deals,
-              style: TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.bold,
-                  color: AppColor.black),
-            ),
-          ],
-        ),
-      ),
-      const SizedBox(
-        height: 8,
-      ),
-      const Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16),
-        child: BestDeals(),
-      ),
+      BestDeals(list: response.carousel?[4].banners??[]),
 
       // DiscountBannerSliderTwo
-      const SizedBox(
-        height: 16,
-      ),
-      const Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16),
-        child: DiscountBannerSliderTwo(),
-      ),
+      DiscountBannerSliderTwo(list: response.carousel?[6].banners??[]),
+
+      // DiscountFreeList
+      DiscountFreeList(list: response.carousel?[5].banners??[]),
 
       // Exclusive Offers
-      const SizedBox(
-        height: 16,
-      ),
-      const Padding(
-        padding: EdgeInsets.only(left: 16, right: 16),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              AppString.ExclusiveOffers,
-              style: TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.bold,
-                  color: AppColor.black),
-            ),
-          ],
-        ),
-      ),
-      const SizedBox(
-        height: 8,
-      ),
-      const Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16),
-        child: ExclusiveOffers(),
-      ),
+      ExclusiveOffers(list: response.carousel?[9].banners??[]),
 
       // ExploreOffersBannerSliderTwo
-      const SizedBox(
-        height: 16,
-      ),
-      const Padding(
-        padding: EdgeInsets.only(left: 16, right: 16),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              AppString.ExploreOffers,
-              style: TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.bold,
-                  color: AppColor.black),
-            ),
-            Text(
-              AppString.ViewAll,
-              style: TextStyle(
-                  fontSize: 13,
-                  fontWeight: FontWeight.w500,
-                  color: AppColor.color_3F9ACC,
-                  decoration: TextDecoration.underline),
-            ),
-          ],
-        ),
-      ),
-      const SizedBox(
-        height: 8,
-      ),
-      const Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16),
-        child: ExploreOffersBannerSliderTwo(),
-      ),
-
-      const SizedBox(
-        height: 16,
-      ),
+      ExploreOffersBannerSliderTwo(list: response.carousel?[10].banners??[]),
     ],
   );
 }

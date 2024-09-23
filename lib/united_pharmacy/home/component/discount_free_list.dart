@@ -1,69 +1,57 @@
 import 'package:flutter/material.dart';
-import 'package:learning_flutter/united_pharmacy/model/response/home/HomePageFirstResponse.dart';
+import 'package:learning_flutter/united_pharmacy/model/response/home/HomePageSecondResponse.dart';
 
 class DiscountFreeList extends StatefulWidget {
-  const DiscountFreeList({super.key});
+  const DiscountFreeList({super.key, required this.list});
+  final List<Banners> list;
 
   @override
   State<DiscountFreeList> createState() => _DiscountFreeListState();
 }
 
 class _DiscountFreeListState extends State<DiscountFreeList> {
-  List<Banners> mList = <Banners>[
-    Banners(
-      url:
-          "https://unitedpharmacy.sa/media/mobikul/carouselimages/File-1726561288.jpg",
-      title: "Buy 3 Pieces To Get Extra Discount 10%",
-      bannerType: "category",
-      dominantColor: "#81c0b6",
-      startDate: "2024-07-12 14:15:00",
-      endDate: "2024-12-31 14:15:00",
-      imgTitle: "Buy 3 Pieces",
-      subTitle: "Extra Discount 10%",
-      id: "5182",
-      name: "Buy 3 Pieces And Get 10% Extra Discount",
-    ),
-    Banners(
-      url:
-          "https://unitedpharmacy.sa/media/mobikul/carouselimages/File-1726561388.jpg",
-      title: "Buy 3 Pieces To Get Extra Discount 10%",
-      bannerType: "category",
-      dominantColor: "#81c0b6",
-      startDate: "2024-07-12 14:15:00",
-      endDate: "2024-12-31 14:15:00",
-      imgTitle: "Buy 2 Pieces",
-      subTitle: "Extra Discount 10%",
-      id: "5182",
-      name: "Buy 2 Pieces And Get 10% Extra Discount",
-    ),
-  ];
+  List<Banners> mList = <Banners>[];
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    mList = widget.list;
+    print('DiscountFreeList: ${mList.length}');
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: ListView.separated(
-            separatorBuilder: (BuildContext context, int index) {
-              return const SizedBox(height: 8);
-            },
-            shrinkWrap: true,
-            physics: const ClampingScrollPhysics(),
-            itemCount: mList.length, // Number of items in your list
-            itemBuilder: (BuildContext context, int index) {
-              var model = mList[index];
-
-              return DiscountBannerItem(
-                model: model,
-              );
-            },
+    return Visibility(
+      visible: mList.isNotEmpty,
+      child: Column(
+        children: [
+          const SizedBox(
+            height: 16,
           ),
-        ),
-        const SizedBox(
-          height: 16,
-        ),
-      ],
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: ListView.separated(
+              separatorBuilder: (BuildContext context, int index) {
+                return const SizedBox(height: 8);
+              },
+              shrinkWrap: true,
+              physics: const ClampingScrollPhysics(),
+              itemCount: mList.length, // Number of items in your list
+              itemBuilder: (BuildContext context, int index) {
+                var model = mList[index];
+
+                return DiscountBannerItem(
+                  model: model,
+                );
+              },
+            ),
+          ),
+          const SizedBox(
+            height: 16,
+          ),
+        ],
+      ),
     );
   }
 }

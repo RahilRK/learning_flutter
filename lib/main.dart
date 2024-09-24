@@ -1,7 +1,10 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
+import 'package:learning_flutter/bloc/counter/counter_bloc.dart';
+import 'package:learning_flutter/bloc/visibility/counter_bloc.dart';
 import 'package:learning_flutter/theme/color.dart';
 import 'package:learning_flutter/theme/theme.dart';
 import 'package:learning_flutter/united_pharmacy/route_generator_for_united_pharmacy.dart';
@@ -9,9 +12,53 @@ import 'package:learning_flutter/united_pharmacy/route_generator_for_united_phar
 import 'bloc/increment_eg.dart';
 
 void main() {
-  runApp(const MaterialMyApp());
+  runApp(const MaterialMyBlocApp());
+  // runApp(const MaterialMyApp());
   // runApp(const DarkModeMyApp());
   // runApp(const CupertinoMyApp());
+}
+
+class MaterialMyBlocApp extends StatelessWidget {
+  const MaterialMyBlocApp({super.key});
+
+  // This widget is the root of your application.
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        // This is the theme of your application.
+        //
+        // TRY THIS: Try running your application with "flutter run". You'll see
+        // the application has a purple toolbar. Then, without quitting the app,
+        // try changing the seedColor in the colorScheme below to Colors.green
+        // and then invoke "hot reload" (save your changes or press the "hot
+        // reload" button in a Flutter-supported IDE, or press "r" if you used
+        // the command line to start the app).
+        //
+        // Notice that the counter didn't reset back to zero; the application
+        // state is not lost during the reload. To reset the state, use hot
+        // restart instead.
+        //
+        // This works for code too, not just values: Most code changes can be
+        // tested with just a hot reload.
+        // colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: AppColor.color_247EAD),
+        useMaterial3: false,
+      ),
+      home: MultiBlocProvider(
+  providers: [
+    BlocProvider(
+        create: (context) => CounterBloc(),
+),
+    BlocProvider(
+      create: (context) => VisibilityBloc(),
+    ),
+  ],
+  child: IncrementEg(),
+),
+    );
+  }
 }
 
 class MaterialMyApp extends StatelessWidget {
@@ -59,8 +106,7 @@ class MaterialMyApp extends StatelessWidget {
       // home: SplashScreen(),
       // home: Registration(),
       // home: FirstPage(),
-      home: IncrementEg(),
-      // initialRoute: '/',
+      initialRoute: '/',
 
       /*todo 2nd way to navigate*/
       /*routes: {
@@ -68,7 +114,7 @@ class MaterialMyApp extends StatelessWidget {
       },*/
 
       /*todo 3rd way to navigate*/
-      // onGenerateRoute: RouteGeneratorForUnitedPharmacy.generateRoute,
+      onGenerateRoute: RouteGeneratorForUnitedPharmacy.generateRoute,
     );
   }
 }

@@ -39,7 +39,7 @@ class _ExploreOffersBannerSliderTwoState extends State<ExploreOffersBannerSlider
         borderRadius: const BorderRadius.all(Radius.circular(16.0)),
         child: Stack(
           children: <Widget>[
-            Image.network(item, fit: BoxFit.fitHeight, width: 1000.0),
+            Image.network(item, fit: BoxFit.cover, width: 1000.0),
           ],
         )))
         .toList();

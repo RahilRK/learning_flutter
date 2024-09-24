@@ -22,11 +22,11 @@ import 'package:text_marquee/text_marquee.dart';
 
 import 'component/category.dart';
 
-class Home extends StatefulWidget {
-  const Home({super.key});
+class HomeDemo extends StatefulWidget {
+  const HomeDemo({super.key});
 
   @override
-  State<Home> createState() => _HomeState();
+  State<HomeDemo> createState() => _HomeDemoState();
 }
 
 var homePageDataFirstRequest = HomePageDataFirstRequest(
@@ -40,21 +40,24 @@ var homePageDataFirstRequest = HomePageDataFirstRequest(
     quoteId: "0",
     os: "android");
 
-late final ScrollController _scrollListener;
+late ScrollController _scrollListener;
 var reachedAtBottomIsCalled = false;
 List<Widget> mWidgetList = <Widget>[];
-List<Widget> mWidgetListTwo = <Widget>[];
 
 late BuildContext dialogContext;
 
-class _HomeState extends State<Home> {
+class _HomeDemoState extends State<HomeDemo> {
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+
+    print("HomeDemo: initState");
+
     // Setup the listener.
     _scrollListener = ScrollController();
+    print("HomeDemo: init _scrollListener");
     _scrollListener.addListener(() {
       if (_scrollListener.position.atEdge) {
         bool isTop = _scrollListener.position.pixels == 0;
@@ -75,36 +78,79 @@ class _HomeState extends State<Home> {
         }
       }
     });
-
-    /*_scrollListener.addListener(() {
-      if (_scrollListener.position.pixels ==
-          _scrollListener.position.maxScrollExtent) {
-
-        if(!reachedAtBottomIsCalled) {
-          reachedAtBottomIsCalled = true;
-
-          print('Reached the bottom of the list');
-          setState(() {
-            // mWidgetList.add(apiCallHomePartTwo());
-            mWidgetList.add(apiCallHomePartTwo());
-          });
-          // print('mWidgetList size: ${mWidgetList.length}');
-          print('mWidgetList size: ${mWidgetListTwo.length}');
-        }
-      }
-    });*/
   }
 
   @override
   void dispose() {
+
+    print("HomeDemo: dispose");
+    print("HomeDemo: dispose _scrollListener");
     _scrollListener.dispose();
-    super.dispose();
+    mWidgetList.clear();
+      super.dispose();
+  }
+
+  Future<void> _handleRefresh() async {
+    // Simulate network fetch or database query
+    // Update the list of items and refresh the UI
+    setState(() {
+
+    });
   }
 
   @override
   Widget build(BuildContext context) {
+    print("HomeDemo: build");
+
     return Scaffold(
-      body: apiCallHomePartOne(),
+      body: RefreshIndicator(
+        onRefresh: _handleRefresh,
+        child: FutureBuilder(
+            future: homepagedatafirst(homePageDataFirstRequest),
+            builder: (context, snapshot) {
+
+              if (snapshot.hasData) {
+
+                if(mWidgetList.isEmpty) {
+                  var response = snapshot.data ?? HomePageFirstResponse();
+                  mWidgetList.add(loadPartOneHomeUI(response));
+                }
+
+                /*return PrimaryScrollController(
+                    controller: _scrollListener,
+                    child: ListView.builder(
+                      itemCount: mWidgetList.length, // Number of items in your list
+                      itemBuilder: (BuildContext context, int index) {
+                        var model = mWidgetList[index];
+
+                        return Container(
+                          child: model,
+                        );
+                      },
+                    ),
+                  );*/
+
+                // return SingleChildScrollView(
+                return ListView.builder(
+                  shrinkWrap: true,
+                  controller: _scrollListener,
+                  physics: AlwaysScrollableScrollPhysics(),
+                  itemCount: mWidgetList.length, // Number of items in your list
+                  itemBuilder: (BuildContext context, int index) {
+                    var model = mWidgetList[index];
+                    return model;
+                  },
+                );
+
+              } else if (snapshot.hasError) {
+                return Text('${snapshot.error}');
+              }
+              else {
+                // return const Text('Something went wrong in homepagedatafirst');
+                return const Text('');
+              }
+            }),
+      ),
     );
   }
 
@@ -137,71 +183,6 @@ class _HomeState extends State<Home> {
       barrierColor: Colors.black38,
     );
   }
-}
-
-Widget apiCallHomePartOne() {
-
-  return FutureBuilder(
-      future: homepagedatafirst(homePageDataFirstRequest),
-      builder: (context, snapshot) {
-
-        if (snapshot.hasData) {
-
-          if(mWidgetList.isEmpty) {
-            var response = snapshot.data ?? HomePageFirstResponse();
-            // return loadPartOneHomeUI(response, _scrollListener);
-            mWidgetList.add(loadPartOneHomeUI(response));
-          }
-
-          /*return PrimaryScrollController(
-                  controller: _scrollListener,
-                  child: ListView.builder(
-                    itemCount: mWidgetList.length, // Number of items in your list
-                    itemBuilder: (BuildContext context, int index) {
-                      var model = mWidgetList[index];
-
-                      return Container(
-                        child: model,
-                      );
-                    },
-                  ),
-                );*/
-
-          return SingleChildScrollView(
-            controller: _scrollListener,
-            child: Column(
-              children: [
-                ListView.builder(
-                  shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
-                  itemCount: mWidgetList.length, // Number of items in your list
-                  itemBuilder: (BuildContext context, int index) {
-                    var model = mWidgetList[index];
-                    return model;
-                  },
-                ),
-
-                ListView.builder(
-                  shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
-                  itemCount: mWidgetListTwo.length, // Number of items in your list
-                  itemBuilder: (BuildContext context, int index) {
-                    var model = mWidgetListTwo[index];
-                    return model;
-                  },
-                )
-              ],
-            ),
-          );
-
-        } else if (snapshot.hasError) {
-          return Text('${snapshot.error}');
-        }
-        else {
-          // return const Text('Something went wrong in homepagedatafirst');
-          return const Text('');
-        }
-      });
 }
 
 Widget loadPartOneHomeUI(HomePageFirstResponse response) {
@@ -312,17 +293,18 @@ Widget loadPartOneHomeUI(HomePageFirstResponse response) {
         height: 6,
       ),
       Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16),
+        padding: EdgeInsets.symmetric(horizontal: 16),
         child: Container(
           decoration: BoxDecoration(
             color: AppColor.color_F22C55,
             borderRadius: BorderRadius.circular(4),
           ),
-          child: const Padding(
+          child: Padding(
             padding:
             EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             child: TextMarquee(
               AppString.Dont_miss,
+              // response.configdata?.prefixtext?? AppString.Dont_miss,
               style: TextStyle(
                   fontSize: 12,
                   fontWeight: FontWeight.normal,

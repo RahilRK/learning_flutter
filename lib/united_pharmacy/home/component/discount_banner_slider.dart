@@ -12,10 +12,10 @@ class DiscountBannerSlider extends StatefulWidget {
   State<DiscountBannerSlider> createState() => _DiscountBannerSliderState();
 }
 
-final List<String> imgList = [];
+late List<String> imgList;
 
 class _DiscountBannerSliderState extends State<DiscountBannerSlider> {
-  List<Banners> mList = [];
+  late List<Banners> mList;
   List<Widget> imageSliders = [];
   int _current = 0;
   final int _indicatorSize = 5;
@@ -25,6 +25,8 @@ class _DiscountBannerSliderState extends State<DiscountBannerSlider> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    mList = [];
+    imgList = [];
     mList = widget.list;
 
     for (final model in mList) {

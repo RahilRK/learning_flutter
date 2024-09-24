@@ -12,11 +12,11 @@ class DiscountBannerSliderTwo extends StatefulWidget {
   State<DiscountBannerSliderTwo> createState() => _DiscountBannerSliderTwoState();
 }
 
-final List<String> imgList = [];
+late List<String> imgList;
 
 class _DiscountBannerSliderTwoState extends State<DiscountBannerSliderTwo> {
 
-  List<Banners> mList = [];
+  late List<Banners> mList;
   List<Widget> imageSliders = [];
   int _current = 0;
   final int _indicatorSize = 5;
@@ -26,6 +26,8 @@ class _DiscountBannerSliderTwoState extends State<DiscountBannerSliderTwo> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    mList = [];
+    imgList = [];
     mList = widget.list;
 
     for (final model in mList) {
@@ -49,69 +51,76 @@ class _DiscountBannerSliderTwoState extends State<DiscountBannerSliderTwo> {
   Widget build(BuildContext context) {
     return Visibility(
       visible: mList.isNotEmpty,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16),
-        child: Stack(
-          alignment: Alignment.center,
-          children: [
-            Column(
-                children: [
-                  Align(
-                    alignment: Alignment.topCenter,
-                    child: CarouselSlider(
-                      items: imageSliders,
-                      carouselController: _controller,
-                      options: CarouselOptions(
-                          autoPlay: true,
-                          aspectRatio: 16/7.5,
-                          enlargeCenterPage: false,
-                          viewportFraction: 1,
-                          onPageChanged: (index, reason) {
-                            setState(() {
-                              _current = index;
-                            });
-                          }),
+      child: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                Column(
+                    children: [
+                      Align(
+                        alignment: Alignment.topCenter,
+                        child: CarouselSlider(
+                          items: imageSliders,
+                          carouselController: _controller,
+                          options: CarouselOptions(
+                              autoPlay: true,
+                              aspectRatio: 16/7.5,
+                              enlargeCenterPage: false,
+                              viewportFraction: 1,
+                              onPageChanged: (index, reason) {
+                                setState(() {
+                                  _current = index;
+                                });
+                              }),
+                        ),
+                      ),
+                    ]),
+                Positioned(
+                  bottom: 0,
+                  child: Container(
+                    width: _indicatorSize * imgList.length.toDouble() + 16,
+                    decoration: BoxDecoration(
+                      color: AppColor.white,
+                      borderRadius: BorderRadius.circular(20),
+                      boxShadow: const [
+                        BoxShadow(
+                          offset: Offset(0, 0),
+                          blurRadius: 2,
+                          spreadRadius: 2,
+                          color: Colors.black26,
+                        ),
+                      ],
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: imgList.asMap().entries.map((entry) {
+                        return GestureDetector(
+                          onTap: () => _controller.animateToPage(entry.key),
+                          child: Container(
+                            width: 4,
+                            height: 4,
+                            margin: const EdgeInsets.symmetric(vertical: 1, horizontal: 1.0),
+                            decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: _current == entry.key
+                                    ? AppColor.color_3F9ACC
+                                    : AppColor.color_A1A1A1),
+                          ),
+                        );
+                      }).toList(),
                     ),
                   ),
-                ]),
-            Positioned(
-              bottom: 0,
-              child: Container(
-                width: _indicatorSize * imgList.length.toDouble() + 16,
-                decoration: BoxDecoration(
-                  color: AppColor.white,
-                  borderRadius: BorderRadius.circular(20),
-                  boxShadow: const [
-                    BoxShadow(
-                      offset: Offset(0, 0),
-                      blurRadius: 2,
-                      spreadRadius: 2,
-                      color: Colors.black26,
-                    ),
-                  ],
                 ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: imgList.asMap().entries.map((entry) {
-                    return GestureDetector(
-                      onTap: () => _controller.animateToPage(entry.key),
-                      child: Container(
-                        width: 4,
-                        height: 4,
-                        margin: const EdgeInsets.symmetric(vertical: 1, horizontal: 1.0),
-                        decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: _current == entry.key
-                                ? AppColor.color_3F9ACC
-                                : AppColor.color_A1A1A1),
-                      ),
-                    );
-                  }).toList(),
-                ),
-              ),
+              ],
             ),
-          ],
-        ),
+          ),
+          const SizedBox(
+            height: 16,
+          ),
+        ],
       ),
     );
   }

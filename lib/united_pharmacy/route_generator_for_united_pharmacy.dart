@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:learning_flutter/united_pharmacy/dashboard_tab/DashboardTab.dart';
 import 'package:learning_flutter/united_pharmacy/home/Home.dart';
+import 'package:learning_flutter/united_pharmacy/home/HomeDemo.dart';
 import 'package:learning_flutter/united_pharmacy/model/request/RegistrationRequest.dart';
+import 'package:learning_flutter/united_pharmacy/splash_screen/SplashScreen.dart';
 import 'package:learning_flutter/united_pharmacy/verification/verification.dart';
 import 'package:learning_flutter/united_pharmacy/login/login_tab.dart';
 import 'package:learning_flutter/united_pharmacy/registration/registration.dart';
@@ -13,8 +15,7 @@ class RouteGeneratorForUnitedPharmacy {
 
     switch (settings.name) {
       case '/':
-        // return MaterialPageRoute(builder: (_) => SplashScreen());
-        return MaterialPageRoute(builder: (_) => const DashboardTab());
+        return MaterialPageRoute(builder: (_) => SplashScreen());
       case '/LoginTab':
         return MaterialPageRoute(builder: (_) => const LoginTab());
       case '/Registration':
@@ -29,7 +30,7 @@ class RouteGeneratorForUnitedPharmacy {
         }
         return _errorRoute();
       case '/Home':
-        return MaterialPageRoute(builder: (_) => const Home());
+        return MaterialPageRoute(builder: (_) => const HomeDemo());
       case '/DashboardTab':
         return MaterialPageRoute(builder: (_) => const DashboardTab());
 

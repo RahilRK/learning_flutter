@@ -48,10 +48,11 @@ class _ExclusiveOffersState extends State<ExclusiveOffers> {
             height: 8,
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
+            padding: const EdgeInsets.symmetric(horizontal: 8),
             child: GridView.count(
-              padding: EdgeInsets.zero,
               shrinkWrap: true,
+              physics: const ClampingScrollPhysics(),
+              padding: EdgeInsets.zero,
               crossAxisCount: 2,
               crossAxisSpacing: 0,
               mainAxisSpacing: 0,

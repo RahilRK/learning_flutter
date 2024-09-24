@@ -13,13 +13,13 @@ import 'dart:convert' as convert;
 
 import 'model/response/LoginResponse.dart';
 
-// var baseUrl = 'https://staging.unitedpharmacy.sa/en';
+var stagingUrl = 'https://staging.unitedpharmacy.sa/en';
 var baseUrl = 'https://unitedpharmacy.sa/en';
 
 Future<LoginResponse> logIn(LoginRequest loginReq) async {
   // This example uses the Google Books API to search for books about http.
   // https://developers.google.com/books/docs/overview
-  var logIn = '$baseUrl/mobikulhttp/customer/logIn';
+  var logIn = '$stagingUrl/mobikulhttp/customer/logIn';
   var uri = Uri.parse(logIn);
   var loginRes= LoginResponse();
 
@@ -39,7 +39,7 @@ Future<LoginResponse> logIn(LoginRequest loginReq) async {
 Future<VerificationResponse> sendotp(VerificationRequest verificationReq) async {
   // This example uses the Google Books API to search for books about http.
   // https://developers.google.com/books/docs/overview
-  var sendotp = '$baseUrl/mobikulhttp/customer/sendotp';
+  var sendotp = '$stagingUrl/mobikulhttp/customer/sendotp';
   var uri = Uri.parse(sendotp);
   var loginRes= VerificationResponse();
 
@@ -59,7 +59,7 @@ Future<VerificationResponse> sendotp(VerificationRequest verificationReq) async 
 Future<RegistrationResponse> createAccount(RegistrationRequest registrationReq) async {
   // This example uses the Google Books API to search for books about http.
   // https://developers.google.com/books/docs/overview
-  var createAccount = '$baseUrl/mobikulhttp/customer/createAccount';
+  var createAccount = '$stagingUrl/mobikulhttp/customer/createAccount';
   var uri = Uri.parse(createAccount);
   var loginRes= RegistrationResponse();
 

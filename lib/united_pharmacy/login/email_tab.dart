@@ -24,8 +24,8 @@ class _EmailTabState extends State<EmailTab> {
   bool isError = false;
   bool isButtonPressed = false;
 
-  late String _email;
-  late String _password;
+  String _email = "";
+  String _password = "";
 
   late List<GlobalKey<FormFieldState>> fieldKeys;
   late GlobalKey<FormFieldState> emailKey;
@@ -352,6 +352,7 @@ class _EmailTabState extends State<EmailTab> {
         mFactor: "2.625",
         currency: "SAR",
         username: _email,
+        mobile: "",
         password: _password,
         os: "android");
 
@@ -383,8 +384,7 @@ class _EmailTabState extends State<EmailTab> {
         showProgress = false;
       });*/
       Navigator.pop(dialogContext);
-
-      print(e);
+      print("Error in getEmailLogin: $e");
     });
   }
 }

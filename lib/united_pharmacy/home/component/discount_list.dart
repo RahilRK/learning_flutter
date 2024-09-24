@@ -28,10 +28,11 @@ class _DiscountListState extends State<DiscountList> {
       child: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
+            padding: const EdgeInsets.symmetric(horizontal: 12),
             child: SizedBox(
               height: 166,
               child: ListView.builder(
+                padding: EdgeInsets.zero,
                 itemCount: mList.length, // Number of items in your list
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (BuildContext context, int index) {

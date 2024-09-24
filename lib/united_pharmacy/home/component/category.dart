@@ -56,10 +56,10 @@ class _CategoryListState extends State<CategoryList> {
             height: 8,
           ),
 
-
           GridView.count(
-            padding: EdgeInsets.zero,
             shrinkWrap: true,
+            physics: const ClampingScrollPhysics(),
+            padding: EdgeInsets.zero,
             crossAxisCount: 4,
             crossAxisSpacing: 0,
             mainAxisSpacing: 0,

@@ -55,7 +55,7 @@ class _MobileNumberTabState extends State<MobileNumberTab> {
     for (var element in fieldKeys) {
       element.currentState!.save();
     }
-    getEmailLogin();
+    getMobileLogin();
   }
 
   void showProgress() {
@@ -292,7 +292,7 @@ class _MobileNumberTabState extends State<MobileNumberTab> {
     );
   }
 
-  void getEmailLogin() {
+  void getMobileLogin() {
     showProgress();
     var loginReq = LoginRequest(
         websiteId: "1",
@@ -329,7 +329,7 @@ class _MobileNumberTabState extends State<MobileNumberTab> {
     }, onError: (e) {
 
       Navigator.pop(dialogContext);
-      print(e);
+      print("Error in getMobileLogin: $e");
     });
   }
 }

@@ -5,6 +5,7 @@ import 'package:learning_flutter/theme/color.dart';
 import 'package:learning_flutter/united_pharmacy/home/Home.dart';
 
 import '../../theme/string.dart';
+import '../home/HomeDemo.dart';
 
 class DashboardTab extends StatefulWidget {
   const DashboardTab({super.key});
@@ -37,7 +38,8 @@ const List<TabItem> items = [
 ];
 
 List<Widget> pageList = [
-  const Home(),
+  // const Home(),
+  const HomeDemo(),
   const Center(child: Text(AppString.Categories),),
   const Center(child: Text(AppString.Offers),),
   const Center(child: Text(AppString.Notifications),),
@@ -123,7 +125,11 @@ class _DashboardTabState extends State<DashboardTab> {
           ),
         ],
       ),
-      body: pageList.elementAt(visit),
+      // body: pageList.elementAt(visit),
+      body: IndexedStack(
+        index: visit,
+        children: pageList,
+      ),
       bottomNavigationBar: BottomBarInspiredOutside(
         items: items,
         backgroundColor: AppColor.white,

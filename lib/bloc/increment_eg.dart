@@ -20,27 +20,37 @@ class _IncrementEgState extends State<IncrementEg> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text('My Bloc App'),
+      ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Center(
-              child: BlocBuilder<CounterBloc, CounterState>(
-                // bloc: counterBloc,
-                  builder: (context, counterState) {
-                    return BlocBuilder<VisibilityBloc, VisibilityState>(
-                      builder: (context, visibilityState) {
-                        return Visibility(
-                          visible: visibilityState.show,
-                          child: Text(
-                            counterState.count.toString(),
-                            style:
-                            TextStyle(fontSize: 32,
-                                fontWeight: FontWeight.bold),
-                          ),
-                        );
-                      },
-                    );
-                  })),
+          BlocBuilder<CounterBloc, CounterState>(
+              // bloc: counterBloc,
+              builder: (context, counterState) {
+            return BlocBuilder<VisibilityBloc, VisibilityState>(
+              builder: (context, visibilityState) {
+                return Visibility(
+                  visible: visibilityState.show,
+                  child: Text(
+                    counterState.count.toString(),
+                    style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
+                  ),
+                );
+              },
+            );
+          }),
+          BlocListener<CounterBloc, CounterState>(
+            listener: (context, state) {
+              if (state.count == 3) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text('Counter is: ${state.count}')),
+                );
+              }
+            },
+            child: Text('Bloc Listener'),
+          ),
           SizedBox(
             height: 8,
           ),
@@ -63,13 +73,15 @@ class _IncrementEgState extends State<IncrementEg> {
                 child: Icon(Icons.remove),
                 backgroundColor: Colors.redAccent,
               ),
-
               FloatingActionButton(
                 onPressed: () {
                   // counterBloc.add(CounterDecrementEvent());
                   context.read<VisibilityBloc>().add(ShowEvent());
                 },
-                child: Text('Show', style: TextStyle(color: Colors.white),),
+                child: Text(
+                  'Show',
+                  style: TextStyle(color: Colors.white),
+                ),
                 backgroundColor: Colors.black,
               ),
               FloatingActionButton(
@@ -77,7 +89,10 @@ class _IncrementEgState extends State<IncrementEg> {
                   // counterBloc.add(CounterDecrementEvent());
                   context.read<VisibilityBloc>().add(HideEvent());
                 },
-                child: Text('Hide', style: TextStyle(color: Colors.white),),
+                child: Text(
+                  'Hide',
+                  style: TextStyle(color: Colors.white),
+                ),
                 backgroundColor: Colors.black,
               ),
             ],

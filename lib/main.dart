@@ -6,6 +6,8 @@ import 'package:learning_flutter/theme/color.dart';
 import 'package:learning_flutter/theme/theme.dart';
 import 'package:learning_flutter/united_pharmacy/route_generator_for_united_pharmacy.dart';
 
+import 'bloc/increment_eg.dart';
+
 void main() {
   runApp(const MaterialMyApp());
   // runApp(const DarkModeMyApp());
@@ -57,7 +59,8 @@ class MaterialMyApp extends StatelessWidget {
       // home: SplashScreen(),
       // home: Registration(),
       // home: FirstPage(),
-      initialRoute: '/',
+      home: IncrementEg(),
+      // initialRoute: '/',
 
       /*todo 2nd way to navigate*/
       /*routes: {
@@ -65,7 +68,7 @@ class MaterialMyApp extends StatelessWidget {
       },*/
 
       /*todo 3rd way to navigate*/
-      onGenerateRoute: RouteGeneratorForUnitedPharmacy.generateRoute,
+      // onGenerateRoute: RouteGeneratorForUnitedPharmacy.generateRoute,
     );
   }
 }

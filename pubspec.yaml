@@ -43,6 +43,7 @@ dependencies:
   flutter_svg: ^2.0.10+1
   text_marquee: ^0.0.2
   flutter_bloc: ^8.1.6
+  dio: ^5.7.0
 
 dev_dependencies:
   flutter_test:

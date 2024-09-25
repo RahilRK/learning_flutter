@@ -26,6 +26,7 @@ class _IncrementEgState extends State<IncrementEg> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          // BlocBuilder eg
           BlocBuilder<CounterBloc, CounterState>(
               // bloc: counterBloc,
               builder: (context, counterState) {
@@ -41,6 +42,7 @@ class _IncrementEgState extends State<IncrementEg> {
               },
             );
           }),
+          // BlocListener eg
           BlocListener<CounterBloc, CounterState>(
             listener: (context, state) {
               if (state.count == 3) {
@@ -50,6 +52,26 @@ class _IncrementEgState extends State<IncrementEg> {
               }
             },
             child: Text('Bloc Listener'),
+          ),
+          SizedBox(
+            height: 8,
+          ),
+          // BlocConsumer eg
+          BlocConsumer<CounterBloc, CounterState>(
+            // bloc: counterBloc,
+            builder: (context, counterState) {
+              return Text(
+                counterState.count.toString(),
+                style: const TextStyle(fontSize: 32, fontWeight: FontWeight.bold, color: Colors.blue),
+              );
+            },
+            listener: (BuildContext context, CounterState state) {
+              if (state.count == 3) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text('Counter is: ${state.count}')),
+                );
+              }
+            },
           ),
           SizedBox(
             height: 8,

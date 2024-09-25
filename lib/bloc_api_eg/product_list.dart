@@ -3,7 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:learning_flutter/bloc_api_eg/bloc/product_list_bloc.dart';
 
 import 'bloc/product_list_state.dart';
-import 'data/model/MealModel.dart';
+import 'data/model/requestMealModel.dart';
+import 'data/model/responseMealModel.dart';
 
 class ProductList extends StatefulWidget {
   const ProductList({super.key});
@@ -18,7 +19,10 @@ class _ProductListState extends State<ProductList> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    context.read<ProductListBloc>().add(LoadProductListEvent());
+
+    RequestMealModel requestMealModel = RequestMealModel(a: "Canadian");
+
+    context.read<ProductListBloc>().add(LoadProductListEvent(requestMealModel));
   }
 
   @override
@@ -58,9 +62,9 @@ class _ProductListState extends State<ProductList> {
 
   Widget ProductItem(Meals model) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: ListTile(
-        leading: Image.network(model.strMealThumb??"strMealThumb"),
+        leading: ClipOval(child: Image.network(model.strMealThumb??"strMealThumb")),
         title: Text(model.strMeal??"strMeal"),
         onTap: () {
           print("onTap");

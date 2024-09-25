@@ -6,5 +6,6 @@ sealed class ProductListEvent {
 }
 
 final class LoadProductListEvent extends ProductListEvent {
-
+  final RequestMealModel requestMealModel;
+  LoadProductListEvent(this.requestMealModel);
 }

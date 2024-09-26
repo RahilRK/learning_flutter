@@ -21,7 +21,7 @@ class _IncrementEgState extends State<IncrementEg> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('My Bloc App'),
+        title: const Text('My Bloc App'),
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -36,12 +36,13 @@ class _IncrementEgState extends State<IncrementEg> {
                   visible: visibilityState.show,
                   child: Text(
                     counterState.count.toString(),
-                    style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
+                    style: const TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
                   ),
                 );
               },
             );
           }),
+
           // BlocListener eg
           BlocListener<CounterBloc, CounterState>(
             listener: (context, state) {
@@ -51,18 +52,22 @@ class _IncrementEgState extends State<IncrementEg> {
                 );
               }
             },
-            child: Text('Bloc Listener'),
+            child: const Text('Bloc Listener'),
           ),
-          SizedBox(
+          const SizedBox(
             height: 8,
           ),
+
           // BlocConsumer eg
           BlocConsumer<CounterBloc, CounterState>(
             // bloc: counterBloc,
             builder: (context, counterState) {
               return Text(
                 counterState.count.toString(),
-                style: const TextStyle(fontSize: 32, fontWeight: FontWeight.bold, color: Colors.blue),
+                style: const TextStyle(
+                    fontSize: 32,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.blue),
               );
             },
             listener: (BuildContext context, CounterState state) {
@@ -73,9 +78,21 @@ class _IncrementEgState extends State<IncrementEg> {
               }
             },
           ),
-          SizedBox(
+          const SizedBox(
             height: 8,
           ),
+
+          // BlocSelector eg
+          BlocSelector<CounterBloc, CounterState, bool>(selector: (state) {
+            return state.count % 2 == 0;
+          }, builder: (context, isEven) {
+            return isEven ? const Text('Even', style: TextStyle(color: Colors.blue),) : const Text('Odd', style: TextStyle(color: Colors.grey),);
+          }),
+          const SizedBox(
+            height: 8,
+          ),
+
+          //UI
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
@@ -84,38 +101,38 @@ class _IncrementEgState extends State<IncrementEg> {
                   // counterBloc.add(CounterIncrementEvent());
                   context.read<CounterBloc>().add(CounterIncrementEvent());
                 },
-                child: Icon(Icons.add),
                 backgroundColor: Colors.green,
+                child: const Icon(Icons.add),
               ),
               FloatingActionButton(
                 onPressed: () {
                   // counterBloc.add(CounterDecrementEvent());
                   context.read<CounterBloc>().add(CounterDecrementEvent());
                 },
-                child: Icon(Icons.remove),
                 backgroundColor: Colors.redAccent,
+                child: const Icon(Icons.remove),
               ),
               FloatingActionButton(
                 onPressed: () {
                   // counterBloc.add(CounterDecrementEvent());
                   context.read<VisibilityBloc>().add(ShowEvent());
                 },
-                child: Text(
+                backgroundColor: Colors.black,
+                child: const Text(
                   'Show',
                   style: TextStyle(color: Colors.white),
                 ),
-                backgroundColor: Colors.black,
               ),
               FloatingActionButton(
                 onPressed: () {
                   // counterBloc.add(CounterDecrementEvent());
                   context.read<VisibilityBloc>().add(HideEvent());
                 },
-                child: Text(
+                backgroundColor: Colors.black,
+                child: const Text(
                   'Hide',
                   style: TextStyle(color: Colors.white),
                 ),
-                backgroundColor: Colors.black,
               ),
             ],
           )

@@ -20,8 +20,8 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
         try {
           final productList = await productListRepository.getProductList(event.requestMealModel);
           emit(ProductListSuccessState(productList));
-        } catch (e) {
-          var error = e.toString();
+        } catch (e, stacktrace) {
+          var error = stacktrace.toString();
           emit(ProductListErrorState(error));
         }
       }

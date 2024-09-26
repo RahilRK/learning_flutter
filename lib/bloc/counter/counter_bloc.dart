@@ -15,4 +15,25 @@ class CounterBloc extends Bloc<CounterEvent, CounterState> {
       emit(CounterState(count: state.count-1));
     });
   }
+
+  @override
+  void onEvent(CounterEvent event) {
+    // TODO: implement onEvent
+    super.onEvent(event);
+    print("onEvent: ${event.toString()}");
+  }
+
+  @override
+  void onTransition(Transition<CounterEvent, CounterState> transition) {
+    // TODO: implement onTransition
+    super.onTransition(transition);
+    print("onTransition: ${transition.toString()}");
+  }
+
+  @override
+  void onChange(Change<CounterState> change) {
+    // TODO: implement onChange
+    super.onChange(change);
+    print("onChange: currentState: ${change.currentState.count}, nextState:${change.nextState.count}");
+  }
 }

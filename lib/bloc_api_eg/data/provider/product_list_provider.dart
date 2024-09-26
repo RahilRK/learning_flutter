@@ -16,9 +16,9 @@ class ProductListProvider {
 
       return ResponseMealModel.fromJson(response.data);
     } catch (e, stacktrace) {
-      print('Exception: ' + e.toString());
-      print('Stacktrace: ' + stacktrace.toString());
-      return Future.error(e.toString());
+      var error = stacktrace.toString();
+      print('error: $error');
+      return Future.error(error);
     }
   }
 }

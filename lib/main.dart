@@ -7,16 +7,18 @@ import 'package:learning_flutter/bloc/visibility/counter_bloc.dart';
 import 'package:learning_flutter/bloc_api_eg/bloc/product_list_bloc.dart';
 import 'package:learning_flutter/bloc_api_eg/data/provider/product_list_provider.dart';
 import 'package:learning_flutter/bloc_api_eg/data/repository/product_list_repository.dart';
+import 'package:learning_flutter/cubit/counter/counter_cubit.dart';
 import 'package:learning_flutter/theme/color.dart';
 import 'package:learning_flutter/theme/theme.dart';
 import 'package:learning_flutter/united_pharmacy/route_generator_for_united_pharmacy.dart';
 
 import 'bloc/increment_eg.dart';
 import 'bloc_api_eg/product_list.dart';
+import 'cubit/cubit_increment_eg.dart';
 
 void main() {
-  // runApp(const MaterialMyBlocApp());
-  runApp(const MyBlocApiApp());
+  runApp(const MyCubitApp());
+  // runApp(const MyBlocApiApp());
   // runApp(const MaterialMyApp());
   // runApp(const DarkModeMyApp());
   // runApp(const CupertinoMyApp());
@@ -96,9 +98,46 @@ class MyBlocApiApp extends StatelessWidget {
       home: RepositoryProvider(
         create: (context) => ProductListRepository(ProductListProvider()),
         child: BlocProvider(
-          create: (context) => ProductListBloc(context.read<ProductListRepository>()),
+          create: (context) =>
+              ProductListBloc(context.read<ProductListRepository>()),
           child: ProductList(),
         ),
+      ),
+    );
+  }
+}
+
+class MyCubitApp extends StatelessWidget {
+  const MyCubitApp({super.key});
+
+  // This widget is the root of your application.
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'My Bloc App',
+      theme: ThemeData(
+        // This is the theme of your application.
+        //
+        // TRY THIS: Try running your application with "flutter run". You'll see
+        // the application has a purple toolbar. Then, without quitting the app,
+        // try changing the seedColor in the colorScheme below to Colors.green
+        // and then invoke "hot reload" (save your changes or press the "hot
+        // reload" button in a Flutter-supported IDE, or press "r" if you used
+        // the command line to start the app).
+        //
+        // Notice that the counter didn't reset back to zero; the application
+        // state is not lost during the reload. To reset the state, use hot
+        // restart instead.
+        //
+        // This works for code too, not just values: Most code changes can be
+        // tested with just a hot reload.
+        // colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: AppColor.color_247EAD),
+        useMaterial3: false,
+      ),
+      home: BlocProvider(
+        create: (context) => CounterCubit(),
+        child: const CubitIncrementEg(),
       ),
     );
   }

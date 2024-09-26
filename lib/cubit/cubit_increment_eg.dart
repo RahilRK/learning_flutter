@@ -22,7 +22,7 @@ class _CubitIncrementEgState extends State<CubitIncrementEg> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('My Bloc App'),
+        title: const Text('My Cubit App'),
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,

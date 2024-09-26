@@ -114,7 +114,7 @@ class MyCubitApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'My Bloc App',
+      title: 'My Cubit App',
       theme: ThemeData(
         // This is the theme of your application.
         //

@@ -8,6 +8,11 @@ import 'package:learning_flutter/bloc_api_eg/bloc/product_list_bloc.dart';
 import 'package:learning_flutter/bloc_api_eg/data/provider/product_list_provider.dart';
 import 'package:learning_flutter/bloc_api_eg/data/repository/product_list_repository.dart';
 import 'package:learning_flutter/cubit/counter/counter_cubit.dart';
+import 'package:learning_flutter/cubit_dynamic_list_eg/cubit/person_cubit.dart';
+import 'package:learning_flutter/cubit_form_validation_api_eg/login/cubit/login_cubit.dart';
+import 'package:learning_flutter/cubit_form_validation_api_eg/login/login_screen.dart';
+import 'package:learning_flutter/cubit_form_validation_api_eg/login/provider/login_provider.dart';
+import 'package:learning_flutter/cubit_form_validation_api_eg/login/repository/login_repository.dart';
 import 'package:learning_flutter/theme/color.dart';
 import 'package:learning_flutter/theme/theme.dart';
 import 'package:learning_flutter/united_pharmacy/route_generator_for_united_pharmacy.dart';
@@ -15,9 +20,12 @@ import 'package:learning_flutter/united_pharmacy/route_generator_for_united_phar
 import 'bloc/increment_eg.dart';
 import 'bloc_api_eg/product_list.dart';
 import 'cubit/cubit_increment_eg.dart';
+import 'cubit_dynamic_list_eg/dynamic_list.dart';
 
 void main() {
-  runApp(const MyCubitApp());
+  // runApp(const MyCubitApp());
+  // runApp(const MyCubitDynamicListApp());
+  runApp(const MyCubitFormValidationApp());
   // runApp(const MyBlocApiApp());
   // runApp(const MaterialMyApp());
   // runApp(const DarkModeMyApp());
@@ -143,6 +151,81 @@ class MyCubitApp extends StatelessWidget {
   }
 }
 
+class MyCubitDynamicListApp extends StatelessWidget {
+  const MyCubitDynamicListApp({super.key});
+
+  // This widget is the root of your application.
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'My Cubit Dynamic List App',
+      theme: ThemeData(
+        // This is the theme of your application.
+        //
+        // TRY THIS: Try running your application with "flutter run". You'll see
+        // the application has a purple toolbar. Then, without quitting the app,
+        // try changing the seedColor in the colorScheme below to Colors.green
+        // and then invoke "hot reload" (save your changes or press the "hot
+        // reload" button in a Flutter-supported IDE, or press "r" if you used
+        // the command line to start the app).
+        //
+        // Notice that the counter didn't reset back to zero; the application
+        // state is not lost during the reload. To reset the state, use hot
+        // restart instead.
+        //
+        // This works for code too, not just values: Most code changes can be
+        // tested with just a hot reload.
+        // colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: AppColor.color_247EAD),
+        useMaterial3: false,
+      ),
+      home: BlocProvider(
+        create: (context) => PersonCubit(),
+        child: const DynamicList(),
+      ),
+    );
+  }
+}
+
+class MyCubitFormValidationApp extends StatelessWidget {
+  const MyCubitFormValidationApp({super.key});
+
+  // This widget is the root of your application.
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'My Cubit Form Validation App',
+      theme: ThemeData(
+        // This is the theme of your application.
+        //
+        // TRY THIS: Try running your application with "flutter run". You'll see
+        // the application has a purple toolbar. Then, without quitting the app,
+        // try changing the seedColor in the colorScheme below to Colors.green
+        // and then invoke "hot reload" (save your changes or press the "hot
+        // reload" button in a Flutter-supported IDE, or press "r" if you used
+        // the command line to start the app).
+        //
+        // Notice that the counter didn't reset back to zero; the application
+        // state is not lost during the reload. To reset the state, use hot
+        // restart instead.
+        //
+        // This works for code too, not just values: Most code changes can be
+        // tested with just a hot reload.
+        // colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: AppColor.color_247EAD),
+        useMaterial3: false,
+      ),
+      home: RepositoryProvider(
+        create: (context) => LoginRepository(LoginProvider()),
+        child: BlocProvider(
+          create: (context) => LoginCubit(context.read<LoginRepository>()),
+          child: const LoginScreen(),
+        ),
+      ),
+    );
+  }
+}
+
 class MaterialMyApp extends StatelessWidget {
   const MaterialMyApp({super.key});
 
@@ -171,9 +254,9 @@ class MaterialMyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: AppColor.color_247EAD),
         useMaterial3: false,
         /*textTheme: TextTheme(
-          displaySmall: TextStyle(fontSize: 14, fontWeight: FontWeight.normal, color: Colors.red), 
-          displayMedium: TextStyle(fontSize: 18, fontWeight: FontWeight.w400, color: Colors.blue), 
-          displayLarge: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.green), 
+          displaySmall: TextStyle(fontSize: 14, fontWeight: FontWeight.normal, color: Colors.red),
+          displayMedium: TextStyle(fontSize: 18, fontWeight: FontWeight.w400, color: Colors.blue),
+          displayLarge: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.green),
         ),*/
       ),
       // home: const DemoScreen(title: 'Flutter Demo Home Page'),

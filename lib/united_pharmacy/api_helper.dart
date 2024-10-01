@@ -24,6 +24,7 @@ Future<LoginResponse> logIn(LoginRequest loginReq) async {
   var loginRes= LoginResponse();
 
   // Await the http get response, then decode the json-formatted response.
+  print('parse: ${uri}');
   var response = await http.post(uri, body: loginReq.toJson());
   if (response.statusCode == 200) {
     print('response: ${response.body}');

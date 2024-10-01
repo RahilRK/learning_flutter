@@ -1,122 +1,113 @@
 /// success : true
-/// message : ""
-/// customerName : "rahil mithani"
-/// customerEmail : "rahil.mithani@brainvire.com"
-/// mobile_number : "540577786"
-/// social_media : null
-/// customerId : "306283"
-/// customerToken : "qs6nm6hlemt37ubqwlj0r6eh2r4n1vgi"
+/// message : "Your Account has been created successfully"
+/// customerName : "test user"
+/// customerId : "306285"
+/// cartCount : 0
+/// customerEmail : "rahil.mithani+1@brainvire.com"
+/// customerToken : "ig1rpqand3rnw3796doi0tiglvqkndaq"
+/// social_media : ""
+/// mobile_number : "566666610"
 /// bannerImage : ""
 /// profileImage : ""
-/// cartCount : 0
-/// wishlistCount : 0
 
-class LoginResponse {
-  LoginResponse({
+class RegistrationResponse {
+  RegistrationResponse({
       bool? success, 
       String? message, 
       String? customerName, 
-      String? customerEmail, 
-      String? mobileNumber, 
-      dynamic socialMedia, 
       String? customerId, 
-      String? customerToken, 
-      String? bannerImage, 
-      String? profileImage, 
       num? cartCount, 
-      num? wishlistCount,}){
+      String? customerEmail, 
+      String? customerToken, 
+      String? socialMedia, 
+      String? mobileNumber, 
+      String? bannerImage, 
+      String? profileImage,}){
     _success = success;
     _message = message;
     _customerName = customerName;
-    _customerEmail = customerEmail;
-    _mobileNumber = mobileNumber;
-    _socialMedia = socialMedia;
     _customerId = customerId;
+    _cartCount = cartCount;
+    _customerEmail = customerEmail;
     _customerToken = customerToken;
+    _socialMedia = socialMedia;
+    _mobileNumber = mobileNumber;
     _bannerImage = bannerImage;
     _profileImage = profileImage;
-    _cartCount = cartCount;
-    _wishlistCount = wishlistCount;
 }
 
-  LoginResponse.fromJson(Map<String, dynamic> json) {
+  RegistrationResponse.fromJson(dynamic json) {
     _success = json['success'];
     _message = json['message'];
     _customerName = json['customerName'];
-    _customerEmail = json['customerEmail'];
-    _mobileNumber = json['mobile_number'];
-    _socialMedia = json['social_media'];
     _customerId = json['customerId'];
+    _cartCount = json['cartCount'];
+    _customerEmail = json['customerEmail'];
     _customerToken = json['customerToken'];
+    _socialMedia = json['social_media'];
+    _mobileNumber = json['mobile_number'];
     _bannerImage = json['bannerImage'];
     _profileImage = json['profileImage'];
-    _cartCount = json['cartCount'];
-    _wishlistCount = json['wishlistCount'];
   }
   bool? _success;
   String? _message;
   String? _customerName;
-  String? _customerEmail;
-  String? _mobileNumber;
-  dynamic _socialMedia;
   String? _customerId;
+  num? _cartCount;
+  String? _customerEmail;
   String? _customerToken;
+  String? _socialMedia;
+  String? _mobileNumber;
   String? _bannerImage;
   String? _profileImage;
-  num? _cartCount;
-  num? _wishlistCount;
-LoginResponse copyWith({  bool? success,
+RegistrationResponse copyWith({  bool? success,
   String? message,
   String? customerName,
-  String? customerEmail,
-  String? mobileNumber,
-  dynamic socialMedia,
   String? customerId,
+  num? cartCount,
+  String? customerEmail,
   String? customerToken,
+  String? socialMedia,
+  String? mobileNumber,
   String? bannerImage,
   String? profileImage,
-  num? cartCount,
-  num? wishlistCount,
-}) => LoginResponse(  success: success ?? _success,
+}) => RegistrationResponse(  success: success ?? _success,
   message: message ?? _message,
   customerName: customerName ?? _customerName,
-  customerEmail: customerEmail ?? _customerEmail,
-  mobileNumber: mobileNumber ?? _mobileNumber,
-  socialMedia: socialMedia ?? _socialMedia,
   customerId: customerId ?? _customerId,
+  cartCount: cartCount ?? _cartCount,
+  customerEmail: customerEmail ?? _customerEmail,
   customerToken: customerToken ?? _customerToken,
+  socialMedia: socialMedia ?? _socialMedia,
+  mobileNumber: mobileNumber ?? _mobileNumber,
   bannerImage: bannerImage ?? _bannerImage,
   profileImage: profileImage ?? _profileImage,
-  cartCount: cartCount ?? _cartCount,
-  wishlistCount: wishlistCount ?? _wishlistCount,
 );
   bool? get success => _success;
   String? get message => _message;
   String? get customerName => _customerName;
-  String? get customerEmail => _customerEmail;
-  String? get mobileNumber => _mobileNumber;
-  dynamic get socialMedia => _socialMedia;
   String? get customerId => _customerId;
+  num? get cartCount => _cartCount;
+  String? get customerEmail => _customerEmail;
   String? get customerToken => _customerToken;
+  String? get socialMedia => _socialMedia;
+  String? get mobileNumber => _mobileNumber;
   String? get bannerImage => _bannerImage;
   String? get profileImage => _profileImage;
-  num? get cartCount => _cartCount;
-  num? get wishlistCount => _wishlistCount;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
     map['success'] = _success;
     map['message'] = _message;
     map['customerName'] = _customerName;
-    map['customerEmail'] = _customerEmail;
-    map['mobile_number'] = _mobileNumber;
-    map['social_media'] = _socialMedia;
     map['customerId'] = _customerId;
+    map['cartCount'] = _cartCount;
+    map['customerEmail'] = _customerEmail;
     map['customerToken'] = _customerToken;
+    map['social_media'] = _socialMedia;
+    map['mobile_number'] = _mobileNumber;
     map['bannerImage'] = _bannerImage;
     map['profileImage'] = _profileImage;
-    map['cartCount'] = _cartCount;
-    map['wishlistCount'] = _wishlistCount;
     return map;
   }
 

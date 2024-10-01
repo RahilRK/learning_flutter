@@ -372,7 +372,7 @@ class _EmailTabState extends State<EmailTab> {
 
         Navigator.pushNamedAndRemoveUntil(context, '/DashboardTab', (Route<dynamic> route) => false);
       } else {
-        var message = data.message ?? "";
+        var message = data.customerEmail ?? "";
         if (message.isNotEmpty) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text(message)),

@@ -16,6 +16,12 @@ import 'package:learning_flutter/cubit_form_validation_api_eg/login/repository/l
 import 'package:learning_flutter/theme/color.dart';
 import 'package:learning_flutter/theme/theme.dart';
 import 'package:learning_flutter/united_pharmacy/route_generator_for_united_pharmacy.dart';
+import 'package:learning_flutter/united_pharmacy_cubit/loginTab/view/login_tab.dart';
+import 'package:learning_flutter/united_pharmacy_cubit/mobileNumberTab/cubit/mob_no_login_cubit.dart';
+import 'package:learning_flutter/united_pharmacy_cubit/mobileNumberTab/provider/mobile_no_login_provider.dart';
+import 'package:learning_flutter/united_pharmacy_cubit/mobileNumberTab/repository/email_login_repository.dart';
+import 'package:learning_flutter/united_pharmacy_cubit/mobileNumberTab/view/mobile_no_tab.dart';
+
 
 import 'bloc/increment_eg.dart';
 import 'bloc_api_eg/product_list.dart';
@@ -25,7 +31,8 @@ import 'cubit_dynamic_list_eg/dynamic_list.dart';
 void main() {
   // runApp(const MyCubitApp());
   // runApp(const MyCubitDynamicListApp());
-  runApp(const MyCubitFormValidationApp());
+  // runApp(const MyCubitFormValidationApp());
+  runApp(const UnitedPharmaCubitApp());
   // runApp(const MyBlocApiApp());
   // runApp(const MaterialMyApp());
   // runApp(const DarkModeMyApp());
@@ -222,6 +229,53 @@ class MyCubitFormValidationApp extends StatelessWidget {
           child: const LoginScreen(),
         ),
       ),
+    );
+  }
+}
+
+class UnitedPharmaCubitApp extends StatelessWidget {
+  const UnitedPharmaCubitApp({super.key});
+
+  // This widget is the root of your application.
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'United Pharma Cubit',
+      theme: ThemeData(
+        // This is the theme of your application.
+        //
+        // TRY THIS: Try running your application with "flutter run". You'll see
+        // the application has a purple toolbar. Then, without quitting the app,
+        // try changing the seedColor in the colorScheme below to Colors.green
+        // and then invoke "hot reload" (save your changes or press the "hot
+        // reload" button in a Flutter-supported IDE, or press "r" if you used
+        // the command line to start the app).
+        //
+        // Notice that the counter didn't reset back to zero; the application
+        // state is not lost during the reload. To reset the state, use hot
+        // restart instead.
+        //
+        // This works for code too, not just values: Most code changes can be
+        // tested with just a hot reload.
+        // colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: AppColor.color_247EAD),
+        useMaterial3: false,
+      ),
+      /*home: RepositoryProvider(
+        create: (context) => UnitedPharaEmailLoginRepository(UnitedPharaEmailLoginProvider()),
+        child: BlocProvider(
+          create: (context) => UnitedPharaEmailLoginCubit(context.read<UnitedPharaEmailLoginRepository>()),
+          child: const EmailTabCubit(),
+        ),
+      ),*/
+      /*home: RepositoryProvider(
+        create: (context) => UnitedPharaMobNoLoginRepository(UnitedPharaMobNoLoginProvider()),
+        child: BlocProvider(
+          create: (context) => UnitedPharaMobNoLoginCubit(context.read<UnitedPharaMobNoLoginRepository>()),
+          child: const MobileNumberTabCubit(),
+        ),
+      ),*/
+      home: LoginTab(),
     );
   }
 }

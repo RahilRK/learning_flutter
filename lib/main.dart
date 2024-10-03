@@ -13,16 +13,13 @@ import 'package:learning_flutter/cubit_form_validation_api_eg/login/cubit/login_
 import 'package:learning_flutter/cubit_form_validation_api_eg/login/login_screen.dart';
 import 'package:learning_flutter/cubit_form_validation_api_eg/login/provider/login_provider.dart';
 import 'package:learning_flutter/cubit_form_validation_api_eg/login/repository/login_repository.dart';
+import 'package:learning_flutter/localization_eg/cubit/locale_cubit.dart';
+import 'package:learning_flutter/localization_eg/view/home.dart';
 import 'package:learning_flutter/theme/color.dart';
 import 'package:learning_flutter/theme/theme.dart';
 import 'package:learning_flutter/united_pharmacy/route_generator_for_united_pharmacy.dart';
 import 'package:learning_flutter/united_pharmacy_cubit/loginTab/view/login_tab.dart';
-import 'package:learning_flutter/united_pharmacy_cubit/mobileNumberTab/cubit/mob_no_login_cubit.dart';
-import 'package:learning_flutter/united_pharmacy_cubit/mobileNumberTab/provider/mobile_no_login_provider.dart';
-import 'package:learning_flutter/united_pharmacy_cubit/mobileNumberTab/repository/email_login_repository.dart';
-import 'package:learning_flutter/united_pharmacy_cubit/mobileNumberTab/view/mobile_no_tab.dart';
-
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'bloc/increment_eg.dart';
 import 'bloc_api_eg/product_list.dart';
 import 'cubit/cubit_increment_eg.dart';
@@ -32,11 +29,88 @@ void main() {
   // runApp(const MyCubitApp());
   // runApp(const MyCubitDynamicListApp());
   // runApp(const MyCubitFormValidationApp());
-  runApp(const UnitedPharmaCubitApp());
+  // runApp(const UnitedPharmaCubitApp());
+  runApp(const MyLocalizationApp());
   // runApp(const MyBlocApiApp());
   // runApp(const MaterialMyApp());
   // runApp(const DarkModeMyApp());
   // runApp(const CupertinoMyApp());
+}
+
+class MyLocalizationApp extends StatefulWidget {
+  const MyLocalizationApp({super.key});
+
+  @override
+  State<MyLocalizationApp> createState() => _MyLocalizationAppState();
+
+  /*static void setLocale(BuildContext context, Locale newLocale) {
+    _MyLocalizationAppState? state =
+        context.findAncestorStateOfType<_MyLocalizationAppState>();
+    state?.setLocale(newLocale);
+  }*/
+}
+
+class _MyLocalizationAppState extends State<MyLocalizationApp> {
+  /*Locale? _local;
+
+  setLocale(Locale local) {
+    setState(() {
+      _local = local;
+    });
+  }*/
+
+  // This widget is the root of your application.
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (context) => LocaleCubit(),
+      child: BlocBuilder<LocaleCubit, LocaleState>(
+        builder: (context, state) {
+
+
+          return MaterialApp(
+            title: 'My Localization App',
+            theme: ThemeData(
+              // This is the theme of your application.
+              //
+              // TRY THIS: Try running your application with "flutter run". You'll see
+              // the application has a purple toolbar. Then, without quitting the app,
+              // try changing the seedColor in the colorScheme below to Colors.green
+              // and then invoke "hot reload" (save your changes or press the "hot
+              // reload" button in a Flutter-supported IDE, or press "r" if you used
+              // the command line to start the app).
+              //
+              // Notice that the counter didn't reset back to zero; the application
+              // state is not lost during the reload. To reset the state, use hot
+              // restart instead.
+              //
+              // This works for code too, not just values: Most code changes can be
+              // tested with just a hot reload.
+              // colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+              colorScheme:
+                  ColorScheme.fromSeed(seedColor: AppColor.color_247EAD),
+              useMaterial3: false,
+            ),
+            localizationsDelegates: AppLocalizations.localizationsDelegates,
+            supportedLocales: AppLocalizations.supportedLocales,
+            // locale: _local,
+            locale: state.locale,
+            /*localeResolutionCallback: (deviceLocale, supportedLocales) {
+        print("deviceLocale: ${deviceLocale?.languageCode}");
+        for (var locale in supportedLocales) {
+          if (deviceLocale != null &&
+              deviceLocale.languageCode == locale.languageCode) {
+            return deviceLocale;
+          }
+        }
+        return supportedLocales.first;
+      },*/
+            home: const Home(),
+          );
+        },
+      ),
+    );
+  }
 }
 
 class MaterialMyBlocApp extends StatelessWidget {
@@ -261,21 +335,7 @@ class UnitedPharmaCubitApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: AppColor.color_247EAD),
         useMaterial3: false,
       ),
-      /*home: RepositoryProvider(
-        create: (context) => UnitedPharaEmailLoginRepository(UnitedPharaEmailLoginProvider()),
-        child: BlocProvider(
-          create: (context) => UnitedPharaEmailLoginCubit(context.read<UnitedPharaEmailLoginRepository>()),
-          child: const EmailTabCubit(),
-        ),
-      ),*/
-      /*home: RepositoryProvider(
-        create: (context) => UnitedPharaMobNoLoginRepository(UnitedPharaMobNoLoginProvider()),
-        child: BlocProvider(
-          create: (context) => UnitedPharaMobNoLoginCubit(context.read<UnitedPharaMobNoLoginRepository>()),
-          child: const MobileNumberTabCubit(),
-        ),
-      ),*/
-      home: LoginTab(),
+      home: const LoginTab(),
     );
   }
 }

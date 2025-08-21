@@ -1,8 +1,6 @@
 
 import 'package:dio/dio.dart';
 
-import 'package:http/http.dart' as http;
-import 'dart:convert' as convert;
 
 import '../../../united_pharmacy_cubit/model/request/LoginRequest.dart';
 import '../../../united_pharmacy_cubit/model/response/LoginResponse.dart';

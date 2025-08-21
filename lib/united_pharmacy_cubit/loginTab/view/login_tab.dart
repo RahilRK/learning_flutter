@@ -83,7 +83,7 @@ class _LoginTabState extends State<LoginTab>
                 color: Colors.indigo.shade500,
               ),*/
                 child: Text(
-                  AppString.MobileNumber,
+                  AppString.Email,
                 ),
               ),
               Tab(
@@ -93,7 +93,7 @@ class _LoginTabState extends State<LoginTab>
                   color: Colors.indigo.shade500,
                 )*/
                   child: Text(
-                AppString.Email,
+                    AppString.MobileNumber,
               )),
             ],
             tabAlignment: TabAlignment.center,

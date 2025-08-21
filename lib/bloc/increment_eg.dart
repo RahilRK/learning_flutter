@@ -29,14 +29,18 @@ class _IncrementEgState extends State<IncrementEg> {
           // BlocBuilder eg
           BlocBuilder<CounterBloc, CounterState>(
               // bloc: counterBloc,
-              builder: (context, counterState) {
+              buildWhen: (prev, curr) {
+            print("Prev: ${prev.count}, Curr: ${curr.count}");
+            return true;
+          }, builder: (context, counterState) {
             return BlocBuilder<VisibilityBloc, VisibilityState>(
               builder: (context, visibilityState) {
                 return Visibility(
                   visible: visibilityState.show,
                   child: Text(
                     counterState.count.toString(),
-                    style: const TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
+                    style: const TextStyle(
+                        fontSize: 32, fontWeight: FontWeight.bold),
                   ),
                 );
               },
@@ -86,7 +90,15 @@ class _IncrementEgState extends State<IncrementEg> {
           BlocSelector<CounterBloc, CounterState, bool>(selector: (state) {
             return state.count % 2 == 0;
           }, builder: (context, isEven) {
-            return isEven ? const Text('Even', style: TextStyle(color: Colors.blue),) : const Text('Odd', style: TextStyle(color: Colors.grey),);
+            return isEven
+                ? const Text(
+                    'Even',
+                    style: TextStyle(color: Colors.blue),
+                  )
+                : const Text(
+                    'Odd',
+                    style: TextStyle(color: Colors.grey),
+                  );
           }),
           const SizedBox(
             height: 8,

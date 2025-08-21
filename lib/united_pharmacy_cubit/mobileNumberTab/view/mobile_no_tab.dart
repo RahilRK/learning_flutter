@@ -236,7 +236,7 @@ class _MobileNumberTabCubitState extends State<MobileNumberTabCubit> {
           } else if (state is MobNoLoginSuccessState) {
             var response = state.loginResponseModel;
             ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text(response.mobileNumber??"")),
+              SnackBar(content: Text(response.mobileNumber ?? "")),
             );
             Navigator.pop(dialogContext);
           } else if (state is MobNoLoginErrorState) {

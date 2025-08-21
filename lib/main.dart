@@ -15,6 +15,7 @@ import 'package:learning_flutter/cubit_form_validation_api_eg/login/provider/log
 import 'package:learning_flutter/cubit_form_validation_api_eg/login/repository/login_repository.dart';
 import 'package:learning_flutter/localization_eg/cubit/locale_cubit.dart';
 import 'package:learning_flutter/localization_eg/view/home.dart';
+import 'package:learning_flutter/search_player/player_cubit.dart';
 import 'package:learning_flutter/theme/color.dart';
 import 'package:learning_flutter/theme/theme.dart';
 import 'package:learning_flutter/united_pharmacy/route_generator_for_united_pharmacy.dart';
@@ -30,11 +31,13 @@ void main() {
   // runApp(const MyCubitDynamicListApp());
   // runApp(const MyCubitFormValidationApp());
   // runApp(const UnitedPharmaCubitApp());
-  runApp(const MyLocalizationApp());
+  // runApp(const MyLocalizationApp());
   // runApp(const MyBlocApiApp());
   // runApp(const MaterialMyApp());
   // runApp(const DarkModeMyApp());
   // runApp(const CupertinoMyApp());
+  // runApp(const MaterialMyBlocApp());
+  runApp(const MySearchPlayer());
 }
 
 class MyLocalizationApp extends StatefulWidget {
@@ -43,7 +46,7 @@ class MyLocalizationApp extends StatefulWidget {
   @override
   State<MyLocalizationApp> createState() => _MyLocalizationAppState();
 
-  /*static void setLocale(BuildContext context, Locale newLocale) {
+/*static void setLocale(BuildContext context, Locale newLocale) {
     _MyLocalizationAppState? state =
         context.findAncestorStateOfType<_MyLocalizationAppState>();
     state?.setLocale(newLocale);
@@ -66,8 +69,6 @@ class _MyLocalizationAppState extends State<MyLocalizationApp> {
       create: (context) => LocaleCubit(),
       child: BlocBuilder<LocaleCubit, LocaleState>(
         builder: (context, state) {
-
-
           return MaterialApp(
             title: 'My Localization App',
             theme: ThemeData(
@@ -265,6 +266,83 @@ class MyCubitDynamicListApp extends StatelessWidget {
         child: const DynamicList(),
       ),
     );
+  }
+}
+
+class MySearchPlayer extends StatelessWidget {
+  const MySearchPlayer({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: "Player Search",
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: AppColor.color_247EAD),
+        useMaterial3: false,
+      ),
+      home: BlocProvider<PlayerCubit>(
+        create: (context) => PlayerCubit(),
+        child: const PlayerSearchHomePage(),
+      ),
+    );
+  }
+}
+
+class PlayerSearchHomePage extends StatefulWidget {
+  const PlayerSearchHomePage({super.key});
+
+  @override
+  State<PlayerSearchHomePage> createState() => _PlayerSearchHomePageState();
+}
+
+class _PlayerSearchHomePageState extends State<PlayerSearchHomePage> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(
+          title: const Text("Player Filter"),
+        ),
+        body: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            children: [
+              TextField(
+                onChanged: (value) {
+                  context.read<PlayerCubit>().filterPlayer(value);
+                },
+                decoration: InputDecoration(
+                    labelText: 'Search', suffixIcon: Icon(Icons.search)),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Expanded(child: BlocBuilder<PlayerCubit, PlayerState>(
+                builder: (context, state) {
+                  if(state is PlayerInitialState) {
+                    return showPlayerList(state.players);
+                  }
+                  else if(state is PlayerFilteredState) {
+                    return showPlayerList(state.filteredPlayers);
+                  }
+                  return Container();
+                },
+              ))
+            ],
+          ),
+        ));
+  }
+
+  Widget showPlayerList(List<Map<String, dynamic>> players) {
+
+    return ListView.builder(itemCount: players.length, itemBuilder: (context, index) {
+
+      final player = players[index];
+
+      return ListTile(
+        title: Text(player['name']),
+        subtitle: Text(player['country']),
+      );
+    });
   }
 }
 

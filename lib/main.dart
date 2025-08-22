@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -13,6 +15,7 @@ import 'package:learning_flutter/cubit_form_validation_api_eg/login/cubit/login_
 import 'package:learning_flutter/cubit_form_validation_api_eg/login/login_screen.dart';
 import 'package:learning_flutter/cubit_form_validation_api_eg/login/provider/login_provider.dart';
 import 'package:learning_flutter/cubit_form_validation_api_eg/login/repository/login_repository.dart';
+import 'package:learning_flutter/image_picker/image_picker_cubit.dart';
 import 'package:learning_flutter/localization_eg/cubit/locale_cubit.dart';
 import 'package:learning_flutter/localization_eg/view/home.dart';
 import 'package:learning_flutter/search_player/player_cubit.dart';
@@ -37,7 +40,8 @@ void main() {
   // runApp(const DarkModeMyApp());
   // runApp(const CupertinoMyApp());
   // runApp(const MaterialMyBlocApp());
-  runApp(const MySearchPlayer());
+  // runApp(const MySearchPlayer());
+  runApp(const MyApp());
 }
 
 class MyLocalizationApp extends StatefulWidget {
@@ -318,10 +322,9 @@ class _PlayerSearchHomePageState extends State<PlayerSearchHomePage> {
               ),
               Expanded(child: BlocBuilder<PlayerCubit, PlayerState>(
                 builder: (context, state) {
-                  if(state is PlayerInitialState) {
+                  if (state is PlayerInitialState) {
                     return showPlayerList(state.players);
-                  }
-                  else if(state is PlayerFilteredState) {
+                  } else if (state is PlayerFilteredState) {
                     return showPlayerList(state.filteredPlayers);
                   }
                   return Container();
@@ -333,16 +336,16 @@ class _PlayerSearchHomePageState extends State<PlayerSearchHomePage> {
   }
 
   Widget showPlayerList(List<Map<String, dynamic>> players) {
+    return ListView.builder(
+        itemCount: players.length,
+        itemBuilder: (context, index) {
+          final player = players[index];
 
-    return ListView.builder(itemCount: players.length, itemBuilder: (context, index) {
-
-      final player = players[index];
-
-      return ListTile(
-        title: Text(player['name']),
-        subtitle: Text(player['country']),
-      );
-    });
+          return ListTile(
+            title: Text(player['name']),
+            subtitle: Text(player['country']),
+          );
+        });
   }
 }
 
@@ -2856,6 +2859,94 @@ class SecondPage extends StatelessWidget {
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'My App',
+      theme: ThemeData(
+        // This is the theme of your application.
+        //
+        // TRY THIS: Try running your application with "flutter run". You'll see
+        // the application has a purple toolbar. Then, without quitting the app,
+        // try changing the seedColor in the colorScheme below to Colors.green
+        // and then invoke "hot reload" (save your changes or press the "hot
+        // reload" button in a Flutter-supported IDE, or press "r" if you used
+        // the command line to start the app).
+        //
+        // Notice that the counter didn't reset back to zero; the application
+        // state is not lost during the reload. To reset the state, use hot
+        // restart instead.
+        //
+        // This works for code too, not just values: Most code changes can be
+        // tested with just a hot reload.
+        // colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: AppColor.color_247EAD),
+        useMaterial3: false,
+      ),
+      home: BlocProvider(
+        create: (context) => ImagePickerCubit(),
+        child: const PickImageHome(),
+      ),
+    );
+  }
+}
+
+class PickImageHome extends StatelessWidget {
+  const PickImageHome({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Pick Image"),
+      ),
+      body: BlocBuilder<ImagePickerCubit, ImagePickerState>(
+        builder: (context, state) {
+          return _buildUI(context, state);
+        },
+      ),
+    );
+  }
+
+  Widget _buildUI(BuildContext context, ImagePickerState state) {
+
+    if(state is ImagePickerErrorState) {
+      print('state:${state.errorMessage}');
+    }
+
+    // decide button text
+    final buttonText =
+        state is ImagePickerLoadedState ? "Choose New Image" : "Choose Image";
+
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          // Only show image in Loaded state
+          if (state is ImagePickerLoadedState) ...[
+            Image.file(
+              File(state.imagePath),
+              height: 200,
+            ),
+            const SizedBox(height: 16),
+          ],
+
+          // Common button
+          ElevatedButton(
+            onPressed: () {
+              context.read<ImagePickerCubit>().pickImage();
+            },
+            child: Text(buttonText),
+          ),
+        ],
       ),
     );
   }

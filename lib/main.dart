@@ -32,7 +32,7 @@ import 'cubit_dynamic_list_eg/dynamic_list.dart';
 void main() {
   // runApp(const MyCubitApp());
   // runApp(const MyCubitDynamicListApp());
-  // runApp(const MyCubitFormValidationApp());
+  runApp(const MyCubitFormValidationApp());
   // runApp(const UnitedPharmaCubitApp());
   // runApp(const MyLocalizationApp());
   // runApp(const MyBlocApiApp());
@@ -41,7 +41,7 @@ void main() {
   // runApp(const CupertinoMyApp());
   // runApp(const MaterialMyBlocApp());
   // runApp(const MySearchPlayer());
-  runApp(const MyApp());
+  // runApp(const MyApp());
 }
 
 class MyLocalizationApp extends StatefulWidget {

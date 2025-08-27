@@ -7,7 +7,9 @@ import '../model/LoginResponseModel.dart';
 
 /*todo this class is used to make API call*/
 class LoginProvider {
-  final dio = Dio(BaseOptions(baseUrl: "https://reqres.in/api/"));
+  final dio = Dio(BaseOptions(baseUrl: "https://reqres.in/api/", headers: {
+    "x-api-key": "reqres-free-v1", // ✅ Add API key header here
+  }));
 
   Future<Response> doLogin(LoginRequestModel requestModel) async {
     Map<String, dynamic> params = requestModel.toJson();
@@ -24,7 +26,6 @@ class LoginProvider {
       }*/
       return response;
     } on DioException catch (e) {
-
       // handle 400 status code error
       if (e.response != null) {
         print(e.response?.statusCode);

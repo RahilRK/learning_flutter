@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -185,7 +186,9 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               BlocListener<LoginCubit, LoginState>(
                 listener: (context, state) {
-                  print('listener state: $state');
+                  if (kDebugMode) {
+                    print('listener state: $state');
+                  }
                   if (state is LoginLoadingState) {
                     showProgress();
                   } else if (state is LoginErrorState) {

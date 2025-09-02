@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -15,9 +17,13 @@ import 'package:learning_flutter/cubit_form_validation_api_eg/login/cubit/login_
 import 'package:learning_flutter/cubit_form_validation_api_eg/login/login_screen.dart';
 import 'package:learning_flutter/cubit_form_validation_api_eg/login/provider/login_provider.dart';
 import 'package:learning_flutter/cubit_form_validation_api_eg/login/repository/login_repository.dart';
+import 'package:learning_flutter/cubit_nav_tab/CubitNavTabApp.dart';
+import 'package:learning_flutter/firebase_notification/notification_cubit.dart';
 import 'package:learning_flutter/image_picker/image_picker_cubit.dart';
 import 'package:learning_flutter/localization_eg/cubit/locale_cubit.dart';
 import 'package:learning_flutter/localization_eg/view/home.dart';
+import 'package:learning_flutter/route_generator.dart';
+import 'package:learning_flutter/route_generator_for_nav_drawer.dart';
 import 'package:learning_flutter/search_player/player_cubit.dart';
 import 'package:learning_flutter/theme/color.dart';
 import 'package:learning_flutter/theme/theme.dart';
@@ -29,14 +35,26 @@ import 'bloc_api_eg/product_list.dart';
 import 'cubit/cubit_increment_eg.dart';
 import 'cubit_dynamic_list_eg/dynamic_list.dart';
 
-void main() {
+final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+
+  // Register background handler
+  FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
+
+/*  String? token = await FirebaseMessaging.instance.getToken();
+  print("🔥 Direct FCM Token: $token");  // << check this*/
+
   // runApp(const MyCubitApp());
   // runApp(const MyCubitDynamicListApp());
-  runApp(const MyCubitFormValidationApp());
+  // runApp(const MyCubitFormValidationApp());
   // runApp(const UnitedPharmaCubitApp());
   // runApp(const MyLocalizationApp());
   // runApp(const MyBlocApiApp());
   // runApp(const MaterialMyApp());
+  runApp(const CubitNavTabApp());
   // runApp(const DarkModeMyApp());
   // runApp(const CupertinoMyApp());
   // runApp(const MaterialMyBlocApp());
@@ -355,33 +373,42 @@ class MyCubitFormValidationApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'My Cubit Form Validation App',
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // TRY THIS: Try running your application with "flutter run". You'll see
-        // the application has a purple toolbar. Then, without quitting the app,
-        // try changing the seedColor in the colorScheme below to Colors.green
-        // and then invoke "hot reload" (save your changes or press the "hot
-        // reload" button in a Flutter-supported IDE, or press "r" if you used
-        // the command line to start the app).
-        //
-        // Notice that the counter didn't reset back to zero; the application
-        // state is not lost during the reload. To reset the state, use hot
-        // restart instead.
-        //
-        // This works for code too, not just values: Most code changes can be
-        // tested with just a hot reload.
-        // colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        colorScheme: ColorScheme.fromSeed(seedColor: AppColor.color_247EAD),
-        useMaterial3: false,
-      ),
-      home: RepositoryProvider(
-        create: (context) => LoginRepository(LoginProvider()),
-        child: BlocProvider(
-          create: (context) => LoginCubit(context.read<LoginRepository>()),
-          child: const LoginScreen(),
+    return RepositoryProvider(
+      create: (context) => LoginRepository(LoginProvider()),
+      child: MultiBlocProvider(
+        providers: [
+          // ✅ Provide NotificationCubit globally
+          BlocProvider(
+            lazy: false,
+            create: (_) => NotificationCubit(),
+          ), // ✅ Provide LoginCubit
+          BlocProvider(
+            create: (context) => LoginCubit(context.read<LoginRepository>()),
+          ),
+        ],
+        child: MaterialApp(
+          title: 'My Cubit Form Validation App',
+          theme: ThemeData(
+            // This is the theme of your application.
+            //
+            // TRY THIS: Try running your application with "flutter run". You'll see
+            // the application has a purple toolbar. Then, without quitting the app,
+            // try changing the seedColor in the colorScheme below to Colors.green
+            // and then invoke "hot reload" (save your changes or press the "hot
+            // reload" button in a Flutter-supported IDE, or press "r" if you used
+            // the command line to start the app).
+            //
+            // Notice that the counter didn't reset back to zero; the application
+            // state is not lost during the reload. To reset the state, use hot
+            // restart instead.
+            //
+            // This works for code too, not just values: Most code changes can be
+            // tested with just a hot reload.
+            // colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+            colorScheme: ColorScheme.fromSeed(seedColor: AppColor.color_247EAD),
+            useMaterial3: false,
+          ),
+          home: const LoginScreen(),
         ),
       ),
     );
@@ -474,7 +501,9 @@ class MaterialMyApp extends StatelessWidget {
       },*/
 
       /*todo 3rd way to navigate*/
-      onGenerateRoute: RouteGeneratorForUnitedPharmacy.generateRoute,
+      // onGenerateRoute: RouteGeneratorForUnitedPharmacy.generateRoute,
+      // onGenerateRoute: RouteGenerator.generateRoute,
+      onGenerateRoute: RouteGeneratorForNavDrawer.generateRoute,
     );
   }
 }
@@ -1616,12 +1645,14 @@ class NormalScreen extends StatelessWidget {
 }
 
 class DetailScreen extends StatelessWidget {
-  final String data;
+  final Map<String, dynamic> data;
 
   const DetailScreen({super.key, required this.data});
 
   @override
   Widget build(BuildContext context) {
+    final id = data['id'];
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('DetailScreen'),
@@ -1631,7 +1662,7 @@ class DetailScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              'Data: $data',
+              'Data: $id',
               style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
             ),
           ],
@@ -2917,8 +2948,7 @@ class PickImageHome extends StatelessWidget {
   }
 
   Widget _buildUI(BuildContext context, ImagePickerState state) {
-
-    if(state is ImagePickerErrorState) {
+    if (state is ImagePickerErrorState) {
       print('state:${state.errorMessage}');
     }
 

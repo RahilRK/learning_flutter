@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:learning_flutter/cubit_nav_tab/NavDrawerCubit.dart';
 import 'package:learning_flutter/main.dart';
 
-class RouteGeneratorForBottomNav {
+class RouteGeneratorForNavDrawerCubit {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     // Getting arguments passed in while calling Navigator.pushNamed
     final args = settings.arguments;
 
     switch (settings.name) {
       case '/':
-        return MaterialPageRoute(builder: (_) => const NavigationBarEg());
+        return MaterialPageRoute(builder: (_) => const NavDrawerCubit());
       case '/NormalScreen':
         return MaterialPageRoute(builder: (_) => const NormalScreen());
       case '/DetailScreen':
         // Validation of correct data type
-        // if (args is String) {
         if (args is Map<String, dynamic>) {
           return MaterialPageRoute(
             builder: (_) => DetailScreen(

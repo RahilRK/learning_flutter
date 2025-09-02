@@ -13,7 +13,8 @@ class RouteGeneratorForNavDrawer {
         return MaterialPageRoute(builder: (_) => const NormalScreen());
       case '/DetailScreen':
         // Validation of correct data type
-        if (args is String) {
+        // if (args is String) {
+        if (args is Map<String, dynamic>) {
           return MaterialPageRoute(
             builder: (_) => DetailScreen(
               data: args,

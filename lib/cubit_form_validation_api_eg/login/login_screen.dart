@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:learning_flutter/cubit_form_validation_api_eg/login/cubit/login_cubit.dart';
+import 'package:learning_flutter/firebase_notification/notification_cubit.dart';
 import 'package:lottie/lottie.dart';
 
 import '../../theme/color.dart';
@@ -214,7 +215,30 @@ class _LoginScreenState extends State<LoginScreen> {
                     context.read<LoginCubit>().doLogin();
                   },
                 ),
-              )
+              ),
+              BlocBuilder<NotificationCubit, NotificationState>(
+                builder: (context, state) {
+                  if (state is NotificationTokenState) {
+                    return Padding(
+                      padding: const EdgeInsets.only(top: 20),
+                      child: Text(
+                        "Notification Token:\n${state.token}",
+                        style: const TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.blue,
+                        ),
+                      ),
+                    );
+                  }
+                  // Optional: show placeholder while waiting
+                  return const Text(
+                    "Fetching notification token...",
+                    style: TextStyle(fontSize: 12, color: Colors.grey),
+                  );
+                },
+              ),
+
             ],
           ),
         ),

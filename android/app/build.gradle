@@ -2,6 +2,8 @@ plugins {
     id "com.android.application"
     id "kotlin-android"
     id "dev.flutter.flutter-gradle-plugin"
+    id "com.google.gms.google-services"
+    id "com.google.firebase.crashlytics"   // 👈 add Crashlytics plugin
 }
 
 def localProperties = new Properties()
@@ -45,7 +47,7 @@ android {
         applicationId "com.rahilrk.learningflutter.learning_flutter"
         // You can update the following values to match your application needs.
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
-        minSdkVersion flutter.minSdkVersion
+        minSdkVersion 23
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
@@ -64,4 +66,11 @@ flutter {
     source '../..'
 }
 
-dependencies {}
+dependencies {
+    // Import the BoM for the Firebase platform
+    implementation(platform("com.google.firebase:firebase-bom:34.1.0"))
+
+    // Add Crashlytics + Analytics SDKs
+    implementation("com.google.firebase:firebase-crashlytics")
+    implementation("com.google.firebase:firebase-analytics")
+}

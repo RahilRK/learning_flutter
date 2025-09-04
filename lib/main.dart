@@ -19,6 +19,10 @@ import 'package:learning_flutter/cubit_form_validation_api_eg/login/provider/log
 import 'package:learning_flutter/cubit_form_validation_api_eg/login/repository/login_repository.dart';
 import 'package:learning_flutter/cubit_nav_tab/CubitNavTabApp.dart';
 import 'package:learning_flutter/firebase_notification/notification_cubit.dart';
+import 'package:learning_flutter/graphql/MyGraphQLListScreen.dart';
+import 'package:learning_flutter/graphql/MyGraphqlFormScreen.dart';
+import 'package:learning_flutter/graphql/country_repository.dart';
+import 'package:learning_flutter/graphql/graphql_service.dart';
 import 'package:learning_flutter/image_picker/image_picker_cubit.dart';
 import 'package:learning_flutter/localization_eg/cubit/locale_cubit.dart';
 import 'package:learning_flutter/localization_eg/view/home.dart';
@@ -39,10 +43,10 @@ final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  // await Firebase.initializeApp();
 
   // Register background handler
-  FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
+  // FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
 
 /*  String? token = await FirebaseMessaging.instance.getToken();
   print("🔥 Direct FCM Token: $token");  // << check this*/
@@ -54,12 +58,18 @@ void main() async {
   // runApp(const MyLocalizationApp());
   // runApp(const MyBlocApiApp());
   // runApp(const MaterialMyApp());
-  runApp(const CubitNavTabApp());
+  // runApp(const CubitNavTabApp());
   // runApp(const DarkModeMyApp());
   // runApp(const CupertinoMyApp());
   // runApp(const MaterialMyBlocApp());
   // runApp(const MySearchPlayer());
   // runApp(const MyApp());
+  // Set up dependencies once
+  final gql = GraphQLService();
+  final repo = CountryRepository(gql);
+
+  // runApp(MyGraphqlListScreen(repo: repo));
+  runApp(MyGraphqlFormScreen(repo: repo));
 }
 
 class MyLocalizationApp extends StatefulWidget {

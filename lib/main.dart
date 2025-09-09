@@ -26,6 +26,7 @@ import 'package:learning_flutter/graphql/graphql_service.dart';
 import 'package:learning_flutter/image_picker/image_picker_cubit.dart';
 import 'package:learning_flutter/localization_eg/cubit/locale_cubit.dart';
 import 'package:learning_flutter/localization_eg/view/home.dart';
+import 'package:learning_flutter/responsive_widget_eg/ResponsiveWidget.dart';
 import 'package:learning_flutter/route_generator.dart';
 import 'package:learning_flutter/route_generator_for_nav_drawer.dart';
 import 'package:learning_flutter/search_player/player_cubit.dart';
@@ -64,12 +65,14 @@ void main() async {
   // runApp(const MaterialMyBlocApp());
   // runApp(const MySearchPlayer());
   // runApp(const MyApp());
+  runApp(const MyResponsiveApp());
+
   // Set up dependencies once
-  final gql = GraphQLService();
+  /*final gql = GraphQLService();
   final repo = CountryRepository(gql);
 
   // runApp(MyGraphqlListScreen(repo: repo));
-  runApp(MyGraphqlFormScreen(repo: repo));
+  runApp(MyGraphqlFormScreen(repo: repo));*/
 }
 
 class MyLocalizationApp extends StatefulWidget {

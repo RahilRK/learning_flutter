@@ -35,6 +35,7 @@ import 'package:learning_flutter/theme/theme.dart';
 import 'package:learning_flutter/united_pharmacy/route_generator_for_united_pharmacy.dart';
 import 'package:learning_flutter/united_pharmacy_cubit/loginTab/view/login_tab.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'auto_route/MyAppRoute.dart';
 import 'bloc/increment_eg.dart';
 import 'bloc_api_eg/product_list.dart';
 import 'cubit/cubit_increment_eg.dart';
@@ -65,7 +66,8 @@ void main() async {
   // runApp(const MaterialMyBlocApp());
   // runApp(const MySearchPlayer());
   // runApp(const MyApp());
-  runApp(const MyResponsiveApp());
+  // runApp(const MyResponsiveApp());
+  runApp(MyAppRoute());
 
   // Set up dependencies once
   /*final gql = GraphQLService();
